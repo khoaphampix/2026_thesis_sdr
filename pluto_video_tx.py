@@ -22,15 +22,15 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime
+import shlex
+import sys
 from collections import deque
 import os
 from pathlib import Path
 import re
 import secrets
-import shlex
 import struct
 import subprocess
-import sys
 import threading
 import time
 import zlib
@@ -60,7 +60,7 @@ CAMERA_URL = (
 # ---------------------------------------------------------------------------
 
 class _TeeStream:
-    """Write the same text to the terminal and the experiment log."""
+    """Mirror text to the terminal and to a persistent UTF-8 log file."""
 
     def __init__(self, console, log_file, lock: threading.Lock):
         self.console = console
@@ -93,12 +93,7 @@ class _TeeStream:
 
 
 class RunLog:
-    """
-    Mirror stdout and stderr into a timestamped UTF-8 text log.
-
-    The log contains the command line, settings, FFmpeg messages, packet
-    status, errors and final statistics while preserving terminal output.
-    """
+    """Install and later restore stdout/stderr tee logging."""
 
     def __init__(
         self,
@@ -119,17 +114,17 @@ class RunLog:
             encoding="utf-8",
             buffering=1,
         )
-        self._original_stdout = sys.stdout
-        self._original_stderr = sys.stderr
+        self._stdout = sys.stdout
+        self._stderr = sys.stderr
         self._lock = threading.Lock()
 
         sys.stdout = _TeeStream(
-            self._original_stdout,
+            self._stdout,
             self._file,
             self._lock,
         )
         sys.stderr = _TeeStream(
-            self._original_stderr,
+            self._stderr,
             self._file,
             self._lock,
         )
@@ -139,14 +134,14 @@ class RunLog:
             sys.stdout.flush()
             sys.stderr.flush()
         finally:
-            sys.stdout = self._original_stdout
-            sys.stderr = self._original_stderr
+            sys.stdout = self._stdout
+            sys.stderr = self._stderr
             self._file.close()
 
 
-def print_log_header(run_log: RunLog, role: str) -> None:
+def print_log_header(run_log: RunLog, role_name: str) -> None:
     print("========== EXPERIMENT LOG ==========")
-    print(f"Role:                {role}")
+    print(f"Role:                {role_name}")
     print(
         "Started:             "
         f"{datetime.now().astimezone().isoformat(timespec='seconds')}"
@@ -773,8 +768,8 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=1,
         help=(
-            "Write a status line every N new packets. Default 1 gives a "
-            "detailed experiment log."
+            "Write a status line every N new packets. Default 1 provides "
+            "a detailed experiment log."
         ),
     )
 
@@ -782,17 +777,14 @@ def build_parser() -> argparse.ArgumentParser:
         "--log-dir",
         type=Path,
         default=Path("logs"),
-        help=(
-            "Directory for automatic timestamped experiment logs. "
-            "Default: logs."
-        ),
+        help="Directory for timestamped logs. Default: logs.",
     )
     parser.add_argument(
         "--log-file",
         type=Path,
         help=(
-            "Optional exact log path. Overrides --log-dir and automatic "
-            "timestamp naming."
+            "Optional exact log filename. Overrides automatic timestamp "
+            "naming."
         ),
     )
 
@@ -983,7 +975,9 @@ def run(args: argparse.Namespace) -> int:
     return 0
 
 
+
 def main() -> int:
+    """Parse arguments, start persistent logging, and run the tx process."""
     parser = build_parser()
     args = parser.parse_args()
     validate_args(parser, args)
@@ -994,20 +988,31 @@ def main() -> int:
         explicit_path=args.log_file,
     )
 
+    exit_code = 1
+
     try:
         print_log_header(run_log, "TRANSMITTER")
-        return run(args)
+        exit_code = run(args)
+        return exit_code
+
+    except KeyboardInterrupt:
+        print()
+        print("Interrupted by user.")
+        return 130
+
     except Exception as error:
         print()
         print("========== FATAL ERROR ==========")
         print(f"{type(error).__name__}: {error}")
         raise
+
     finally:
         print()
         print(
             "Finished:            "
             f"{datetime.now().astimezone().isoformat(timespec='seconds')}"
         )
+        print(f"Exit code:           {exit_code}")
         print(f"Experiment log:      {run_log.path}")
         run_log.close()
 
