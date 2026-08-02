@@ -260,3 +260,20 @@ ffmpeg -rtsp_transport tcp \
 -x265-params "keyint=3:min-keyint=3:scenecut=0:bframes=0:repeat-headers=1:aud=1" \
 -f hevc \
 -y ~/camera_test/camera_sdr.h265
+
+-------------------------------------------
+
+python3 adi_mac.py \
+--uri "usb:" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--tone-offset 200000 \
+--rx-gain 20 \
+--snr-threshold 18
+
+python3 adi_win.py \
+--uri "usb:" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--tone-offset 200000 \
+--tx-gain -40
