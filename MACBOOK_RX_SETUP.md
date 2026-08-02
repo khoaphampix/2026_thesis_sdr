@@ -1,3 +1,5 @@
+pyenv activate  pysdr_3_11_9
+
 # MacBook — PlutoSDR Video Receiver
 
 ## 1. Role of this computer

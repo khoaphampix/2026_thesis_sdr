@@ -3,7 +3,7 @@
 python3 one_pluto_live_camera_v8_inplace_resync.py \
 --source file \
 --copy-original \
---input "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265" \
+--input "camera_stream_transmitted_camera.h265" \
 --input-fps 10 \
 --payload-size 512 \
 --samples-per-bit 4 \
