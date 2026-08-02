@@ -229,6 +229,40 @@ def next_power_of_two(value: int) -> int:
     return 1 << max(0, value - 1).bit_length()
 
 
+class PacketRecoveryError(ValueError):
+    """Packet decode failure carrying the strongest preamble metric."""
+
+    def __init__(
+        self,
+        message: str,
+        best_metric: float = 0.0,
+    ):
+        super().__init__(message)
+        self.best_metric = float(best_metric)
+
+
+def rx_signal_levels(
+    samples: np.ndarray,
+    full_scale: float,
+) -> tuple[float, float, float]:
+    """Return RMS ADC magnitude and approximate RMS/peak dBFS."""
+    values = np.asarray(samples)
+    real = np.real(values).astype(np.float64, copy=False)
+    imag = np.imag(values).astype(np.float64, copy=False)
+
+    component_power = np.mean((real * real + imag * imag) / 2.0)
+    rms = float(np.sqrt(max(component_power, 0.0)))
+    peak = float(max(
+        np.max(np.abs(real), initial=0.0),
+        np.max(np.abs(imag), initial=0.0),
+    ))
+
+    reference = max(float(full_scale), 1e-12)
+    rms_dbfs = 20.0 * np.log10(max(rms / reference, 1e-12))
+    peak_dbfs = 20.0 * np.log10(max(peak / reference, 1e-12))
+    return rms, float(rms_dbfs), float(peak_dbfs)
+
+
 def recover_any_packet(
     rx_samples: np.ndarray,
     payload_size: int,
@@ -416,11 +450,24 @@ def recover_any_packet(
             last_error = error
 
     if not candidates:
-        raise ValueError("No synchronization candidates.")
+        raise PacketRecoveryError(
+            "No synchronization candidates.",
+            best_metric=0.0,
+        )
 
-    raise ValueError(
-        f"No valid packet; best metric="
-        f"{candidates[0][0]:.3f}; last error={last_error}"
+    best_metric = float(candidates[0][0])
+
+    if best_metric < metric_threshold:
+        raise PacketRecoveryError(
+            f"Preamble below threshold: best={best_metric:.3f}, "
+            f"required={metric_threshold:.3f}.",
+            best_metric=best_metric,
+        )
+
+    raise PacketRecoveryError(
+        f"Preamble found but packet failed: best={best_metric:.3f}, "
+        f"last error={last_error}.",
+        best_metric=best_metric,
     )
 
 
@@ -643,6 +690,43 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
+        "--heartbeat-seconds",
+        type=float,
+        default=1.0,
+        help=(
+            "Print and log RX search/link status at this interval even when "
+            "no packet is decoded. Default: 1 second."
+        ),
+    )
+    parser.add_argument(
+        "--link-timeout",
+        type=float,
+        default=5.0,
+        help=(
+            "Declare the RF protocol link lost after this many seconds "
+            "without a CRC-valid packet. Default: 5 seconds."
+        ),
+    )
+    parser.add_argument(
+        "--no-link-warning-seconds",
+        type=float,
+        default=10.0,
+        help=(
+            "Print a detailed settings warning if no valid TX packet has "
+            "ever been received after this time. Default: 10 seconds."
+        ),
+    )
+    parser.add_argument(
+        "--adc-full-scale",
+        type=float,
+        default=2048.0,
+        help=(
+            "ADC component full-scale reference used only for approximate "
+            "dBFS diagnostics. Default: 2048."
+        ),
+    )
+
+    parser.add_argument(
         "--log-dir",
         type=Path,
         default=Path("logs"),
@@ -678,6 +762,16 @@ def validate_args(
         parser.error("--reorder-window must be at least 1")
     if args.gap_timeout <= 0:
         parser.error("--gap-timeout must be greater than zero")
+    if args.heartbeat_seconds <= 0:
+        parser.error("--heartbeat-seconds must be greater than zero")
+    if args.link_timeout <= 0:
+        parser.error("--link-timeout must be greater than zero")
+    if args.no_link_warning_seconds <= 0:
+        parser.error(
+            "--no-link-warning-seconds must be greater than zero"
+        )
+    if args.adc_full_scale <= 0:
+        parser.error("--adc-full-scale must be greater than zero")
 
 
 def run(args: argparse.Namespace) -> int:
@@ -699,6 +793,8 @@ def run(args: argparse.Namespace) -> int:
     print(f"Frame samples:       {frame_samples:,}")
     print(f"RX buffer:           {rx_buffer_size:,} samples")
     print(f"RX gain:             {args.rx_gain:.1f} dB")
+    print(f"Heartbeat interval:  {args.heartbeat_seconds:.1f} s")
+    print(f"Link timeout:        {args.link_timeout:.1f} s")
     print(
         f"Playback prebuffer:  "
         f"{args.playback_prebuffer_bytes:,} bytes"
@@ -731,6 +827,116 @@ def run(args: argparse.Namespace) -> int:
     start_time = time.monotonic()
     cfo_history: deque[float] = deque(maxlen=50)
     metric_history: deque[float] = deque(maxlen=50)
+
+    last_heartbeat_at = start_time
+    last_valid_protocol_at: float | None = None
+    first_valid_protocol_at: float | None = None
+    link_connected = False
+    no_link_warning_printed = False
+    last_recovery_error = "No RX buffer decoded yet."
+    strongest_metric_since_heartbeat = 0.0
+    latest_rms = 0.0
+    latest_rms_dbfs = -240.0
+    latest_peak_dbfs = -240.0
+    buffers_at_last_heartbeat = 0
+    invalid_at_last_heartbeat = 0
+    duplicates_at_last_heartbeat = 0
+
+    def print_rx_heartbeat(force: bool = False) -> None:
+        nonlocal last_heartbeat_at
+        nonlocal link_connected
+        nonlocal no_link_warning_printed
+        nonlocal strongest_metric_since_heartbeat
+        nonlocal buffers_at_last_heartbeat
+        nonlocal invalid_at_last_heartbeat
+        nonlocal duplicates_at_last_heartbeat
+
+        now = time.monotonic()
+        if not force and now - last_heartbeat_at < args.heartbeat_seconds:
+            return
+
+        elapsed = max(now - start_time, 1e-9)
+        interval = max(now - last_heartbeat_at, 1e-9)
+        buffers_delta = rx_buffers - buffers_at_last_heartbeat
+        invalid_delta = invalid_buffers - invalid_at_last_heartbeat
+        duplicate_delta = duplicate_packets - duplicates_at_last_heartbeat
+        buffer_rate = buffers_delta / interval
+
+        if last_valid_protocol_at is None:
+            if strongest_metric_since_heartbeat >= args.metric_threshold:
+                state = "TX_WAVEFORM_CANDIDATE"
+            else:
+                state = "SEARCHING"
+        else:
+            silent_time = now - last_valid_protocol_at
+            if silent_time <= args.link_timeout:
+                state = "CONNECTED"
+            else:
+                state = "LINK_LOST"
+                if link_connected:
+                    print()
+                    print("========== RF LINK LOST ==========")
+                    print(
+                        "No CRC-valid transmitter packet for "
+                        f"{silent_time:.1f} seconds."
+                    )
+                    print(
+                        "RX hardware is still capturing samples; check TX "
+                        "activity, gain and matching settings."
+                    )
+                    print()
+                link_connected = False
+
+        print(
+            "RX HEARTBEAT "
+            f"state={state}, "
+            f"elapsed={elapsed:.1f}s, "
+            f"buffers={rx_buffers:,}, "
+            f"buffer_rate={buffer_rate:.1f}/s, "
+            f"valid={valid_packets:,}, "
+            f"duplicates={duplicate_packets:,}(+{duplicate_delta}), "
+            f"invalid={invalid_buffers:,}(+{invalid_delta}), "
+            f"rms={latest_rms:.1f} ADC ({latest_rms_dbfs:.1f} dBFS), "
+            f"peak={latest_peak_dbfs:.1f} dBFS, "
+            f"best_sync={strongest_metric_since_heartbeat:.3f}/"
+            f"{args.metric_threshold:.3f}"
+        )
+
+        if state in ("SEARCHING", "TX_WAVEFORM_CANDIDATE"):
+            print(f"RX DETAIL: {last_recovery_error}")
+
+        if (
+            last_valid_protocol_at is None
+            and not no_link_warning_printed
+            and elapsed >= args.no_link_warning_seconds
+        ):
+            no_link_warning_printed = True
+            print()
+            print("========== NO TX PROTOCOL DETECTED ==========")
+            print(
+                f"No CRC-valid P2V1 packet was received in {elapsed:.1f} "
+                "seconds."
+            )
+            print(
+                "The RX Pluto and sample capture are running, but an RF "
+                "protocol connection has not been proved."
+            )
+            print("Check both TX and RX use exactly:")
+            print(f"  frequency       {args.frequency}")
+            print(f"  sample rate     {args.sample_rate}")
+            print(f"  samples/bit     {args.samples_per_bit}")
+            print(f"  payload size    {args.payload_size}")
+            print(
+                "Confirm TX prints increasing 'TX packet=' lines. For a "
+                "short antenna test, try TX gain -40 dB and RX gain 30 dB."
+            )
+            print()
+
+        last_heartbeat_at = now
+        strongest_metric_since_heartbeat = 0.0
+        buffers_at_last_heartbeat = rx_buffers
+        invalid_at_last_heartbeat = invalid_buffers
+        duplicates_at_last_heartbeat = duplicate_packets
 
     def remember_sequence(sequence: int) -> None:
         if sequence in recent_set:
@@ -827,15 +1033,75 @@ def run(args: argparse.Namespace) -> int:
             gap_started_at = now
 
     try:
+        print("Opening RX Pluto through direct USB context...")
         device = open_rx_pluto(args, rx_buffer_size)
 
-        # Discard two initial buffers after configuring the receiver.
-        for _ in range(2):
-            device.rx()
+        print()
+        print("========== USB PLUTO CONNECTED ==========")
+        print(f"Context:             {args.uri}")
+        print(f"Configured RX LO:    {int(device.rx_lo):,} Hz")
+        print(
+            f"Configured rate:     {int(device.sample_rate):,} sample/s"
+        )
+        print(
+            f"Configured bandwidth:{int(device.rx_rf_bandwidth):,} Hz"
+        )
+        print(f"Gain mode:           {device.gain_control_mode_chan0}")
+        print(
+            f"Hardware gain:       "
+            f"{float(device.rx_hardwaregain_chan0):.1f} dB"
+        )
+        print(
+            f"Buffer size:         {int(device.rx_buffer_size):,} samples"
+        )
+        print("USB connection and RX configuration succeeded.")
+        print()
+
+        warmup_samples = None
+        for warmup_index in range(2):
+            warmup_samples = device.rx()
+            print(
+                f"RX warm-up capture {warmup_index + 1}/2: "
+                f"{len(warmup_samples):,} complex samples"
+            )
+
+        if warmup_samples is None or len(warmup_samples) == 0:
+            raise RuntimeError("RX Pluto returned an empty warm-up buffer.")
+
+        latest_rms, latest_rms_dbfs, latest_peak_dbfs = rx_signal_levels(
+            warmup_samples,
+            args.adc_full_scale,
+        )
+
+        print()
+        print("========== RX SAMPLE FLOW ACTIVE ==========")
+        print(
+            f"Captured:            {len(warmup_samples):,} complex samples"
+        )
+        print(
+            f"Initial RMS:         {latest_rms:.1f} ADC "
+            f"({latest_rms_dbfs:.1f} dBFS approximate)"
+        )
+        print(
+            f"Initial peak:        {latest_peak_dbfs:.1f} dBFS approximate"
+        )
+        print(
+            "The receiver is searching for a CRC-valid P2V1 transmitter "
+            "packet."
+        )
+        print(
+            "Only 'RF LINK CONNECTED' proves successful TX/RX "
+            "communication."
+        )
+        print()
 
         while True:
             samples = device.rx()
             rx_buffers += 1
+            latest_rms, latest_rms_dbfs, latest_peak_dbfs = rx_signal_levels(
+                samples,
+                args.adc_full_scale,
+            )
 
             try:
                 fields, metric, phase, cfo_hz = recover_any_packet(
@@ -846,10 +1112,51 @@ def run(args: argparse.Namespace) -> int:
                     candidates_per_phase=args.candidates_per_phase,
                     metric_threshold=args.metric_threshold,
                 )
-            except Exception:
+            except PacketRecoveryError as error:
                 invalid_buffers += 1
+                strongest_metric_since_heartbeat = max(
+                    strongest_metric_since_heartbeat,
+                    error.best_metric,
+                )
+                last_recovery_error = str(error)
                 flush_ready()
+                print_rx_heartbeat()
                 continue
+            except Exception as error:
+                invalid_buffers += 1
+                last_recovery_error = (
+                    f"Unexpected decoder error: {type(error).__name__}: "
+                    f"{error}"
+                )
+                flush_ready()
+                print_rx_heartbeat()
+                continue
+
+            strongest_metric_since_heartbeat = max(
+                strongest_metric_since_heartbeat,
+                metric,
+            )
+            last_recovery_error = "CRC-valid packet received."
+            last_valid_protocol_at = time.monotonic()
+
+            if not link_connected:
+                link_connected = True
+                if first_valid_protocol_at is None:
+                    first_valid_protocol_at = last_valid_protocol_at
+
+                print()
+                print("========== RF LINK CONNECTED ==========")
+                print(
+                    "A CRC-valid P2V1 packet from the transmitter was "
+                    "decoded."
+                )
+                print(f"TX session:          0x{fields['session']:08X}")
+                print(f"First sequence:      {fields['sequence']}")
+                print(f"Sync metric:         {metric:.3f}")
+                print(f"Sample phase:        {phase}")
+                print(f"Estimated CFO:       {cfo_hz:+.1f} Hz")
+                print("TX and RX protocol connection is confirmed.")
+                print()
 
             if (
                 active_session is None
@@ -863,6 +1170,7 @@ def run(args: argparse.Namespace) -> int:
 
             if sequence in recent_set or sequence in pending:
                 duplicate_packets += 1
+                print_rx_heartbeat()
                 continue
 
             pending[sequence] = fields
@@ -903,6 +1211,8 @@ def run(args: argparse.Namespace) -> int:
                     f"avg_CFO={average_cfo:+.0f} Hz, "
                     f"rate={useful_rate:,.0f} bit/s"
                 )
+
+            print_rx_heartbeat()
 
     except KeyboardInterrupt:
         print("\nStopping receiver...")
@@ -946,6 +1256,31 @@ def run(args: argparse.Namespace) -> int:
     print(f"Useful RX rate:      {useful_rate:,.0f} bit/s")
     print(f"Average recent CFO:  {average_cfo:+.1f} Hz")
     print(f"Saved stream:        {args.rx_save}")
+    print(
+        f"Saved file size:     "
+        f"{args.rx_save.stat().st_size if args.rx_save.exists() else 0:,} "
+        "bytes"
+    )
+
+    if valid_packets == 0:
+        print(
+            "RESULT: RX Pluto was opened and sampled, but no CRC-valid TX "
+            "protocol packet was decoded."
+        )
+        print(
+            "A zero-byte H.265 file is expected because only validated "
+            "payload bytes are written."
+        )
+    elif total_payload_bytes == 0:
+        print(
+            "RESULT: Protocol packets were detected, but no ordered video "
+            "payload was written."
+        )
+    else:
+        print(
+            "RESULT: TX/RX protocol link confirmed and validated video "
+            "payload was written."
+        )
 
     return 0
 
