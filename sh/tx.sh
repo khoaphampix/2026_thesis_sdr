@@ -1,0 +1,14 @@
+..\python3 pluto_video_tx.py \
+--uri "usb:" \
+--source file \
+--input "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--samples-per-bit 4 \
+--payload-size 400 \
+--packet-airtime 0.10 \
+--inter-packet-gap 0.002 \
+--tx-gain -50 \
+--status-every 1 \
+--log-dir logs \
+--tx-save two_pluto_file_tx.h265

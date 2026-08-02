@@ -1,0 +1,16 @@
+python3 pluto_video_rx.py \
+--uri "usb:" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--samples-per-bit 4 \
+--payload-size 400 \
+--rx-gain 20 \
+--rx-buffer-frames 4 \
+--candidates-per-phase 8 \
+--metric-threshold 0.55 \
+--reorder-window 8 \
+--gap-timeout 1.0 \
+--playback-prebuffer-bytes 8000 \
+--status-every 1 \
+--log-dir logs \
+--rx-save two_pluto_received.h265ww
