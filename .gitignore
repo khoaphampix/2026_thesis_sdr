@@ -2,3 +2,4 @@ logs/*
 *.h265
 *.Identifier
 !/loop_test_code/*.h265
+!two_pluto_received.h265
