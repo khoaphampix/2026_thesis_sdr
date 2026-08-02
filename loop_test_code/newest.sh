@@ -1,0 +1,25 @@
+python3 one_pluto_live_camera_v10_balanced_padding.py \
+--source file \
+--copy-original \
+--input "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265" \
+--input-fps 10 \
+--payload-size 768 \
+--samples-per-bit 4 \
+--sample-rate 2000000 \
+--captures-per-attempt 4 \
+--rx-warmup-captures 1 \
+--sync-candidates 16 \
+--tx-hold-frames 1.15 \
+--minimum-tx-hold 0.016 \
+--rx-buffer-frames 2 \
+--soft-reset-after 3 \
+--hard-reset-after 8 \
+--periodic-reset-packets 0 \
+--reset-pause 0.15 \
+--tx-gain -50 \
+--rx-gain 0 \
+--retries 25 \
+--strict \
+--no-display \
+--tx-save transmitted_v10_768.h265 \
+--rx-save received_v10_768.h265

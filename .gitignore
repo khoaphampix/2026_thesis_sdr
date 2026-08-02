@@ -1,0 +1,4 @@
+logs/*
+*.h265
+*.Identifier
+!/loop_test_code/*.h265

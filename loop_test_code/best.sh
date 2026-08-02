@@ -1,0 +1,28 @@
+python3 one_pluto_live_camera_v8_2_adaptive_rx.py \
+--source file \
+--copy-original \
+--input "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265" \
+--input-fps 10 \
+--payload-size 400 \
+--samples-per-bit 4 \
+--sample-rate 2000000 \
+--captures-per-attempt 4 \
+--fresh-rx-captures 2 \
+--fresh-rx-pause 0.02 \
+--startup-extra-hold 0.20 \
+--rx-warmup-captures 1 \
+--sync-candidates 16 \
+--tx-hold-frames 1.2 \
+--minimum-tx-hold 0.015 \
+--rx-buffer-frames 2 \
+--soft-reset-after 3 \
+--hard-reset-after 8 \
+--periodic-reset-packets 0 \
+--reset-pause 0.15 \
+--tx-gain -50 \
+--rx-gain 0 \
+--retries 20 \
+--strict \
+--no-display \
+--tx-save transmitted_best400.h265 \
+--rx-save received_best400.h265
