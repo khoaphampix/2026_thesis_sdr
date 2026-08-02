@@ -1,0 +1,1534 @@
+========== EXPERIMENT LOG ==========
+Role:                RECEIVER
+Started:             2026-08-02T16:57:10+09:30
+Command:             pluto_video_rx_fixed_sync.py --uri usb: --frequency 915000000 --sample-rate 2000000 --samples-per-bit 4 --payload-size 400 --rx-gain 30 --rx-buffer-frames 4 --candidates-per-phase 16 --metric-threshold 0.40 --reorder-window 8 --gap-timeout 1.0 --playback-prebuffer-bytes 8000 --status-every 1 --log-dir logs --no-display --rx-save two_pluto_received.h265
+Log file:            logs/rx_20260802_165710.log
+Pluto connection:    direct USB context usb:
+
+========== TWO-PLUTO VIDEO RECEIVER ==========
+RX URI:              usb:
+Frequency:           915,000,000 Hz
+Sample rate:         2,000,000 sample/s
+Samples per bit:     4
+Payload size:        400 bytes
+Sync detector:       differential known preamble
+Frame samples:       15,712
+RX buffer:           65,536 samples
+RX gain:             30.0 dB
+Heartbeat interval:  1.0 s
+Link timeout:        5.0 s
+Playback prebuffer:  8,000 bytes
+RX file:             two_pluto_received.h265
+Start this receiver before pluto_video_tx.py.
+Press Ctrl+C to stop.
+
+Opening RX Pluto through direct USB context...
+
+========== USB PLUTO CONNECTED ==========
+Context:             usb:
+Configured RX LO:    914,999,998 Hz
+Configured rate:     1,999,999 sample/s
+Configured bandwidth:2,000,000 Hz
+Gain mode:           manual
+Hardware gain:       30.0 dB
+Buffer size:         65,536 samples
+USB connection and RX configuration succeeded.
+
+RX warm-up capture 1/2: 65,536 complex samples
+RX warm-up capture 2/2: 65,536 complex samples
+
+========== RX SAMPLE FLOW ACTIVE ==========
+Captured:            65,536 complex samples
+Initial RMS:         5.1 ADC (-52.1 dBFS approximate)
+Initial peak:        -39.4 dBFS approximate
+The receiver is searching for a CRC-valid P2V1 transmitter packet.
+Only 'RF LINK CONNECTED' proves successful TX/RX communication.
+
+RX HEARTBEAT state=SEARCHING, elapsed=1.0s, buffers=10, buffer_rate=9.7/s, valid=0, duplicates=0(+0), invalid=10(+10), rms=5.1 ADC (-52.2 dBFS), peak=-38.6 dBFS, best_sync=0.150/0.400
+RX DETAIL: Known preamble below threshold: best=0.132, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=2.0s, buffers=41, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=41(+31), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.157/0.400
+RX DETAIL: Known preamble below threshold: best=0.156, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=3.1s, buffers=72, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=72(+31), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.154/0.400
+RX DETAIL: Known preamble below threshold: best=0.152, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=4.1s, buffers=103, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=103(+31), rms=4.9 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.160/0.400
+RX DETAIL: Known preamble below threshold: best=0.147, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=5.1s, buffers=134, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=134(+31), rms=5.0 ADC (-52.3 dBFS), peak=-38.6 dBFS, best_sync=0.164/0.400
+RX DETAIL: Known preamble below threshold: best=0.142, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=6.1s, buffers=165, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=165(+31), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.175/0.400
+RX DETAIL: Known preamble below threshold: best=0.147, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=7.1s, buffers=196, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=196(+31), rms=5.0 ADC (-52.3 dBFS), peak=-39.0 dBFS, best_sync=0.172/0.400
+RX DETAIL: Known preamble below threshold: best=0.172, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=8.1s, buffers=227, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=227(+31), rms=5.0 ADC (-52.3 dBFS), peak=-38.3 dBFS, best_sync=0.158/0.400
+RX DETAIL: Known preamble below threshold: best=0.135, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=9.2s, buffers=256, buffer_rate=28.6/s, valid=0, duplicates=0(+0), invalid=256(+29), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.165/0.400
+RX DETAIL: Known preamble below threshold: best=0.150, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=10.2s, buffers=287, buffer_rate=30.3/s, valid=0, duplicates=0(+0), invalid=287(+31), rms=5.0 ADC (-52.3 dBFS), peak=-38.3 dBFS, best_sync=0.174/0.400
+RX DETAIL: Known preamble below threshold: best=0.134, required=0.400.
+
+========== NO TX PROTOCOL DETECTED ==========
+No CRC-valid P2V1 packet was received in 10.2 seconds.
+The RX Pluto and sample capture are running, but an RF protocol connection has not been proved.
+Check both TX and RX use exactly:
+  frequency       915000000
+  sample rate     2000000
+  samples/bit     4
+  payload size    400
+Confirm TX prints increasing 'TX packet=' lines. For a short antenna test, try TX gain -40 dB and RX gain 30 dB.
+
+RX HEARTBEAT state=SEARCHING, elapsed=11.2s, buffers=319, buffer_rate=31.0/s, valid=0, duplicates=0(+0), invalid=319(+32), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.160/0.400
+RX DETAIL: Known preamble below threshold: best=0.144, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=12.2s, buffers=350, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=350(+31), rms=4.9 ADC (-52.3 dBFS), peak=-39.8 dBFS, best_sync=0.168/0.400
+RX DETAIL: Known preamble below threshold: best=0.167, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=13.2s, buffers=381, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=381(+31), rms=5.0 ADC (-52.3 dBFS), peak=-38.6 dBFS, best_sync=0.159/0.400
+RX DETAIL: Known preamble below threshold: best=0.159, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=14.3s, buffers=412, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=412(+31), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.169/0.400
+RX DETAIL: Known preamble below threshold: best=0.139, required=0.400.
+RX HEARTBEAT state=SEARCHING, elapsed=15.3s, buffers=443, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=443(+31), rms=1236.1 ADC (-4.4 dBFS), peak=0.0 dBFS, best_sync=0.154/0.400
+RX DETAIL: Known preamble below threshold: best=0.035, required=0.400.
+RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=16.3s, buffers=472, buffer_rate=28.6/s, valid=0, duplicates=0(+0), invalid=472(+29), rms=7.8 ADC (-48.4 dBFS), peak=-36.7 dBFS, best_sync=0.852/0.400
+RX DETAIL: Known preamble candidate found but packet validation failed: best=0.832, last error=Known preamble correlation too low: 0.063..
+RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=17.3s, buffers=501, buffer_rate=28.0/s, valid=0, duplicates=0(+0), invalid=501(+29), rms=7.8 ADC (-48.3 dBFS), peak=-35.9 dBFS, best_sync=0.862/0.400
+RX DETAIL: Known preamble candidate found but packet validation failed: best=0.849, last error=Known preamble correlation too low: 0.075..
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      7
+Sync metric:         0.916
+Sample phase:        2
+Estimated CFO:       +3611.3 Hz
+TX and RX protocol connection is confirmed.
+
+New TX session: 0xAD7F181A; starting at sequence 7
+RX seq=7, valid=1, duplicates=0, pending=0, metric=0.916, avg_metric=0.916, CFO=+3611 Hz, avg_CFO=+3611 Hz, rate=175 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=18.3s, buffers=529, buffer_rate=27.9/s, valid=1, duplicates=0(+0), invalid=528(+27), rms=7.8 ADC (-48.3 dBFS), peak=-36.4 dBFS, best_sync=0.916/0.400
+RX seq=8, valid=2, duplicates=0, pending=0, metric=0.917, avg_metric=0.916, CFO=+3609 Hz, avg_CFO=+3610 Hz, rate=342 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=19.3s, buffers=557, buffer_rate=27.9/s, valid=2, duplicates=0(+0), invalid=555(+27), rms=5.0 ADC (-52.2 dBFS), peak=-37.9 dBFS, best_sync=0.917/0.400
+RX HEARTBEAT state=CONNECTED, elapsed=20.3s, buffers=585, buffer_rate=28.0/s, valid=2, duplicates=0(+0), invalid=583(+28), rms=7.8 ADC (-48.4 dBFS), peak=-35.6 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=CONNECTED, elapsed=21.3s, buffers=613, buffer_rate=27.8/s, valid=2, duplicates=0(+0), invalid=611(+28), rms=7.8 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.848/0.400
+RX HEARTBEAT state=CONNECTED, elapsed=22.4s, buffers=640, buffer_rate=26.2/s, valid=2, duplicates=0(+0), invalid=638(+27), rms=7.8 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.857/0.400
+RX HEARTBEAT state=CONNECTED, elapsed=23.4s, buffers=667, buffer_rate=26.9/s, valid=2, duplicates=0(+0), invalid=665(+27), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.857/0.400
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.7 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=24.4s, buffers=695, buffer_rate=27.9/s, valid=2, duplicates=0(+0), invalid=693(+28), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.857/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=25.4s, buffers=724, buffer_rate=28.1/s, valid=2, duplicates=0(+0), invalid=722(+29), rms=7.7 ADC (-48.5 dBFS), peak=-35.9 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=26.4s, buffers=752, buffer_rate=27.8/s, valid=2, duplicates=0(+0), invalid=750(+28), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.853/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=27.4s, buffers=779, buffer_rate=26.5/s, valid=2, duplicates=0(+0), invalid=777(+27), rms=5.3 ADC (-51.7 dBFS), peak=-37.3 dBFS, best_sync=0.857/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=28.4s, buffers=807, buffer_rate=27.8/s, valid=2, duplicates=0(+0), invalid=805(+28), rms=7.7 ADC (-48.5 dBFS), peak=-37.3 dBFS, best_sync=0.852/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=29.4s, buffers=835, buffer_rate=27.9/s, valid=2, duplicates=0(+0), invalid=833(+28), rms=7.7 ADC (-48.5 dBFS), peak=-36.4 dBFS, best_sync=0.853/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=30.5s, buffers=864, buffer_rate=27.7/s, valid=2, duplicates=0(+0), invalid=862(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.854/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=31.5s, buffers=893, buffer_rate=28.2/s, valid=2, duplicates=0(+0), invalid=891(+29), rms=7.8 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.857/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=32.5s, buffers=921, buffer_rate=27.2/s, valid=2, duplicates=0(+0), invalid=919(+28), rms=7.7 ADC (-48.5 dBFS), peak=-36.4 dBFS, best_sync=0.851/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=33.5s, buffers=949, buffer_rate=27.8/s, valid=2, duplicates=0(+0), invalid=947(+28), rms=6.4 ADC (-50.2 dBFS), peak=-37.3 dBFS, best_sync=0.851/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=34.6s, buffers=978, buffer_rate=28.1/s, valid=2, duplicates=0(+0), invalid=976(+29), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.849/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      53
+Sync metric:         0.915
+Sample phase:        3
+Estimated CFO:       +3594.7 Hz
+TX and RX protocol connection is confirmed.
+
+Skipping missing sequence 9; nearest received=53
+Skipping missing sequence 10; nearest received=53
+Skipping missing sequence 11; nearest received=53
+Skipping missing sequence 12; nearest received=53
+Skipping missing sequence 13; nearest received=53
+Skipping missing sequence 14; nearest received=53
+Skipping missing sequence 15; nearest received=53
+Skipping missing sequence 16; nearest received=53
+Skipping missing sequence 17; nearest received=53
+Skipping missing sequence 18; nearest received=53
+Skipping missing sequence 19; nearest received=53
+Skipping missing sequence 20; nearest received=53
+Skipping missing sequence 21; nearest received=53
+Skipping missing sequence 22; nearest received=53
+Skipping missing sequence 23; nearest received=53
+Skipping missing sequence 24; nearest received=53
+Skipping missing sequence 25; nearest received=53
+Skipping missing sequence 26; nearest received=53
+Skipping missing sequence 27; nearest received=53
+Skipping missing sequence 28; nearest received=53
+Skipping missing sequence 29; nearest received=53
+Skipping missing sequence 30; nearest received=53
+Skipping missing sequence 31; nearest received=53
+Skipping missing sequence 32; nearest received=53
+Skipping missing sequence 33; nearest received=53
+Skipping missing sequence 34; nearest received=53
+Skipping missing sequence 35; nearest received=53
+Skipping missing sequence 36; nearest received=53
+Skipping missing sequence 37; nearest received=53
+Skipping missing sequence 38; nearest received=53
+Skipping missing sequence 39; nearest received=53
+Skipping missing sequence 40; nearest received=53
+Skipping missing sequence 41; nearest received=53
+Skipping missing sequence 42; nearest received=53
+Skipping missing sequence 43; nearest received=53
+Skipping missing sequence 44; nearest received=53
+Skipping missing sequence 45; nearest received=53
+RX seq=53, valid=3, duplicates=0, pending=1, metric=0.915, avg_metric=0.916, CFO=+3595 Hz, avg_CFO=+3605 Hz, rate=182 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=35.6s, buffers=1,006, buffer_rate=27.8/s, valid=3, duplicates=0(+0), invalid=1,003(+27), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.915/0.400
+Skipping missing sequence 46; nearest received=53
+RX HEARTBEAT state=CONNECTED, elapsed=36.6s, buffers=1,035, buffer_rate=28.9/s, valid=3, duplicates=0(+0), invalid=1,032(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.856/0.400
+Skipping missing sequence 47; nearest received=53
+RX HEARTBEAT state=CONNECTED, elapsed=37.6s, buffers=1,063, buffer_rate=27.7/s, valid=3, duplicates=0(+0), invalid=1,060(+28), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.848/0.400
+Skipping missing sequence 48; nearest received=53
+RX HEARTBEAT state=CONNECTED, elapsed=38.6s, buffers=1,092, buffer_rate=28.1/s, valid=3, duplicates=0(+0), invalid=1,089(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.844/0.400
+Skipping missing sequence 49; nearest received=53
+RX HEARTBEAT state=CONNECTED, elapsed=39.6s, buffers=1,121, buffer_rate=28.7/s, valid=3, duplicates=0(+0), invalid=1,118(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.856/0.400
+Skipping missing sequence 50; nearest received=53
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.5 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=40.7s, buffers=1,150, buffer_rate=28.1/s, valid=3, duplicates=0(+0), invalid=1,147(+29), rms=7.9 ADC (-48.3 dBFS), peak=-36.7 dBFS, best_sync=0.853/0.400
+Skipping missing sequence 51; nearest received=53
+RX HEARTBEAT state=LINK_LOST, elapsed=41.7s, buffers=1,179, buffer_rate=28.4/s, valid=3, duplicates=0(+0), invalid=1,176(+29), rms=7.7 ADC (-48.5 dBFS), peak=-36.4 dBFS, best_sync=0.852/0.400
+Skipping missing sequence 52; nearest received=53
+RX HEARTBEAT state=LINK_LOST, elapsed=42.7s, buffers=1,207, buffer_rate=27.8/s, valid=3, duplicates=0(+0), invalid=1,204(+28), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.851/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=43.7s, buffers=1,235, buffer_rate=27.9/s, valid=3, duplicates=0(+0), invalid=1,232(+28), rms=6.7 ADC (-49.7 dBFS), peak=-37.0 dBFS, best_sync=0.856/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=44.7s, buffers=1,264, buffer_rate=28.2/s, valid=3, duplicates=0(+0), invalid=1,261(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.850/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=45.7s, buffers=1,292, buffer_rate=27.6/s, valid=3, duplicates=0(+0), invalid=1,289(+28), rms=7.7 ADC (-48.5 dBFS), peak=-35.9 dBFS, best_sync=0.851/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=46.8s, buffers=1,321, buffer_rate=28.7/s, valid=3, duplicates=0(+0), invalid=1,318(+29), rms=5.0 ADC (-52.3 dBFS), peak=-37.9 dBFS, best_sync=0.853/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=47.8s, buffers=1,349, buffer_rate=27.9/s, valid=3, duplicates=0(+0), invalid=1,346(+28), rms=7.7 ADC (-48.5 dBFS), peak=-35.9 dBFS, best_sync=0.851/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=48.8s, buffers=1,377, buffer_rate=27.9/s, valid=3, duplicates=0(+0), invalid=1,374(+28), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=49.8s, buffers=1,406, buffer_rate=28.4/s, valid=3, duplicates=0(+0), invalid=1,403(+29), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.859/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=50.8s, buffers=1,435, buffer_rate=28.0/s, valid=3, duplicates=0(+0), invalid=1,432(+29), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=51.8s, buffers=1,463, buffer_rate=27.7/s, valid=3, duplicates=0(+0), invalid=1,460(+28), rms=5.6 ADC (-51.2 dBFS), peak=-37.3 dBFS, best_sync=0.856/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=52.9s, buffers=1,492, buffer_rate=28.1/s, valid=3, duplicates=0(+0), invalid=1,489(+29), rms=7.7 ADC (-48.5 dBFS), peak=-33.8 dBFS, best_sync=0.848/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=53.9s, buffers=1,520, buffer_rate=27.7/s, valid=3, duplicates=0(+0), invalid=1,517(+28), rms=7.7 ADC (-48.5 dBFS), peak=-37.6 dBFS, best_sync=0.850/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=54.9s, buffers=1,550, buffer_rate=29.1/s, valid=3, duplicates=0(+0), invalid=1,547(+30), rms=7.5 ADC (-48.7 dBFS), peak=-36.7 dBFS, best_sync=0.854/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=55.9s, buffers=1,578, buffer_rate=27.6/s, valid=3, duplicates=0(+0), invalid=1,575(+28), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.859/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=57.0s, buffers=1,608, buffer_rate=29.0/s, valid=3, duplicates=0(+0), invalid=1,605(+30), rms=7.7 ADC (-48.5 dBFS), peak=-36.4 dBFS, best_sync=0.853/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=58.0s, buffers=1,637, buffer_rate=28.0/s, valid=3, duplicates=0(+0), invalid=1,634(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.852/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=59.0s, buffers=1,665, buffer_rate=27.4/s, valid=3, duplicates=0(+0), invalid=1,662(+28), rms=5.4 ADC (-51.5 dBFS), peak=-37.6 dBFS, best_sync=0.849/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=60.0s, buffers=1,692, buffer_rate=26.8/s, valid=3, duplicates=0(+0), invalid=1,689(+27), rms=7.8 ADC (-48.4 dBFS), peak=-37.3 dBFS, best_sync=0.857/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=61.0s, buffers=1,719, buffer_rate=26.5/s, valid=3, duplicates=0(+0), invalid=1,716(+27), rms=7.7 ADC (-48.5 dBFS), peak=-37.3 dBFS, best_sync=0.853/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=62.1s, buffers=1,746, buffer_rate=26.4/s, valid=3, duplicates=0(+0), invalid=1,743(+27), rms=7.7 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.858/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=63.1s, buffers=1,775, buffer_rate=28.1/s, valid=3, duplicates=0(+0), invalid=1,772(+29), rms=7.7 ADC (-48.5 dBFS), peak=-37.3 dBFS, best_sync=0.851/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      129
+Sync metric:         0.907
+Sample phase:        2
+Estimated CFO:       +3597.3 Hz
+TX and RX protocol connection is confirmed.
+
+Skipping missing sequence 54; nearest received=129
+Skipping missing sequence 55; nearest received=129
+Skipping missing sequence 56; nearest received=129
+Skipping missing sequence 57; nearest received=129
+Skipping missing sequence 58; nearest received=129
+Skipping missing sequence 59; nearest received=129
+Skipping missing sequence 60; nearest received=129
+Skipping missing sequence 61; nearest received=129
+Skipping missing sequence 62; nearest received=129
+Skipping missing sequence 63; nearest received=129
+Skipping missing sequence 64; nearest received=129
+Skipping missing sequence 65; nearest received=129
+Skipping missing sequence 66; nearest received=129
+Skipping missing sequence 67; nearest received=129
+Skipping missing sequence 68; nearest received=129
+Skipping missing sequence 69; nearest received=129
+Skipping missing sequence 70; nearest received=129
+Skipping missing sequence 71; nearest received=129
+Skipping missing sequence 72; nearest received=129
+Skipping missing sequence 73; nearest received=129
+Skipping missing sequence 74; nearest received=129
+Skipping missing sequence 75; nearest received=129
+Skipping missing sequence 76; nearest received=129
+Skipping missing sequence 77; nearest received=129
+Skipping missing sequence 78; nearest received=129
+Skipping missing sequence 79; nearest received=129
+Skipping missing sequence 80; nearest received=129
+Skipping missing sequence 81; nearest received=129
+Skipping missing sequence 82; nearest received=129
+Skipping missing sequence 83; nearest received=129
+Skipping missing sequence 84; nearest received=129
+Skipping missing sequence 85; nearest received=129
+Skipping missing sequence 86; nearest received=129
+Skipping missing sequence 87; nearest received=129
+Skipping missing sequence 88; nearest received=129
+Skipping missing sequence 89; nearest received=129
+Skipping missing sequence 90; nearest received=129
+Skipping missing sequence 91; nearest received=129
+Skipping missing sequence 92; nearest received=129
+Skipping missing sequence 93; nearest received=129
+Skipping missing sequence 94; nearest received=129
+Skipping missing sequence 95; nearest received=129
+Skipping missing sequence 96; nearest received=129
+Skipping missing sequence 97; nearest received=129
+Skipping missing sequence 98; nearest received=129
+Skipping missing sequence 99; nearest received=129
+Skipping missing sequence 100; nearest received=129
+Skipping missing sequence 101; nearest received=129
+Skipping missing sequence 102; nearest received=129
+Skipping missing sequence 103; nearest received=129
+Skipping missing sequence 104; nearest received=129
+Skipping missing sequence 105; nearest received=129
+Skipping missing sequence 106; nearest received=129
+Skipping missing sequence 107; nearest received=129
+Skipping missing sequence 108; nearest received=129
+Skipping missing sequence 109; nearest received=129
+Skipping missing sequence 110; nearest received=129
+Skipping missing sequence 111; nearest received=129
+Skipping missing sequence 112; nearest received=129
+Skipping missing sequence 113; nearest received=129
+Skipping missing sequence 114; nearest received=129
+Skipping missing sequence 115; nearest received=129
+Skipping missing sequence 116; nearest received=129
+Skipping missing sequence 117; nearest received=129
+Skipping missing sequence 118; nearest received=129
+Skipping missing sequence 119; nearest received=129
+Skipping missing sequence 120; nearest received=129
+Skipping missing sequence 121; nearest received=129
+RX seq=129, valid=4, duplicates=0, pending=1, metric=0.907, avg_metric=0.914, CFO=+3597 Hz, avg_CFO=+3603 Hz, rate=151 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=64.1s, buffers=1,804, buffer_rate=28.1/s, valid=4, duplicates=0(+0), invalid=1,800(+28), rms=6.7 ADC (-49.7 dBFS), peak=-37.0 dBFS, best_sync=0.907/0.400
+Skipping missing sequence 122; nearest received=129
+RX HEARTBEAT state=CONNECTED, elapsed=65.1s, buffers=1,832, buffer_rate=27.7/s, valid=4, duplicates=0(+0), invalid=1,828(+28), rms=7.8 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.859/0.400
+Skipping missing sequence 123; nearest received=129
+RX HEARTBEAT state=CONNECTED, elapsed=66.2s, buffers=1,861, buffer_rate=28.2/s, valid=4, duplicates=0(+0), invalid=1,857(+29), rms=7.7 ADC (-48.4 dBFS), peak=-37.6 dBFS, best_sync=0.856/0.400
+Skipping missing sequence 124; nearest received=129
+RX HEARTBEAT state=CONNECTED, elapsed=67.2s, buffers=1,891, buffer_rate=29.0/s, valid=4, duplicates=0(+0), invalid=1,887(+30), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.853/0.400
+Skipping missing sequence 125; nearest received=129
+RX HEARTBEAT state=CONNECTED, elapsed=68.2s, buffers=1,919, buffer_rate=27.8/s, valid=4, duplicates=0(+0), invalid=1,915(+28), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.855/0.400
+Skipping missing sequence 126; nearest received=129
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.8 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=69.2s, buffers=1,946, buffer_rate=26.9/s, valid=4, duplicates=0(+0), invalid=1,942(+27), rms=7.7 ADC (-48.5 dBFS), peak=-37.0 dBFS, best_sync=0.849/0.400
+Skipping missing sequence 127; nearest received=129
+RX HEARTBEAT state=LINK_LOST, elapsed=70.2s, buffers=1,976, buffer_rate=29.7/s, valid=4, duplicates=0(+0), invalid=1,972(+30), rms=5.0 ADC (-52.3 dBFS), peak=-39.4 dBFS, best_sync=0.859/0.400
+Skipping missing sequence 128; nearest received=129
+RX HEARTBEAT state=LINK_LOST, elapsed=71.2s, buffers=2,005, buffer_rate=28.4/s, valid=4, duplicates=0(+0), invalid=2,001(+29), rms=7.7 ADC (-48.5 dBFS), peak=-36.7 dBFS, best_sync=0.859/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=72.3s, buffers=2,034, buffer_rate=28.2/s, valid=4, duplicates=0(+0), invalid=2,030(+29), rms=7.8 ADC (-48.4 dBFS), peak=-36.7 dBFS, best_sync=0.856/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=73.3s, buffers=2,062, buffer_rate=27.5/s, valid=4, duplicates=0(+0), invalid=2,058(+28), rms=7.8 ADC (-48.4 dBFS), peak=-36.7 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=74.3s, buffers=2,091, buffer_rate=28.1/s, valid=4, duplicates=0(+0), invalid=2,087(+29), rms=7.4 ADC (-48.9 dBFS), peak=-37.0 dBFS, best_sync=0.853/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=75.3s, buffers=2,118, buffer_rate=26.7/s, valid=4, duplicates=0(+0), invalid=2,114(+27), rms=7.5 ADC (-48.7 dBFS), peak=-36.7 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=76.4s, buffers=2,147, buffer_rate=28.7/s, valid=4, duplicates=0(+0), invalid=2,143(+29), rms=7.8 ADC (-48.4 dBFS), peak=-36.7 dBFS, best_sync=0.850/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=77.4s, buffers=2,175, buffer_rate=27.7/s, valid=4, duplicates=0(+0), invalid=2,171(+28), rms=7.6 ADC (-48.7 dBFS), peak=-36.7 dBFS, best_sync=0.858/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=78.4s, buffers=2,203, buffer_rate=27.6/s, valid=4, duplicates=0(+0), invalid=2,199(+28), rms=6.8 ADC (-49.6 dBFS), peak=-37.3 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=79.4s, buffers=2,232, buffer_rate=28.0/s, valid=4, duplicates=0(+0), invalid=2,228(+29), rms=7.9 ADC (-48.2 dBFS), peak=-36.4 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=80.4s, buffers=2,257, buffer_rate=24.4/s, valid=4, duplicates=0(+0), invalid=2,253(+25), rms=8.0 ADC (-48.1 dBFS), peak=-36.4 dBFS, best_sync=0.856/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=81.4s, buffers=2,282, buffer_rate=25.0/s, valid=4, duplicates=0(+0), invalid=2,278(+25), rms=8.2 ADC (-48.0 dBFS), peak=-36.7 dBFS, best_sync=0.868/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=82.5s, buffers=2,308, buffer_rate=25.4/s, valid=4, duplicates=0(+0), invalid=2,304(+26), rms=8.1 ADC (-48.1 dBFS), peak=-36.4 dBFS, best_sync=0.867/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=83.5s, buffers=2,335, buffer_rate=26.9/s, valid=4, duplicates=0(+0), invalid=2,331(+27), rms=7.2 ADC (-49.1 dBFS), peak=-37.3 dBFS, best_sync=0.865/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      184
+Sync metric:         0.928
+Sample phase:        2
+Estimated CFO:       +3592.6 Hz
+TX and RX protocol connection is confirmed.
+
+Skipping missing sequence 130; nearest received=184
+Skipping missing sequence 131; nearest received=184
+Skipping missing sequence 132; nearest received=184
+Skipping missing sequence 133; nearest received=184
+Skipping missing sequence 134; nearest received=184
+Skipping missing sequence 135; nearest received=184
+Skipping missing sequence 136; nearest received=184
+Skipping missing sequence 137; nearest received=184
+Skipping missing sequence 138; nearest received=184
+Skipping missing sequence 139; nearest received=184
+Skipping missing sequence 140; nearest received=184
+Skipping missing sequence 141; nearest received=184
+Skipping missing sequence 142; nearest received=184
+Skipping missing sequence 143; nearest received=184
+Skipping missing sequence 144; nearest received=184
+Skipping missing sequence 145; nearest received=184
+Skipping missing sequence 146; nearest received=184
+Skipping missing sequence 147; nearest received=184
+Skipping missing sequence 148; nearest received=184
+Skipping missing sequence 149; nearest received=184
+Skipping missing sequence 150; nearest received=184
+Skipping missing sequence 151; nearest received=184
+Skipping missing sequence 152; nearest received=184
+Skipping missing sequence 153; nearest received=184
+Skipping missing sequence 154; nearest received=184
+Skipping missing sequence 155; nearest received=184
+Skipping missing sequence 156; nearest received=184
+Skipping missing sequence 157; nearest received=184
+Skipping missing sequence 158; nearest received=184
+Skipping missing sequence 159; nearest received=184
+Skipping missing sequence 160; nearest received=184
+Skipping missing sequence 161; nearest received=184
+Skipping missing sequence 162; nearest received=184
+Skipping missing sequence 163; nearest received=184
+Skipping missing sequence 164; nearest received=184
+Skipping missing sequence 165; nearest received=184
+Skipping missing sequence 166; nearest received=184
+Skipping missing sequence 167; nearest received=184
+Skipping missing sequence 168; nearest received=184
+Skipping missing sequence 169; nearest received=184
+Skipping missing sequence 170; nearest received=184
+Skipping missing sequence 171; nearest received=184
+Skipping missing sequence 172; nearest received=184
+Skipping missing sequence 173; nearest received=184
+Skipping missing sequence 174; nearest received=184
+Skipping missing sequence 175; nearest received=184
+Skipping missing sequence 176; nearest received=184
+RX seq=184, valid=5, duplicates=0, pending=1, metric=0.928, avg_metric=0.916, CFO=+3593 Hz, avg_CFO=+3601 Hz, rate=153 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=84.5s, buffers=2,364, buffer_rate=28.3/s, valid=5, duplicates=1(+1), invalid=2,358(+27), rms=6.2 ADC (-50.3 dBFS), peak=-36.7 dBFS, best_sync=0.928/0.400
+Skipping missing sequence 177; nearest received=184
+RX HEARTBEAT state=CONNECTED, elapsed=85.5s, buffers=2,392, buffer_rate=27.0/s, valid=5, duplicates=1(+0), invalid=2,386(+28), rms=8.2 ADC (-47.9 dBFS), peak=-37.0 dBFS, best_sync=0.878/0.400
+RX seq=188, valid=6, duplicates=1, pending=2, metric=0.927, avg_metric=0.918, CFO=+3605 Hz, avg_CFO=+3602 Hz, rate=150 bit/s
+Skipping missing sequence 178; nearest received=184
+RX seq=190, valid=7, duplicates=1, pending=3, metric=0.919, avg_metric=0.918, CFO=+3602 Hz, avg_CFO=+3602 Hz, rate=148 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=86.5s, buffers=2,423, buffer_rate=30.8/s, valid=7, duplicates=2(+1), invalid=2,414(+28), rms=8.2 ADC (-47.9 dBFS), peak=-36.4 dBFS, best_sync=0.927/0.400
+Skipping missing sequence 179; nearest received=184
+RX HEARTBEAT state=CONNECTED, elapsed=87.5s, buffers=2,451, buffer_rate=27.9/s, valid=7, duplicates=2(+0), invalid=2,442(+28), rms=5.6 ADC (-51.3 dBFS), peak=-36.4 dBFS, best_sync=0.875/0.400
+Skipping missing sequence 180; nearest received=184
+RX HEARTBEAT state=CONNECTED, elapsed=88.6s, buffers=2,478, buffer_rate=26.3/s, valid=7, duplicates=2(+0), invalid=2,469(+27), rms=8.2 ADC (-47.9 dBFS), peak=-36.4 dBFS, best_sync=0.878/0.400
+Skipping missing sequence 181; nearest received=184
+RX HEARTBEAT state=CONNECTED, elapsed=89.6s, buffers=2,507, buffer_rate=28.1/s, valid=7, duplicates=2(+0), invalid=2,498(+29), rms=8.2 ADC (-47.9 dBFS), peak=-36.7 dBFS, best_sync=0.881/0.400
+Skipping missing sequence 182; nearest received=184
+RX HEARTBEAT state=CONNECTED, elapsed=90.6s, buffers=2,535, buffer_rate=27.2/s, valid=7, duplicates=2(+0), invalid=2,526(+28), rms=8.2 ADC (-47.9 dBFS), peak=-36.1 dBFS, best_sync=0.871/0.400
+Skipping missing sequence 183; nearest received=184
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.1 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=91.6s, buffers=2,564, buffer_rate=28.4/s, valid=7, duplicates=2(+0), invalid=2,555(+29), rms=8.2 ADC (-47.9 dBFS), peak=-36.4 dBFS, best_sync=0.873/0.400
+Skipping missing sequence 185; nearest received=188
+RX HEARTBEAT state=LINK_LOST, elapsed=92.7s, buffers=2,592, buffer_rate=27.8/s, valid=7, duplicates=2(+0), invalid=2,583(+28), rms=7.9 ADC (-48.3 dBFS), peak=-36.4 dBFS, best_sync=0.873/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      207
+Sync metric:         0.911
+Sample phase:        3
+Estimated CFO:       +3593.2 Hz
+TX and RX protocol connection is confirmed.
+
+RX seq=207, valid=8, duplicates=2, pending=3, metric=0.911, avg_metric=0.917, CFO=+3593 Hz, avg_CFO=+3601 Hz, rate=172 bit/s
+Skipping missing sequence 186; nearest received=188
+RX seq=209, valid=9, duplicates=2, pending=4, metric=0.925, avg_metric=0.918, CFO=+3604 Hz, avg_CFO=+3601 Hz, rate=171 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=93.7s, buffers=2,622, buffer_rate=28.9/s, valid=9, duplicates=2(+0), invalid=2,611(+28), rms=8.0 ADC (-48.1 dBFS), peak=-36.4 dBFS, best_sync=0.925/0.400
+Skipping missing sequence 187; nearest received=188
+RX HEARTBEAT state=CONNECTED, elapsed=94.7s, buffers=2,651, buffer_rate=28.4/s, valid=9, duplicates=2(+0), invalid=2,640(+29), rms=6.5 ADC (-49.9 dBFS), peak=-37.0 dBFS, best_sync=0.859/0.400
+Skipping missing sequence 189; nearest received=190
+Skipping missing sequence 191; nearest received=207
+Skipping missing sequence 192; nearest received=207
+Skipping missing sequence 193; nearest received=207
+Skipping missing sequence 194; nearest received=207
+Skipping missing sequence 195; nearest received=207
+Skipping missing sequence 196; nearest received=207
+Skipping missing sequence 197; nearest received=207
+Skipping missing sequence 198; nearest received=207
+Skipping missing sequence 199; nearest received=207
+RX HEARTBEAT state=CONNECTED, elapsed=95.7s, buffers=2,676, buffer_rate=24.8/s, valid=9, duplicates=2(+0), invalid=2,665(+25), rms=8.1 ADC (-48.1 dBFS), peak=-35.9 dBFS, best_sync=0.867/0.400
+Skipping missing sequence 200; nearest received=207
+RX HEARTBEAT state=CONNECTED, elapsed=96.7s, buffers=2,703, buffer_rate=26.9/s, valid=9, duplicates=2(+0), invalid=2,692(+27), rms=5.7 ADC (-51.1 dBFS), peak=-37.0 dBFS, best_sync=0.863/0.400
+Skipping missing sequence 201; nearest received=207
+RX HEARTBEAT state=CONNECTED, elapsed=97.8s, buffers=2,731, buffer_rate=27.1/s, valid=9, duplicates=2(+0), invalid=2,720(+28), rms=8.1 ADC (-48.0 dBFS), peak=-36.7 dBFS, best_sync=0.865/0.400
+Skipping missing sequence 202; nearest received=207
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.3 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=98.8s, buffers=2,756, buffer_rate=24.3/s, valid=9, duplicates=2(+0), invalid=2,745(+25), rms=7.8 ADC (-48.4 dBFS), peak=-36.7 dBFS, best_sync=0.869/0.400
+Skipping missing sequence 203; nearest received=207
+RX HEARTBEAT state=LINK_LOST, elapsed=99.8s, buffers=2,782, buffer_rate=25.9/s, valid=9, duplicates=2(+0), invalid=2,771(+26), rms=8.0 ADC (-48.1 dBFS), peak=-36.7 dBFS, best_sync=0.864/0.400
+Skipping missing sequence 204; nearest received=207
+RX HEARTBEAT state=LINK_LOST, elapsed=100.8s, buffers=2,808, buffer_rate=25.9/s, valid=9, duplicates=2(+0), invalid=2,797(+26), rms=8.0 ADC (-48.1 dBFS), peak=-35.1 dBFS, best_sync=0.862/0.400
+Skipping missing sequence 205; nearest received=207
+RX HEARTBEAT state=LINK_LOST, elapsed=101.8s, buffers=2,835, buffer_rate=26.8/s, valid=9, duplicates=2(+0), invalid=2,824(+27), rms=6.1 ADC (-50.5 dBFS), peak=-37.3 dBFS, best_sync=0.861/0.400
+Skipping missing sequence 206; nearest received=207
+RX HEARTBEAT state=LINK_LOST, elapsed=102.8s, buffers=2,862, buffer_rate=27.0/s, valid=9, duplicates=2(+0), invalid=2,851(+27), rms=7.8 ADC (-48.3 dBFS), peak=-37.0 dBFS, best_sync=0.863/0.400
+Skipping missing sequence 208; nearest received=209
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      237
+Sync metric:         0.924
+Sample phase:        3
+Estimated CFO:       +3595.6 Hz
+TX and RX protocol connection is confirmed.
+
+Skipping missing sequence 210; nearest received=237
+Skipping missing sequence 211; nearest received=237
+Skipping missing sequence 212; nearest received=237
+Skipping missing sequence 213; nearest received=237
+Skipping missing sequence 214; nearest received=237
+Skipping missing sequence 215; nearest received=237
+Skipping missing sequence 216; nearest received=237
+Skipping missing sequence 217; nearest received=237
+Skipping missing sequence 218; nearest received=237
+Skipping missing sequence 219; nearest received=237
+Skipping missing sequence 220; nearest received=237
+Skipping missing sequence 221; nearest received=237
+Skipping missing sequence 222; nearest received=237
+Skipping missing sequence 223; nearest received=237
+Skipping missing sequence 224; nearest received=237
+Skipping missing sequence 225; nearest received=237
+Skipping missing sequence 226; nearest received=237
+Skipping missing sequence 227; nearest received=237
+Skipping missing sequence 228; nearest received=237
+Skipping missing sequence 229; nearest received=237
+RX seq=237, valid=10, duplicates=2, pending=1, metric=0.924, avg_metric=0.919, CFO=+3596 Hz, avg_CFO=+3601 Hz, rate=278 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=103.8s, buffers=2,891, buffer_rate=28.3/s, valid=10, duplicates=2(+0), invalid=2,879(+28), rms=8.2 ADC (-48.0 dBFS), peak=-37.0 dBFS, best_sync=0.924/0.400
+Skipping missing sequence 230; nearest received=237
+RX HEARTBEAT state=CONNECTED, elapsed=104.8s, buffers=2,918, buffer_rate=26.6/s, valid=10, duplicates=2(+0), invalid=2,906(+27), rms=8.0 ADC (-48.1 dBFS), peak=-36.4 dBFS, best_sync=0.862/0.400
+Skipping missing sequence 231; nearest received=237
+RX HEARTBEAT state=CONNECTED, elapsed=105.9s, buffers=2,946, buffer_rate=27.2/s, valid=10, duplicates=2(+0), invalid=2,934(+28), rms=5.1 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.869/0.400
+RX seq=244, valid=11, duplicates=2, pending=2, metric=0.919, avg_metric=0.919, CFO=+3591 Hz, avg_CFO=+3600 Hz, rate=271 bit/s
+Skipping missing sequence 232; nearest received=237
+RX seq=245, valid=12, duplicates=2, pending=3, metric=0.919, avg_metric=0.919, CFO=+3583 Hz, avg_CFO=+3598 Hz, rate=270 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=106.9s, buffers=2,975, buffer_rate=28.8/s, valid=12, duplicates=2(+0), invalid=2,961(+27), rms=8.1 ADC (-48.1 dBFS), peak=-37.3 dBFS, best_sync=0.919/0.400
+Skipping missing sequence 233; nearest received=237
+RX HEARTBEAT state=CONNECTED, elapsed=107.9s, buffers=3,003, buffer_rate=27.3/s, valid=12, duplicates=2(+0), invalid=2,989(+28), rms=8.1 ADC (-48.0 dBFS), peak=-36.1 dBFS, best_sync=0.874/0.400
+Skipping missing sequence 234; nearest received=237
+RX HEARTBEAT state=CONNECTED, elapsed=108.9s, buffers=3,030, buffer_rate=26.8/s, valid=12, duplicates=2(+0), invalid=3,016(+27), rms=8.1 ADC (-48.0 dBFS), peak=-35.9 dBFS, best_sync=0.861/0.400
+Skipping missing sequence 235; nearest received=237
+RX HEARTBEAT state=CONNECTED, elapsed=109.9s, buffers=3,059, buffer_rate=28.5/s, valid=12, duplicates=2(+0), invalid=3,045(+29), rms=8.1 ADC (-48.1 dBFS), peak=-36.1 dBFS, best_sync=0.868/0.400
+Skipping missing sequence 236; nearest received=237
+RX HEARTBEAT state=CONNECTED, elapsed=110.9s, buffers=3,088, buffer_rate=29.0/s, valid=12, duplicates=2(+0), invalid=3,074(+29), rms=5.1 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.865/0.400
+Skipping missing sequence 238; nearest received=244
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.1 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=112.0s, buffers=3,117, buffer_rate=28.3/s, valid=12, duplicates=2(+0), invalid=3,103(+29), rms=8.1 ADC (-48.1 dBFS), peak=-37.0 dBFS, best_sync=0.862/0.400
+Skipping missing sequence 239; nearest received=244
+RX HEARTBEAT state=LINK_LOST, elapsed=113.0s, buffers=3,148, buffer_rate=30.2/s, valid=12, duplicates=2(+0), invalid=3,134(+31), rms=8.0 ADC (-48.1 dBFS), peak=-36.4 dBFS, best_sync=0.861/0.400
+Skipping missing sequence 240; nearest received=244
+RX HEARTBEAT state=LINK_LOST, elapsed=114.0s, buffers=3,178, buffer_rate=29.3/s, valid=12, duplicates=2(+0), invalid=3,164(+30), rms=5.1 ADC (-52.1 dBFS), peak=-39.0 dBFS, best_sync=0.863/0.400
+Skipping missing sequence 241; nearest received=244
+RX HEARTBEAT state=LINK_LOST, elapsed=115.0s, buffers=3,208, buffer_rate=29.6/s, valid=12, duplicates=2(+0), invalid=3,194(+30), rms=5.1 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.863/0.400
+Skipping missing sequence 242; nearest received=244
+RX HEARTBEAT state=LINK_LOST, elapsed=116.0s, buffers=3,230, buffer_rate=21.6/s, valid=12, duplicates=2(+0), invalid=3,216(+22), rms=6.4 ADC (-50.1 dBFS), peak=-37.3 dBFS, best_sync=0.857/0.400
+Skipping missing sequence 243; nearest received=244
+RX HEARTBEAT state=LINK_LOST, elapsed=117.1s, buffers=3,260, buffer_rate=29.7/s, valid=12, duplicates=2(+0), invalid=3,246(+30), rms=5.1 ADC (-52.1 dBFS), peak=-39.4 dBFS, best_sync=0.861/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=118.1s, buffers=3,290, buffer_rate=29.4/s, valid=12, duplicates=2(+0), invalid=3,276(+30), rms=5.1 ADC (-52.1 dBFS), peak=-38.6 dBFS, best_sync=0.858/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=119.1s, buffers=3,319, buffer_rate=28.1/s, valid=12, duplicates=2(+0), invalid=3,305(+29), rms=8.0 ADC (-48.2 dBFS), peak=-36.4 dBFS, best_sync=0.875/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=120.1s, buffers=3,347, buffer_rate=27.9/s, valid=12, duplicates=2(+0), invalid=3,333(+28), rms=8.2 ADC (-48.0 dBFS), peak=-37.0 dBFS, best_sync=0.881/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=121.1s, buffers=3,376, buffer_rate=28.0/s, valid=12, duplicates=2(+0), invalid=3,362(+29), rms=8.2 ADC (-47.9 dBFS), peak=-36.1 dBFS, best_sync=0.868/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=122.1s, buffers=3,404, buffer_rate=27.9/s, valid=12, duplicates=2(+0), invalid=3,390(+28), rms=5.8 ADC (-51.0 dBFS), peak=-36.7 dBFS, best_sync=0.869/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=123.2s, buffers=3,432, buffer_rate=27.3/s, valid=12, duplicates=2(+0), invalid=3,418(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.882/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=124.2s, buffers=3,460, buffer_rate=27.9/s, valid=12, duplicates=2(+0), invalid=3,446(+28), rms=8.5 ADC (-47.6 dBFS), peak=-36.7 dBFS, best_sync=0.885/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      285
+Sync metric:         0.930
+Sample phase:        3
+Estimated CFO:       +3588.4 Hz
+TX and RX protocol connection is confirmed.
+
+Skipping missing sequence 246; nearest received=285
+Skipping missing sequence 247; nearest received=285
+Skipping missing sequence 248; nearest received=285
+Skipping missing sequence 249; nearest received=285
+Skipping missing sequence 250; nearest received=285
+Skipping missing sequence 251; nearest received=285
+Skipping missing sequence 252; nearest received=285
+Skipping missing sequence 253; nearest received=285
+Skipping missing sequence 254; nearest received=285
+Skipping missing sequence 255; nearest received=285
+Skipping missing sequence 256; nearest received=285
+Skipping missing sequence 257; nearest received=285
+Skipping missing sequence 258; nearest received=285
+Skipping missing sequence 259; nearest received=285
+Skipping missing sequence 260; nearest received=285
+Skipping missing sequence 261; nearest received=285
+Skipping missing sequence 262; nearest received=285
+Skipping missing sequence 263; nearest received=285
+Skipping missing sequence 264; nearest received=285
+Skipping missing sequence 265; nearest received=285
+Skipping missing sequence 266; nearest received=285
+Skipping missing sequence 267; nearest received=285
+Skipping missing sequence 268; nearest received=285
+Skipping missing sequence 269; nearest received=285
+Skipping missing sequence 270; nearest received=285
+Skipping missing sequence 271; nearest received=285
+Skipping missing sequence 272; nearest received=285
+Skipping missing sequence 273; nearest received=285
+Skipping missing sequence 274; nearest received=285
+Skipping missing sequence 275; nearest received=285
+Skipping missing sequence 276; nearest received=285
+Skipping missing sequence 277; nearest received=285
+RX seq=285, valid=13, duplicates=2, pending=1, metric=0.930, avg_metric=0.920, CFO=+3588 Hz, avg_CFO=+3598 Hz, rate=308 bit/s
+RX seq=286, valid=14, duplicates=2, pending=2, metric=0.930, avg_metric=0.920, CFO=+3594 Hz, avg_CFO=+3597 Hz, rate=308 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=125.2s, buffers=3,489, buffer_rate=28.1/s, valid=14, duplicates=3(+1), invalid=3,472(+26), rms=8.4 ADC (-47.8 dBFS), peak=-35.9 dBFS, best_sync=0.930/0.400
+Skipping missing sequence 278; nearest received=285
+RX HEARTBEAT state=CONNECTED, elapsed=126.2s, buffers=3,517, buffer_rate=27.9/s, valid=14, duplicates=3(+0), invalid=3,500(+28), rms=8.3 ADC (-47.8 dBFS), peak=-37.0 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 279; nearest received=285
+RX HEARTBEAT state=CONNECTED, elapsed=127.2s, buffers=3,545, buffer_rate=28.0/s, valid=14, duplicates=3(+0), invalid=3,528(+28), rms=5.0 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.878/0.400
+RX seq=293, valid=15, duplicates=3, pending=3, metric=0.926, avg_metric=0.921, CFO=+3594 Hz, avg_CFO=+3597 Hz, rate=302 bit/s
+Skipping missing sequence 280; nearest received=285
+RX HEARTBEAT state=CONNECTED, elapsed=128.2s, buffers=3,574, buffer_rate=28.8/s, valid=15, duplicates=3(+0), invalid=3,556(+28), rms=8.3 ADC (-47.8 dBFS), peak=-35.9 dBFS, best_sync=0.926/0.400
+Skipping missing sequence 281; nearest received=285
+RX HEARTBEAT state=CONNECTED, elapsed=129.2s, buffers=3,602, buffer_rate=27.7/s, valid=15, duplicates=3(+0), invalid=3,584(+28), rms=8.3 ADC (-47.8 dBFS), peak=-35.9 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 282; nearest received=285
+RX HEARTBEAT state=CONNECTED, elapsed=130.2s, buffers=3,630, buffer_rate=27.6/s, valid=15, duplicates=3(+0), invalid=3,612(+28), rms=6.7 ADC (-49.7 dBFS), peak=-36.7 dBFS, best_sync=0.878/0.400
+Skipping missing sequence 283; nearest received=285
+RX seq=303, valid=16, duplicates=3, pending=4, metric=0.926, avg_metric=0.921, CFO=+3595 Hz, avg_CFO=+3597 Hz, rate=293 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=131.2s, buffers=3,658, buffer_rate=27.9/s, valid=16, duplicates=3(+0), invalid=3,639(+27), rms=8.3 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.926/0.400
+Skipping missing sequence 284; nearest received=285
+RX seq=306, valid=17, duplicates=3, pending=3, metric=0.920, avg_metric=0.921, CFO=+3601 Hz, avg_CFO=+3597 Hz, rate=339 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=132.3s, buffers=3,687, buffer_rate=28.2/s, valid=17, duplicates=3(+0), invalid=3,667(+28), rms=8.3 ADC (-47.8 dBFS), peak=-35.6 dBFS, best_sync=0.920/0.400
+Skipping missing sequence 287; nearest received=293
+RX HEARTBEAT state=CONNECTED, elapsed=133.3s, buffers=3,716, buffer_rate=28.4/s, valid=17, duplicates=3(+0), invalid=3,696(+29), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.881/0.400
+RX seq=309, valid=18, duplicates=3, pending=4, metric=0.928, avg_metric=0.922, CFO=+3596 Hz, avg_CFO=+3597 Hz, rate=335 bit/s
+Skipping missing sequence 288; nearest received=293
+RX HEARTBEAT state=CONNECTED, elapsed=134.3s, buffers=3,744, buffer_rate=27.5/s, valid=18, duplicates=3(+0), invalid=3,723(+27), rms=8.3 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.928/0.400
+Skipping missing sequence 289; nearest received=293
+RX HEARTBEAT state=CONNECTED, elapsed=135.3s, buffers=3,772, buffer_rate=27.9/s, valid=18, duplicates=3(+0), invalid=3,751(+28), rms=8.3 ADC (-47.8 dBFS), peak=-35.6 dBFS, best_sync=0.884/0.400
+RX seq=314, valid=19, duplicates=3, pending=5, metric=0.925, avg_metric=0.922, CFO=+3598 Hz, avg_CFO=+3597 Hz, rate=331 bit/s
+Skipping missing sequence 290; nearest received=293
+RX HEARTBEAT state=CONNECTED, elapsed=136.3s, buffers=3,800, buffer_rate=27.7/s, valid=19, duplicates=3(+0), invalid=3,778(+27), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.925/0.400
+Skipping missing sequence 291; nearest received=293
+RX HEARTBEAT state=CONNECTED, elapsed=137.4s, buffers=3,829, buffer_rate=28.2/s, valid=19, duplicates=3(+0), invalid=3,807(+29), rms=5.0 ADC (-52.2 dBFS), peak=-38.6 dBFS, best_sync=0.885/0.400
+Skipping missing sequence 292; nearest received=293
+Skipping missing sequence 294; nearest received=303
+Skipping missing sequence 295; nearest received=303
+RX seq=321, valid=20, duplicates=3, pending=5, metric=0.933, avg_metric=0.922, CFO=+3607 Hz, avg_CFO=+3598 Hz, rate=348 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=138.4s, buffers=3,857, buffer_rate=27.9/s, valid=20, duplicates=3(+0), invalid=3,834(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.933/0.400
+RX seq=323, valid=21, duplicates=3, pending=6, metric=0.932, avg_metric=0.923, CFO=+3591 Hz, avg_CFO=+3597 Hz, rate=346 bit/s
+Skipping missing sequence 296; nearest received=303
+RX HEARTBEAT state=CONNECTED, elapsed=139.4s, buffers=3,885, buffer_rate=27.9/s, valid=21, duplicates=3(+0), invalid=3,861(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.932/0.400
+RX seq=326, valid=22, duplicates=3, pending=7, metric=0.933, avg_metric=0.923, CFO=+3586 Hz, avg_CFO=+3597 Hz, rate=343 bit/s
+Skipping missing sequence 297; nearest received=303
+Skipping missing sequence 298; nearest received=303
+Skipping missing sequence 299; nearest received=303
+Skipping missing sequence 300; nearest received=303
+Skipping missing sequence 301; nearest received=303
+Skipping missing sequence 302; nearest received=303
+RX seq=327, valid=23, duplicates=3, pending=7, metric=0.923, avg_metric=0.923, CFO=+3579 Hz, avg_CFO=+3596 Hz, rate=365 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=140.4s, buffers=3,914, buffer_rate=28.3/s, valid=23, duplicates=3(+0), invalid=3,888(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 304; nearest received=306
+Skipping missing sequence 305; nearest received=306
+RX seq=330, valid=24, duplicates=3, pending=7, metric=0.932, avg_metric=0.924, CFO=+3595 Hz, avg_CFO=+3596 Hz, rate=385 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=141.4s, buffers=3,942, buffer_rate=27.7/s, valid=24, duplicates=3(+0), invalid=3,915(+27), rms=5.0 ADC (-52.2 dBFS), peak=-37.6 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 307; nearest received=309
+Skipping missing sequence 308; nearest received=309
+RX seq=331, valid=25, duplicates=3, pending=7, metric=0.934, avg_metric=0.924, CFO=+3605 Hz, avg_CFO=+3596 Hz, rate=407 bit/s
+Skipping missing sequence 310; nearest received=314
+Skipping missing sequence 311; nearest received=314
+Skipping missing sequence 312; nearest received=314
+Skipping missing sequence 313; nearest received=314
+RX seq=332, valid=26, duplicates=4, pending=7, metric=0.925, avg_metric=0.924, CFO=+3586 Hz, avg_CFO=+3596 Hz, rate=429 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=142.4s, buffers=3,971, buffer_rate=28.2/s, valid=26, duplicates=4(+1), invalid=3,941(+26), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 315; nearest received=321
+RX HEARTBEAT state=CONNECTED, elapsed=143.4s, buffers=3,999, buffer_rate=27.7/s, valid=26, duplicates=4(+0), invalid=3,969(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.883/0.400
+Skipping missing sequence 316; nearest received=321
+Skipping missing sequence 317; nearest received=321
+Skipping missing sequence 318; nearest received=321
+Skipping missing sequence 319; nearest received=321
+Skipping missing sequence 320; nearest received=321
+RX seq=337, valid=27, duplicates=4, pending=7, metric=0.922, avg_metric=0.924, CFO=+3598 Hz, avg_CFO=+3596 Hz, rate=445 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=144.4s, buffers=4,027, buffer_rate=28.0/s, valid=27, duplicates=4(+0), invalid=3,996(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.922/0.400
+Skipping missing sequence 322; nearest received=323
+RX HEARTBEAT state=CONNECTED, elapsed=145.4s, buffers=4,055, buffer_rate=28.0/s, valid=27, duplicates=4(+0), invalid=4,024(+28), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.883/0.400
+Skipping missing sequence 324; nearest received=326
+RX HEARTBEAT state=CONNECTED, elapsed=146.4s, buffers=4,083, buffer_rate=27.8/s, valid=27, duplicates=4(+0), invalid=4,052(+28), rms=5.1 ADC (-52.2 dBFS), peak=-36.4 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 325; nearest received=326
+RX HEARTBEAT state=CONNECTED, elapsed=147.4s, buffers=4,110, buffer_rate=26.9/s, valid=27, duplicates=4(+0), invalid=4,079(+27), rms=8.4 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.883/0.400
+Skipping missing sequence 328; nearest received=330
+RX HEARTBEAT state=CONNECTED, elapsed=148.5s, buffers=4,140, buffer_rate=29.0/s, valid=27, duplicates=4(+0), invalid=4,109(+30), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 329; nearest received=330
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.8 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=149.5s, buffers=4,168, buffer_rate=27.7/s, valid=27, duplicates=4(+0), invalid=4,137(+28), rms=8.4 ADC (-47.7 dBFS), peak=-35.3 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 333; nearest received=337
+RX HEARTBEAT state=LINK_LOST, elapsed=150.5s, buffers=4,196, buffer_rate=27.8/s, valid=27, duplicates=4(+0), invalid=4,165(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.887/0.400
+Skipping missing sequence 334; nearest received=337
+RX HEARTBEAT state=LINK_LOST, elapsed=151.5s, buffers=4,224, buffer_rate=27.7/s, valid=27, duplicates=4(+0), invalid=4,193(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.886/0.400
+Skipping missing sequence 335; nearest received=337
+RX HEARTBEAT state=LINK_LOST, elapsed=152.5s, buffers=4,252, buffer_rate=27.7/s, valid=27, duplicates=4(+0), invalid=4,221(+28), rms=6.4 ADC (-50.1 dBFS), peak=-37.0 dBFS, best_sync=0.884/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      361
+Sync metric:         0.928
+Sample phase:        2
+Estimated CFO:       +3606.6 Hz
+TX and RX protocol connection is confirmed.
+
+RX seq=361, valid=28, duplicates=4, pending=2, metric=0.928, avg_metric=0.924, CFO=+3607 Hz, avg_CFO=+3596 Hz, rate=545 bit/s
+Skipping missing sequence 336; nearest received=337
+Skipping missing sequence 338; nearest received=361
+Skipping missing sequence 339; nearest received=361
+Skipping missing sequence 340; nearest received=361
+Skipping missing sequence 341; nearest received=361
+Skipping missing sequence 342; nearest received=361
+Skipping missing sequence 343; nearest received=361
+Skipping missing sequence 344; nearest received=361
+Skipping missing sequence 345; nearest received=361
+Skipping missing sequence 346; nearest received=361
+Skipping missing sequence 347; nearest received=361
+Skipping missing sequence 348; nearest received=361
+Skipping missing sequence 349; nearest received=361
+Skipping missing sequence 350; nearest received=361
+Skipping missing sequence 351; nearest received=361
+Skipping missing sequence 352; nearest received=361
+Skipping missing sequence 353; nearest received=361
+RX HEARTBEAT state=CONNECTED, elapsed=153.5s, buffers=4,280, buffer_rate=27.9/s, valid=28, duplicates=4(+0), invalid=4,248(+27), rms=8.4 ADC (-47.7 dBFS), peak=-35.6 dBFS, best_sync=0.928/0.400
+RX seq=364, valid=29, duplicates=4, pending=2, metric=0.936, avg_metric=0.924, CFO=+3586 Hz, avg_CFO=+3596 Hz, rate=562 bit/s
+Skipping missing sequence 354; nearest received=361
+RX HEARTBEAT state=CONNECTED, elapsed=154.5s, buffers=4,308, buffer_rate=28.0/s, valid=29, duplicates=4(+0), invalid=4,275(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.936/0.400
+Skipping missing sequence 355; nearest received=361
+RX seq=367, valid=30, duplicates=4, pending=3, metric=0.914, avg_metric=0.924, CFO=+3602 Hz, avg_CFO=+3596 Hz, rate=558 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=155.5s, buffers=4,336, buffer_rate=27.7/s, valid=30, duplicates=4(+0), invalid=4,302(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.914/0.400
+Skipping missing sequence 356; nearest received=361
+RX HEARTBEAT state=CONNECTED, elapsed=156.5s, buffers=4,364, buffer_rate=27.9/s, valid=30, duplicates=4(+0), invalid=4,330(+28), rms=8.5 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.886/0.400
+Skipping missing sequence 357; nearest received=361
+RX HEARTBEAT state=CONNECTED, elapsed=157.6s, buffers=4,392, buffer_rate=27.4/s, valid=30, duplicates=4(+0), invalid=4,358(+28), rms=5.0 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.890/0.400
+Skipping missing sequence 358; nearest received=361
+RX seq=376, valid=31, duplicates=4, pending=4, metric=0.924, avg_metric=0.924, CFO=+3606 Hz, avg_CFO=+3597 Hz, rate=546 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=158.6s, buffers=4,421, buffer_rate=29.0/s, valid=31, duplicates=5(+1), invalid=4,385(+27), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.935/0.400
+Skipping missing sequence 359; nearest received=361
+RX seq=379, valid=32, duplicates=5, pending=5, metric=0.922, avg_metric=0.924, CFO=+3580 Hz, avg_CFO=+3596 Hz, rate=542 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=159.6s, buffers=4,449, buffer_rate=27.9/s, valid=32, duplicates=5(+0), invalid=4,412(+27), rms=8.5 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.922/0.400
+Skipping missing sequence 360; nearest received=361
+RX seq=381, valid=33, duplicates=5, pending=5, metric=0.926, avg_metric=0.924, CFO=+3591 Hz, avg_CFO=+3596 Hz, rate=560 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=160.6s, buffers=4,477, buffer_rate=27.5/s, valid=33, duplicates=5(+0), invalid=4,439(+27), rms=7.3 ADC (-48.9 dBFS), peak=-36.7 dBFS, best_sync=0.926/0.400
+Skipping missing sequence 362; nearest received=364
+RX seq=384, valid=34, duplicates=5, pending=6, metric=0.927, avg_metric=0.924, CFO=+3581 Hz, avg_CFO=+3595 Hz, rate=557 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=161.6s, buffers=4,506, buffer_rate=28.1/s, valid=34, duplicates=6(+1), invalid=4,466(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.930/0.400
+RX seq=386, valid=35, duplicates=6, pending=7, metric=0.934, avg_metric=0.924, CFO=+3590 Hz, avg_CFO=+3595 Hz, rate=554 bit/s
+Skipping missing sequence 363; nearest received=364
+RX seq=387, valid=36, duplicates=7, pending=7, metric=0.932, avg_metric=0.925, CFO=+3595 Hz, avg_CFO=+3595 Hz, rate=572 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=162.6s, buffers=4,534, buffer_rate=28.0/s, valid=36, duplicates=7(+1), invalid=4,491(+25), rms=8.5 ADC (-47.7 dBFS), peak=-35.6 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 365; nearest received=367
+Skipping missing sequence 366; nearest received=367
+Skipping missing sequence 368; nearest received=376
+RX seq=388, valid=37, duplicates=7, pending=7, metric=0.931, avg_metric=0.925, CFO=+3590 Hz, avg_CFO=+3595 Hz, rate=590 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=163.6s, buffers=4,563, buffer_rate=28.5/s, valid=37, duplicates=7(+0), invalid=4,519(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 369; nearest received=376
+RX HEARTBEAT state=CONNECTED, elapsed=164.6s, buffers=4,591, buffer_rate=27.6/s, valid=37, duplicates=7(+0), invalid=4,547(+28), rms=5.8 ADC (-51.0 dBFS), peak=-36.1 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 370; nearest received=376
+RX HEARTBEAT state=CONNECTED, elapsed=165.7s, buffers=4,619, buffer_rate=27.7/s, valid=37, duplicates=7(+0), invalid=4,575(+28), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.890/0.400
+Skipping missing sequence 371; nearest received=376
+RX HEARTBEAT state=CONNECTED, elapsed=166.7s, buffers=4,644, buffer_rate=24.9/s, valid=37, duplicates=7(+0), invalid=4,600(+25), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 372; nearest received=376
+Skipping missing sequence 373; nearest received=376
+Skipping missing sequence 374; nearest received=376
+Skipping missing sequence 375; nearest received=376
+RX seq=401, valid=38, duplicates=7, pending=7, metric=0.934, avg_metric=0.925, CFO=+3585 Hz, avg_CFO=+3595 Hz, rate=593 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=167.7s, buffers=4,674, buffer_rate=29.1/s, valid=38, duplicates=7(+0), invalid=4,629(+29), rms=5.0 ADC (-52.2 dBFS), peak=-38.6 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 377; nearest received=379
+Skipping missing sequence 378; nearest received=379
+RX seq=403, valid=39, duplicates=7, pending=7, metric=0.932, avg_metric=0.925, CFO=+3588 Hz, avg_CFO=+3595 Hz, rate=609 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=168.7s, buffers=4,702, buffer_rate=27.7/s, valid=39, duplicates=7(+0), invalid=4,656(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 380; nearest received=381
+RX HEARTBEAT state=CONNECTED, elapsed=169.7s, buffers=4,730, buffer_rate=27.9/s, valid=39, duplicates=7(+0), invalid=4,684(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 382; nearest received=384
+RX HEARTBEAT state=CONNECTED, elapsed=170.7s, buffers=4,759, buffer_rate=28.4/s, valid=39, duplicates=7(+0), invalid=4,713(+29), rms=5.0 ADC (-52.2 dBFS), peak=-39.8 dBFS, best_sync=0.879/0.400
+RX seq=67109274, valid=40, duplicates=7, pending=7, metric=0.931, avg_metric=0.925, CFO=+3593 Hz, avg_CFO=+3595 Hz, rate=618 bit/s
+Skipping missing sequence 383; nearest received=384
+RX seq=411, valid=41, duplicates=7, pending=7, metric=0.927, avg_metric=0.925, CFO=+3588 Hz, avg_CFO=+3595 Hz, rate=635 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=171.8s, buffers=4,789, buffer_rate=29.3/s, valid=41, duplicates=7(+0), invalid=4,741(+28), rms=8.4 ADC (-47.8 dBFS), peak=-37.0 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 385; nearest received=386
+Skipping missing sequence 389; nearest received=401
+Skipping missing sequence 390; nearest received=401
+Skipping missing sequence 391; nearest received=401
+Skipping missing sequence 392; nearest received=401
+Skipping missing sequence 393; nearest received=401
+RX seq=414, valid=42, duplicates=7, pending=5, metric=0.928, avg_metric=0.926, CFO=+3602 Hz, avg_CFO=+3595 Hz, rate=686 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=172.8s, buffers=4,817, buffer_rate=27.9/s, valid=42, duplicates=7(+0), invalid=4,768(+27), rms=7.8 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.928/0.400
+RX seq=415, valid=43, duplicates=7, pending=6, metric=0.931, avg_metric=0.926, CFO=+3602 Hz, avg_CFO=+3595 Hz, rate=685 bit/s
+Skipping missing sequence 394; nearest received=401
+RX HEARTBEAT state=CONNECTED, elapsed=173.8s, buffers=4,846, buffer_rate=28.0/s, valid=43, duplicates=7(+0), invalid=4,796(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 395; nearest received=401
+RX seq=419, valid=44, duplicates=7, pending=7, metric=0.933, avg_metric=0.926, CFO=+3584 Hz, avg_CFO=+3595 Hz, rate=678 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=174.8s, buffers=4,875, buffer_rate=28.0/s, valid=44, duplicates=7(+0), invalid=4,824(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 396; nearest received=401
+Skipping missing sequence 397; nearest received=401
+Skipping missing sequence 398; nearest received=401
+Skipping missing sequence 399; nearest received=401
+Skipping missing sequence 400; nearest received=401
+RX seq=421, valid=45, duplicates=7, pending=7, metric=0.929, avg_metric=0.926, CFO=+3598 Hz, avg_CFO=+3595 Hz, rate=695 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=175.9s, buffers=4,903, buffer_rate=27.4/s, valid=45, duplicates=7(+0), invalid=4,851(+27), rms=8.4 ADC (-47.7 dBFS), peak=-37.0 dBFS, best_sync=0.929/0.400
+Skipping missing sequence 402; nearest received=403
+RX HEARTBEAT state=CONNECTED, elapsed=176.9s, buffers=4,931, buffer_rate=27.7/s, valid=45, duplicates=7(+0), invalid=4,879(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.877/0.400
+Skipping missing sequence 404; nearest received=411
+RX HEARTBEAT state=CONNECTED, elapsed=177.9s, buffers=4,960, buffer_rate=28.1/s, valid=45, duplicates=7(+0), invalid=4,908(+29), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 405; nearest received=411
+RX HEARTBEAT state=CONNECTED, elapsed=178.9s, buffers=4,988, buffer_rate=27.3/s, valid=45, duplicates=7(+0), invalid=4,936(+28), rms=8.4 ADC (-47.8 dBFS), peak=-35.9 dBFS, best_sync=0.882/0.400
+RX seq=431, valid=46, duplicates=7, pending=7, metric=0.935, avg_metric=0.926, CFO=+3587 Hz, avg_CFO=+3595 Hz, rate=697 bit/s
+Skipping missing sequence 406; nearest received=411
+Skipping missing sequence 407; nearest received=411
+Skipping missing sequence 408; nearest received=411
+Skipping missing sequence 409; nearest received=411
+Skipping missing sequence 410; nearest received=411
+RX seq=433, valid=47, duplicates=7, pending=7, metric=0.926, avg_metric=0.926, CFO=+3609 Hz, avg_CFO=+3595 Hz, rate=713 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=179.9s, buffers=5,018, buffer_rate=29.2/s, valid=47, duplicates=7(+0), invalid=4,964(+28), rms=5.0 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.935/0.400
+Skipping missing sequence 412; nearest received=414
+Skipping missing sequence 413; nearest received=414
+RX seq=434, valid=48, duplicates=7, pending=6, metric=0.934, avg_metric=0.926, CFO=+3604 Hz, avg_CFO=+3595 Hz, rate=746 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=180.9s, buffers=5,046, buffer_rate=27.9/s, valid=48, duplicates=8(+1), invalid=4,990(+26), rms=8.4 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 416; nearest received=419
+RX seq=439, valid=49, duplicates=8, pending=7, metric=0.939, avg_metric=0.926, CFO=+3595 Hz, avg_CFO=+3595 Hz, rate=739 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=182.0s, buffers=5,075, buffer_rate=28.1/s, valid=49, duplicates=8(+0), invalid=5,018(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.939/0.400
+Skipping missing sequence 417; nearest received=419
+RX HEARTBEAT state=CONNECTED, elapsed=183.0s, buffers=5,103, buffer_rate=27.5/s, valid=49, duplicates=8(+0), invalid=5,046(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 418; nearest received=419
+RX HEARTBEAT state=CONNECTED, elapsed=184.0s, buffers=5,131, buffer_rate=27.8/s, valid=49, duplicates=8(+0), invalid=5,074(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.881/0.400
+Skipping missing sequence 420; nearest received=421
+Skipping missing sequence 422; nearest received=431
+Skipping missing sequence 423; nearest received=431
+RX HEARTBEAT state=CONNECTED, elapsed=185.0s, buffers=5,160, buffer_rate=28.4/s, valid=49, duplicates=8(+0), invalid=5,103(+29), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.878/0.400
+Skipping missing sequence 424; nearest received=431
+RX HEARTBEAT state=CONNECTED, elapsed=186.0s, buffers=5,188, buffer_rate=27.6/s, valid=49, duplicates=8(+0), invalid=5,131(+28), rms=5.0 ADC (-52.2 dBFS), peak=-38.3 dBFS, best_sync=0.877/0.400
+RX seq=451, valid=50, duplicates=8, pending=6, metric=0.919, avg_metric=0.926, CFO=+3591 Hz, avg_CFO=+3595 Hz, rate=757 bit/s
+Skipping missing sequence 425; nearest received=431
+RX HEARTBEAT state=CONNECTED, elapsed=187.1s, buffers=5,217, buffer_rate=28.1/s, valid=50, duplicates=9(+1), invalid=5,158(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 426; nearest received=431
+RX seq=454, valid=51, duplicates=9, pending=7, metric=0.932, avg_metric=0.927, CFO=+3597 Hz, avg_CFO=+3595 Hz, rate=752 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=188.1s, buffers=5,247, buffer_rate=29.4/s, valid=51, duplicates=9(+0), invalid=5,187(+29), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 427; nearest received=431
+RX HEARTBEAT state=CONNECTED, elapsed=189.1s, buffers=5,275, buffer_rate=27.5/s, valid=51, duplicates=9(+0), invalid=5,215(+28), rms=6.1 ADC (-50.6 dBFS), peak=-37.0 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 428; nearest received=431
+RX HEARTBEAT state=CONNECTED, elapsed=190.1s, buffers=5,303, buffer_rate=28.0/s, valid=51, duplicates=9(+0), invalid=5,243(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 429; nearest received=431
+RX HEARTBEAT state=CONNECTED, elapsed=191.1s, buffers=5,331, buffer_rate=27.6/s, valid=51, duplicates=9(+0), invalid=5,271(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.887/0.400
+Skipping missing sequence 430; nearest received=431
+RX seq=466, valid=52, duplicates=9, pending=7, metric=0.927, avg_metric=0.927, CFO=+3597 Hz, avg_CFO=+3594 Hz, rate=751 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=192.1s, buffers=5,359, buffer_rate=28.0/s, valid=52, duplicates=10(+1), invalid=5,297(+26), rms=8.4 ADC (-47.7 dBFS), peak=-35.6 dBFS, best_sync=0.927/0.400
+Skipping missing sequence 432; nearest received=433
+RX HEARTBEAT state=CONNECTED, elapsed=193.1s, buffers=5,387, buffer_rate=27.8/s, valid=52, duplicates=10(+0), invalid=5,325(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 435; nearest received=439
+RX HEARTBEAT state=CONNECTED, elapsed=194.2s, buffers=5,415, buffer_rate=27.6/s, valid=52, duplicates=10(+0), invalid=5,353(+28), rms=6.2 ADC (-50.4 dBFS), peak=-37.0 dBFS, best_sync=0.881/0.400
+Skipping missing sequence 436; nearest received=439
+RX seq=474, valid=53, duplicates=10, pending=6, metric=0.935, avg_metric=0.927, CFO=+3586 Hz, avg_CFO=+3594 Hz, rate=772 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=195.2s, buffers=5,444, buffer_rate=28.6/s, valid=53, duplicates=10(+0), invalid=5,381(+28), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.935/0.400
+Skipping missing sequence 437; nearest received=439
+RX HEARTBEAT state=CONNECTED, elapsed=196.2s, buffers=5,472, buffer_rate=28.0/s, valid=53, duplicates=10(+0), invalid=5,409(+28), rms=8.4 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 438; nearest received=439
+Skipping missing sequence 440; nearest received=451
+Skipping missing sequence 441; nearest received=451
+Skipping missing sequence 442; nearest received=451
+Skipping missing sequence 443; nearest received=451
+RX HEARTBEAT state=CONNECTED, elapsed=197.2s, buffers=5,502, buffer_rate=29.2/s, valid=53, duplicates=10(+0), invalid=5,439(+30), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.883/0.400
+Skipping missing sequence 444; nearest received=451
+RX seq=483, valid=54, duplicates=10, pending=6, metric=0.931, avg_metric=0.928, CFO=+3593 Hz, avg_CFO=+3594 Hz, rate=775 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=198.2s, buffers=5,531, buffer_rate=28.2/s, valid=54, duplicates=10(+0), invalid=5,467(+28), rms=7.1 ADC (-49.2 dBFS), peak=-36.7 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 445; nearest received=451
+RX seq=484, valid=55, duplicates=10, pending=7, metric=0.932, avg_metric=0.928, CFO=+3609 Hz, avg_CFO=+3594 Hz, rate=773 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=199.2s, buffers=5,559, buffer_rate=28.0/s, valid=55, duplicates=10(+0), invalid=5,494(+27), rms=8.4 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 446; nearest received=451
+Skipping missing sequence 447; nearest received=451
+Skipping missing sequence 448; nearest received=451
+Skipping missing sequence 449; nearest received=451
+Skipping missing sequence 450; nearest received=451
+RX seq=486, valid=56, duplicates=10, pending=7, metric=0.933, avg_metric=0.928, CFO=+3587 Hz, avg_CFO=+3594 Hz, rate=786 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=200.2s, buffers=5,588, buffer_rate=28.3/s, valid=56, duplicates=11(+1), invalid=5,521(+27), rms=8.4 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 452; nearest received=454
+Skipping missing sequence 453; nearest received=454
+Skipping missing sequence 455; nearest received=466
+Skipping missing sequence 456; nearest received=466
+Skipping missing sequence 457; nearest received=466
+Skipping missing sequence 458; nearest received=466
+RX seq=490, valid=57, duplicates=11, pending=7, metric=0.925, avg_metric=0.928, CFO=+3593 Hz, avg_CFO=+3594 Hz, rate=797 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=201.3s, buffers=5,616, buffer_rate=27.8/s, valid=57, duplicates=11(+0), invalid=5,548(+27), rms=8.3 ADC (-47.8 dBFS), peak=-35.9 dBFS, best_sync=0.925/0.400
+Skipping missing sequence 459; nearest received=466
+Skipping missing sequence 460; nearest received=466
+Skipping missing sequence 461; nearest received=466
+Skipping missing sequence 462; nearest received=466
+Skipping missing sequence 463; nearest received=466
+Skipping missing sequence 464; nearest received=466
+Skipping missing sequence 465; nearest received=466
+RX seq=491, valid=58, duplicates=11, pending=7, metric=0.936, avg_metric=0.929, CFO=+3603 Hz, avg_CFO=+3594 Hz, rate=811 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=202.3s, buffers=5,642, buffer_rate=25.8/s, valid=58, duplicates=11(+0), invalid=5,573(+25), rms=8.3 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.936/0.400
+Skipping missing sequence 467; nearest received=474
+Skipping missing sequence 468; nearest received=474
+Skipping missing sequence 469; nearest received=474
+Skipping missing sequence 470; nearest received=474
+Skipping missing sequence 471; nearest received=474
+Skipping missing sequence 472; nearest received=474
+Skipping missing sequence 473; nearest received=474
+Skipping missing sequence 475; nearest received=483
+RX seq=495, valid=59, duplicates=11, pending=7, metric=0.921, avg_metric=0.928, CFO=+3599 Hz, avg_CFO=+3594 Hz, rate=821 bit/s
+Skipping missing sequence 476; nearest received=483
+Skipping missing sequence 477; nearest received=483
+Skipping missing sequence 478; nearest received=483
+Skipping missing sequence 479; nearest received=483
+Skipping missing sequence 480; nearest received=483
+Skipping missing sequence 481; nearest received=483
+Skipping missing sequence 482; nearest received=483
+RX seq=497, valid=60, duplicates=11, pending=6, metric=0.928, avg_metric=0.929, CFO=+3588 Hz, avg_CFO=+3594 Hz, rate=850 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=203.3s, buffers=5,671, buffer_rate=28.5/s, valid=60, duplicates=11(+0), invalid=5,600(+27), rms=8.3 ADC (-47.9 dBFS), peak=-36.1 dBFS, best_sync=0.928/0.400
+RX seq=498, valid=61, duplicates=11, pending=7, metric=0.917, avg_metric=0.928, CFO=+3599 Hz, avg_CFO=+3594 Hz, rate=847 bit/s
+Skipping missing sequence 485; nearest received=486
+RX HEARTBEAT state=CONNECTED, elapsed=204.3s, buffers=5,699, buffer_rate=27.7/s, valid=61, duplicates=11(+0), invalid=5,627(+27), rms=5.0 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.917/0.400
+Skipping missing sequence 487; nearest received=490
+RX HEARTBEAT state=CONNECTED, elapsed=205.3s, buffers=5,727, buffer_rate=27.7/s, valid=61, duplicates=11(+0), invalid=5,655(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.876/0.400
+Skipping missing sequence 488; nearest received=490
+RX HEARTBEAT state=CONNECTED, elapsed=206.3s, buffers=5,756, buffer_rate=28.2/s, valid=61, duplicates=11(+0), invalid=5,684(+29), rms=8.3 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.877/0.400
+RX seq=507, valid=62, duplicates=11, pending=7, metric=0.928, avg_metric=0.929, CFO=+3588 Hz, avg_CFO=+3594 Hz, rate=850 bit/s
+Skipping missing sequence 489; nearest received=490
+RX HEARTBEAT state=CONNECTED, elapsed=207.3s, buffers=5,785, buffer_rate=28.6/s, valid=62, duplicates=11(+0), invalid=5,712(+28), rms=7.2 ADC (-49.0 dBFS), peak=-37.0 dBFS, best_sync=0.928/0.400
+Skipping missing sequence 492; nearest received=495
+RX HEARTBEAT state=CONNECTED, elapsed=208.4s, buffers=5,813, buffer_rate=27.5/s, valid=62, duplicates=11(+0), invalid=5,740(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 493; nearest received=495
+RX HEARTBEAT state=CONNECTED, elapsed=209.4s, buffers=5,841, buffer_rate=28.0/s, valid=62, duplicates=11(+0), invalid=5,768(+28), rms=8.3 ADC (-47.9 dBFS), peak=-36.7 dBFS, best_sync=0.877/0.400
+RX seq=515, valid=63, duplicates=11, pending=6, metric=0.934, avg_metric=0.929, CFO=+3589 Hz, avg_CFO=+3594 Hz, rate=867 bit/s
+Skipping missing sequence 494; nearest received=495
+RX HEARTBEAT state=CONNECTED, elapsed=210.4s, buffers=5,870, buffer_rate=28.7/s, valid=63, duplicates=11(+0), invalid=5,796(+28), rms=6.3 ADC (-50.2 dBFS), peak=-36.4 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 496; nearest received=497
+Skipping missing sequence 499; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=211.4s, buffers=5,898, buffer_rate=28.0/s, valid=63, duplicates=11(+0), invalid=5,824(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 500; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=212.4s, buffers=5,926, buffer_rate=28.0/s, valid=63, duplicates=11(+0), invalid=5,852(+28), rms=8.3 ADC (-47.9 dBFS), peak=-35.1 dBFS, best_sync=0.873/0.400
+Skipping missing sequence 501; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=213.4s, buffers=5,954, buffer_rate=27.8/s, valid=63, duplicates=11(+0), invalid=5,880(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.877/0.400
+RX seq=524, valid=64, duplicates=11, pending=4, metric=0.931, avg_metric=0.929, CFO=+3607 Hz, avg_CFO=+3594 Hz, rate=899 bit/s
+RX seq=525, valid=65, duplicates=11, pending=5, metric=0.931, avg_metric=0.929, CFO=+3603 Hz, avg_CFO=+3595 Hz, rate=897 bit/s
+RX seq=526, valid=66, duplicates=11, pending=6, metric=0.931, avg_metric=0.929, CFO=+3596 Hz, avg_CFO=+3595 Hz, rate=897 bit/s
+Skipping missing sequence 502; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=214.4s, buffers=5,983, buffer_rate=28.5/s, valid=66, duplicates=11(+0), invalid=5,906(+26), rms=5.5 ADC (-51.5 dBFS), peak=-37.3 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 503; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=215.4s, buffers=6,011, buffer_rate=27.6/s, valid=66, duplicates=11(+0), invalid=5,934(+28), rms=8.3 ADC (-47.8 dBFS), peak=-37.0 dBFS, best_sync=0.875/0.400
+Skipping missing sequence 504; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=216.5s, buffers=6,040, buffer_rate=28.0/s, valid=66, duplicates=11(+0), invalid=5,963(+29), rms=8.3 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.879/0.400
+RX seq=534, valid=67, duplicates=11, pending=7, metric=0.931, avg_metric=0.929, CFO=+3587 Hz, avg_CFO=+3594 Hz, rate=884 bit/s
+Skipping missing sequence 505; nearest received=507
+RX HEARTBEAT state=CONNECTED, elapsed=217.5s, buffers=6,069, buffer_rate=28.7/s, valid=67, duplicates=11(+0), invalid=5,991(+28), rms=7.2 ADC (-49.1 dBFS), peak=-36.1 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 506; nearest received=507
+RX seq=535, valid=68, duplicates=11, pending=7, metric=0.932, avg_metric=0.929, CFO=+3600 Hz, avg_CFO=+3594 Hz, rate=896 bit/s
+Skipping missing sequence 508; nearest received=515
+Skipping missing sequence 509; nearest received=515
+Skipping missing sequence 510; nearest received=515
+Skipping missing sequence 511; nearest received=515
+Skipping missing sequence 512; nearest received=515
+Skipping missing sequence 513; nearest received=515
+Skipping missing sequence 514; nearest received=515
+Skipping missing sequence 516; nearest received=524
+RX seq=536, valid=69, duplicates=11, pending=7, metric=0.921, avg_metric=0.929, CFO=+3600 Hz, avg_CFO=+3594 Hz, rate=910 bit/s
+Skipping missing sequence 517; nearest received=524
+Skipping missing sequence 518; nearest received=524
+Skipping missing sequence 519; nearest received=524
+Skipping missing sequence 520; nearest received=524
+Skipping missing sequence 521; nearest received=524
+Skipping missing sequence 522; nearest received=524
+Skipping missing sequence 523; nearest received=524
+RX seq=537, valid=70, duplicates=11, pending=5, metric=0.926, avg_metric=0.929, CFO=+3601 Hz, avg_CFO=+3594 Hz, rate=952 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=218.5s, buffers=6,098, buffer_rate=28.3/s, valid=70, duplicates=11(+0), invalid=6,017(+26), rms=6.4 ADC (-50.1 dBFS), peak=-36.7 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 527; nearest received=534
+RX HEARTBEAT state=CONNECTED, elapsed=219.5s, buffers=6,126, buffer_rate=28.0/s, valid=70, duplicates=11(+0), invalid=6,045(+28), rms=8.3 ADC (-47.9 dBFS), peak=-36.1 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 528; nearest received=534
+RX HEARTBEAT state=CONNECTED, elapsed=220.5s, buffers=6,154, buffer_rate=27.7/s, valid=70, duplicates=11(+0), invalid=6,073(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.881/0.400
+Skipping missing sequence 529; nearest received=534
+RX HEARTBEAT state=CONNECTED, elapsed=221.5s, buffers=6,182, buffer_rate=27.9/s, valid=70, duplicates=11(+0), invalid=6,101(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.7 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 530; nearest received=534
+RX HEARTBEAT state=CONNECTED, elapsed=222.6s, buffers=6,208, buffer_rate=24.5/s, valid=70, duplicates=11(+0), invalid=6,127(+26), rms=6.7 ADC (-49.7 dBFS), peak=-36.7 dBFS, best_sync=0.876/0.400
+Skipping missing sequence 531; nearest received=534
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.2 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=223.6s, buffers=6,237, buffer_rate=28.0/s, valid=70, duplicates=11(+0), invalid=6,156(+29), rms=8.3 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.883/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      553
+Sync metric:         0.925
+Sample phase:        2
+Estimated CFO:       +3595.2 Hz
+TX and RX protocol connection is confirmed.
+
+RX seq=553, valid=71, duplicates=11, pending=6, metric=0.925, avg_metric=0.929, CFO=+3595 Hz, avg_CFO=+3594 Hz, rate=928 bit/s
+Skipping missing sequence 532; nearest received=534
+RX HEARTBEAT state=CONNECTED, elapsed=224.6s, buffers=6,265, buffer_rate=28.0/s, valid=71, duplicates=11(+0), invalid=6,183(+27), rms=7.0 ADC (-49.4 dBFS), peak=-36.7 dBFS, best_sync=0.925/0.400
+Skipping missing sequence 533; nearest received=534
+Skipping missing sequence 538; nearest received=553
+Skipping missing sequence 539; nearest received=553
+Skipping missing sequence 540; nearest received=553
+Skipping missing sequence 541; nearest received=553
+Skipping missing sequence 542; nearest received=553
+Skipping missing sequence 543; nearest received=553
+Skipping missing sequence 544; nearest received=553
+Skipping missing sequence 545; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=225.6s, buffers=6,294, buffer_rate=28.6/s, valid=71, duplicates=11(+0), invalid=6,212(+29), rms=8.3 ADC (-47.8 dBFS), peak=-37.0 dBFS, best_sync=0.878/0.400
+RX seq=557, valid=72, duplicates=11, pending=3, metric=0.932, avg_metric=0.929, CFO=+3592 Hz, avg_CFO=+3594 Hz, rate=978 bit/s
+Skipping missing sequence 546; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=226.6s, buffers=6,323, buffer_rate=28.2/s, valid=72, duplicates=11(+0), invalid=6,240(+28), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 547; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=227.7s, buffers=6,352, buffer_rate=28.4/s, valid=72, duplicates=11(+0), invalid=6,269(+29), rms=8.3 ADC (-47.9 dBFS), peak=-37.0 dBFS, best_sync=0.875/0.400
+Skipping missing sequence 548; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=228.7s, buffers=6,380, buffer_rate=27.7/s, valid=72, duplicates=11(+0), invalid=6,297(+28), rms=8.3 ADC (-47.8 dBFS), peak=-36.1 dBFS, best_sync=0.883/0.400
+RX seq=566, valid=73, duplicates=11, pending=4, metric=0.932, avg_metric=0.929, CFO=+3602 Hz, avg_CFO=+3595 Hz, rate=963 bit/s
+Skipping missing sequence 549; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=229.7s, buffers=6,409, buffer_rate=28.0/s, valid=73, duplicates=11(+0), invalid=6,325(+28), rms=7.6 ADC (-48.6 dBFS), peak=-36.4 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 550; nearest received=553
+RX seq=570, valid=74, duplicates=11, pending=5, metric=0.934, avg_metric=0.929, CFO=+3583 Hz, avg_CFO=+3595 Hz, rate=958 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=230.7s, buffers=6,437, buffer_rate=27.5/s, valid=74, duplicates=11(+0), invalid=6,352(+27), rms=7.4 ADC (-48.8 dBFS), peak=-36.4 dBFS, best_sync=0.934/0.400
+RX seq=572, valid=75, duplicates=11, pending=6, metric=0.932, avg_metric=0.929, CFO=+3596 Hz, avg_CFO=+3595 Hz, rate=955 bit/s
+Skipping missing sequence 551; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=231.7s, buffers=6,465, buffer_rate=27.8/s, valid=75, duplicates=11(+0), invalid=6,379(+27), rms=8.2 ADC (-47.9 dBFS), peak=-35.9 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 552; nearest received=553
+RX HEARTBEAT state=CONNECTED, elapsed=232.7s, buffers=6,493, buffer_rate=27.7/s, valid=75, duplicates=11(+0), invalid=6,407(+28), rms=8.4 ADC (-47.8 dBFS), peak=-37.0 dBFS, best_sync=0.879/0.400
+RX seq=578, valid=76, duplicates=11, pending=6, metric=0.937, avg_metric=0.929, CFO=+3597 Hz, avg_CFO=+3595 Hz, rate=960 bit/s
+Skipping missing sequence 554; nearest received=557
+RX HEARTBEAT state=CONNECTED, elapsed=233.8s, buffers=6,521, buffer_rate=27.7/s, valid=76, duplicates=11(+0), invalid=6,434(+27), rms=8.2 ADC (-48.0 dBFS), peak=-36.7 dBFS, best_sync=0.937/0.400
+RX seq=580, valid=77, duplicates=11, pending=7, metric=0.929, avg_metric=0.929, CFO=+3601 Hz, avg_CFO=+3595 Hz, rate=957 bit/s
+Skipping missing sequence 555; nearest received=557
+RX HEARTBEAT state=CONNECTED, elapsed=234.8s, buffers=6,550, buffer_rate=28.3/s, valid=77, duplicates=11(+0), invalid=6,462(+28), rms=8.2 ADC (-47.9 dBFS), peak=-36.7 dBFS, best_sync=0.929/0.400
+Skipping missing sequence 556; nearest received=557
+Skipping missing sequence 558; nearest received=566
+RX seq=582, valid=78, duplicates=11, pending=7, metric=0.932, avg_metric=0.929, CFO=+3600 Hz, avg_CFO=+3595 Hz, rate=967 bit/s
+Skipping missing sequence 559; nearest received=566
+Skipping missing sequence 560; nearest received=566
+Skipping missing sequence 561; nearest received=566
+Skipping missing sequence 562; nearest received=566
+Skipping missing sequence 563; nearest received=566
+Skipping missing sequence 564; nearest received=566
+Skipping missing sequence 565; nearest received=566
+RX seq=583, valid=79, duplicates=11, pending=7, metric=0.942, avg_metric=0.930, CFO=+3597 Hz, avg_CFO=+3595 Hz, rate=979 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=235.8s, buffers=6,579, buffer_rate=28.4/s, valid=79, duplicates=13(+2), invalid=6,487(+25), rms=4.9 ADC (-52.4 dBFS), peak=-37.9 dBFS, best_sync=0.942/0.400
+Skipping missing sequence 567; nearest received=570
+Skipping missing sequence 568; nearest received=570
+Skipping missing sequence 569; nearest received=570
+RX seq=585, valid=80, duplicates=13, pending=7, metric=0.940, avg_metric=0.930, CFO=+3598 Hz, avg_CFO=+3595 Hz, rate=990 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=236.8s, buffers=6,607, buffer_rate=27.9/s, valid=80, duplicates=14(+1), invalid=6,513(+26), rms=8.1 ADC (-48.0 dBFS), peak=-36.1 dBFS, best_sync=0.946/0.400
+Skipping missing sequence 571; nearest received=572
+RX HEARTBEAT state=CONNECTED, elapsed=237.8s, buffers=6,637, buffer_rate=29.0/s, valid=80, duplicates=14(+0), invalid=6,543(+30), rms=8.1 ADC (-48.1 dBFS), peak=-36.7 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 573; nearest received=578
+RX HEARTBEAT state=CONNECTED, elapsed=238.9s, buffers=6,663, buffer_rate=25.4/s, valid=80, duplicates=14(+0), invalid=6,569(+26), rms=8.3 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 574; nearest received=578
+RX HEARTBEAT state=CONNECTED, elapsed=239.9s, buffers=6,690, buffer_rate=26.5/s, valid=80, duplicates=14(+0), invalid=6,596(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.878/0.400
+Skipping missing sequence 575; nearest received=578
+RX HEARTBEAT state=CONNECTED, elapsed=240.9s, buffers=6,717, buffer_rate=26.8/s, valid=80, duplicates=14(+0), invalid=6,623(+27), rms=8.4 ADC (-47.7 dBFS), peak=-35.6 dBFS, best_sync=0.877/0.400
+Skipping missing sequence 576; nearest received=578
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.9 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=241.9s, buffers=6,744, buffer_rate=26.0/s, valid=80, duplicates=14(+0), invalid=6,650(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.878/0.400
+Skipping missing sequence 577; nearest received=578
+RX HEARTBEAT state=LINK_LOST, elapsed=243.0s, buffers=6,771, buffer_rate=26.1/s, valid=80, duplicates=14(+0), invalid=6,677(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 579; nearest received=580
+RX HEARTBEAT state=LINK_LOST, elapsed=244.0s, buffers=6,797, buffer_rate=25.6/s, valid=80, duplicates=14(+0), invalid=6,703(+26), rms=8.5 ADC (-47.6 dBFS), peak=-36.4 dBFS, best_sync=0.883/0.400
+Skipping missing sequence 581; nearest received=582
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      608
+Sync metric:         0.925
+Sample phase:        1
+Estimated CFO:       +3589.8 Hz
+TX and RX protocol connection is confirmed.
+
+RX seq=608, valid=81, duplicates=14, pending=3, metric=0.925, avg_metric=0.930, CFO=+3590 Hz, avg_CFO=+3594 Hz, rate=1,020 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=245.0s, buffers=6,823, buffer_rate=25.7/s, valid=81, duplicates=14(+0), invalid=6,728(+25), rms=5.0 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.925/0.400
+RX seq=610, valid=82, duplicates=14, pending=4, metric=0.929, avg_metric=0.930, CFO=+3606 Hz, avg_CFO=+3595 Hz, rate=1,018 bit/s
+Skipping missing sequence 584; nearest received=585
+Skipping missing sequence 586; nearest received=608
+Skipping missing sequence 587; nearest received=608
+Skipping missing sequence 588; nearest received=608
+Skipping missing sequence 589; nearest received=608
+Skipping missing sequence 590; nearest received=608
+Skipping missing sequence 591; nearest received=608
+Skipping missing sequence 592; nearest received=608
+Skipping missing sequence 593; nearest received=608
+Skipping missing sequence 594; nearest received=608
+Skipping missing sequence 595; nearest received=608
+Skipping missing sequence 596; nearest received=608
+Skipping missing sequence 597; nearest received=608
+Skipping missing sequence 598; nearest received=608
+Skipping missing sequence 599; nearest received=608
+Skipping missing sequence 600; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=246.0s, buffers=6,850, buffer_rate=26.2/s, valid=82, duplicates=14(+0), invalid=6,754(+26), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.929/0.400
+Skipping missing sequence 601; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=247.0s, buffers=6,878, buffer_rate=27.6/s, valid=82, duplicates=14(+0), invalid=6,782(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 602; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=248.0s, buffers=6,906, buffer_rate=27.7/s, valid=82, duplicates=14(+0), invalid=6,810(+28), rms=6.9 ADC (-49.4 dBFS), peak=-37.3 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 603; nearest received=608
+RX seq=620, valid=83, duplicates=14, pending=4, metric=0.929, avg_metric=0.930, CFO=+3600 Hz, avg_CFO=+3595 Hz, rate=1,015 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=249.1s, buffers=6,934, buffer_rate=27.6/s, valid=83, duplicates=14(+0), invalid=6,837(+27), rms=6.9 ADC (-49.5 dBFS), peak=-37.0 dBFS, best_sync=0.929/0.400
+Skipping missing sequence 604; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=250.1s, buffers=6,962, buffer_rate=27.4/s, valid=83, duplicates=14(+0), invalid=6,865(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.883/0.400
+Skipping missing sequence 605; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=251.1s, buffers=6,988, buffer_rate=25.4/s, valid=83, duplicates=14(+0), invalid=6,891(+26), rms=8.6 ADC (-47.6 dBFS), peak=-36.1 dBFS, best_sync=0.892/0.400
+Skipping missing sequence 606; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=252.1s, buffers=7,014, buffer_rate=25.1/s, valid=83, duplicates=14(+0), invalid=6,917(+26), rms=8.5 ADC (-47.6 dBFS), peak=-36.7 dBFS, best_sync=0.888/0.400
+RX seq=629, valid=84, duplicates=14, pending=5, metric=0.931, avg_metric=0.930, CFO=+3601 Hz, avg_CFO=+3596 Hz, rate=1,002 bit/s
+Skipping missing sequence 607; nearest received=608
+RX HEARTBEAT state=CONNECTED, elapsed=253.2s, buffers=7,041, buffer_rate=26.4/s, valid=84, duplicates=14(+0), invalid=6,943(+26), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 609; nearest received=610
+Skipping missing sequence 611; nearest received=620
+Skipping missing sequence 612; nearest received=620
+RX seq=634, valid=85, duplicates=14, pending=4, metric=0.924, avg_metric=0.930, CFO=+3594 Hz, avg_CFO=+3596 Hz, rate=1,021 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=254.2s, buffers=7,065, buffer_rate=23.7/s, valid=85, duplicates=14(+0), invalid=6,966(+23), rms=8.6 ADC (-47.5 dBFS), peak=-36.1 dBFS, best_sync=0.924/0.400
+Skipping missing sequence 613; nearest received=620
+RX seq=636, valid=86, duplicates=14, pending=5, metric=0.939, avg_metric=0.930, CFO=+3607 Hz, avg_CFO=+3596 Hz, rate=1,017 bit/s
+RX seq=637, valid=87, duplicates=14, pending=6, metric=0.927, avg_metric=0.930, CFO=+3606 Hz, avg_CFO=+3596 Hz, rate=1,017 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=255.2s, buffers=7,093, buffer_rate=26.7/s, valid=87, duplicates=14(+0), invalid=6,992(+26), rms=7.6 ADC (-48.7 dBFS), peak=-36.1 dBFS, best_sync=0.939/0.400
+Skipping missing sequence 614; nearest received=620
+RX seq=639, valid=88, duplicates=14, pending=7, metric=0.933, avg_metric=0.930, CFO=+3595 Hz, avg_CFO=+3596 Hz, rate=1,013 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=256.3s, buffers=7,122, buffer_rate=28.0/s, valid=88, duplicates=14(+0), invalid=7,020(+28), rms=7.7 ADC (-48.5 dBFS), peak=-36.1 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 615; nearest received=620
+Skipping missing sequence 616; nearest received=620
+Skipping missing sequence 617; nearest received=620
+Skipping missing sequence 618; nearest received=620
+Skipping missing sequence 619; nearest received=620
+Skipping missing sequence 621; nearest received=629
+RX seq=641, valid=89, duplicates=14, pending=7, metric=0.929, avg_metric=0.930, CFO=+3594 Hz, avg_CFO=+3597 Hz, rate=1,023 bit/s
+Skipping missing sequence 622; nearest received=629
+Skipping missing sequence 623; nearest received=629
+Skipping missing sequence 624; nearest received=629
+Skipping missing sequence 625; nearest received=629
+Skipping missing sequence 626; nearest received=629
+Skipping missing sequence 627; nearest received=629
+Skipping missing sequence 628; nearest received=629
+RX seq=642, valid=90, duplicates=14, pending=7, metric=0.916, avg_metric=0.930, CFO=+3593 Hz, avg_CFO=+3597 Hz, rate=1,032 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=257.3s, buffers=7,152, buffer_rate=29.4/s, valid=90, duplicates=14(+0), invalid=7,048(+28), rms=6.6 ADC (-49.8 dBFS), peak=-36.7 dBFS, best_sync=0.929/0.400
+Skipping missing sequence 630; nearest received=634
+RX HEARTBEAT state=CONNECTED, elapsed=258.3s, buffers=7,180, buffer_rate=27.7/s, valid=90, duplicates=14(+0), invalid=7,076(+28), rms=8.4 ADC (-47.7 dBFS), peak=-37.0 dBFS, best_sync=0.885/0.400
+Skipping missing sequence 631; nearest received=634
+RX HEARTBEAT state=CONNECTED, elapsed=259.3s, buffers=7,207, buffer_rate=26.8/s, valid=90, duplicates=14(+0), invalid=7,103(+27), rms=8.7 ADC (-47.5 dBFS), peak=-36.1 dBFS, best_sync=0.891/0.400
+Skipping missing sequence 632; nearest received=634
+RX HEARTBEAT state=CONNECTED, elapsed=260.3s, buffers=7,235, buffer_rate=27.9/s, valid=90, duplicates=14(+0), invalid=7,131(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 633; nearest received=634
+RX HEARTBEAT state=CONNECTED, elapsed=261.3s, buffers=7,263, buffer_rate=27.2/s, valid=90, duplicates=14(+0), invalid=7,159(+28), rms=8.4 ADC (-47.8 dBFS), peak=-35.6 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 635; nearest received=636
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.1 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=262.3s, buffers=7,290, buffer_rate=26.5/s, valid=90, duplicates=14(+0), invalid=7,186(+27), rms=5.0 ADC (-52.2 dBFS), peak=-37.6 dBFS, best_sync=0.883/0.400
+
+========== RF LINK CONNECTED ==========
+A CRC-valid P2V1 packet from the transmitter was decoded.
+TX session:          0xAD7F181A
+First sequence:      657
+Sync metric:         0.933
+Sample phase:        2
+Estimated CFO:       +3598.4 Hz
+TX and RX protocol connection is confirmed.
+
+RX seq=657, valid=91, duplicates=14, pending=5, metric=0.933, avg_metric=0.930, CFO=+3598 Hz, avg_CFO=+3597 Hz, rate=1,049 bit/s
+Skipping missing sequence 638; nearest received=639
+RX HEARTBEAT state=CONNECTED, elapsed=263.4s, buffers=7,319, buffer_rate=28.0/s, valid=91, duplicates=14(+0), invalid=7,214(+28), rms=8.2 ADC (-47.9 dBFS), peak=-37.0 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 640; nearest received=641
+Skipping missing sequence 643; nearest received=657
+Skipping missing sequence 644; nearest received=657
+Skipping missing sequence 645; nearest received=657
+Skipping missing sequence 646; nearest received=657
+Skipping missing sequence 647; nearest received=657
+Skipping missing sequence 648; nearest received=657
+Skipping missing sequence 649; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=264.4s, buffers=7,346, buffer_rate=26.5/s, valid=91, duplicates=14(+0), invalid=7,241(+27), rms=8.6 ADC (-47.5 dBFS), peak=-36.4 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 650; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=265.4s, buffers=7,374, buffer_rate=27.8/s, valid=91, duplicates=14(+0), invalid=7,269(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 651; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=266.4s, buffers=7,402, buffer_rate=27.6/s, valid=91, duplicates=14(+0), invalid=7,297(+28), rms=8.6 ADC (-47.6 dBFS), peak=-35.6 dBFS, best_sync=0.881/0.400
+RX seq=669, valid=92, duplicates=14, pending=3, metric=0.938, avg_metric=0.930, CFO=+3590 Hz, avg_CFO=+3596 Hz, rate=1,067 bit/s
+Skipping missing sequence 652; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=267.4s, buffers=7,430, buffer_rate=27.9/s, valid=92, duplicates=14(+0), invalid=7,324(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.938/0.400
+RX seq=670, valid=93, duplicates=14, pending=4, metric=0.924, avg_metric=0.930, CFO=+3602 Hz, avg_CFO=+3596 Hz, rate=1,065 bit/s
+RX seq=671, valid=94, duplicates=14, pending=5, metric=0.925, avg_metric=0.930, CFO=+3592 Hz, avg_CFO=+3597 Hz, rate=1,064 bit/s
+RX seq=673, valid=95, duplicates=14, pending=6, metric=0.933, avg_metric=0.930, CFO=+3605 Hz, avg_CFO=+3597 Hz, rate=1,061 bit/s
+Skipping missing sequence 653; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=268.4s, buffers=7,459, buffer_rate=28.7/s, valid=95, duplicates=14(+0), invalid=7,350(+26), rms=8.3 ADC (-47.8 dBFS), peak=-35.9 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 654; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=269.5s, buffers=7,486, buffer_rate=26.3/s, valid=95, duplicates=14(+0), invalid=7,377(+27), rms=8.5 ADC (-47.7 dBFS), peak=-35.1 dBFS, best_sync=0.889/0.400
+Skipping missing sequence 655; nearest received=657
+RX HEARTBEAT state=CONNECTED, elapsed=270.5s, buffers=7,512, buffer_rate=25.7/s, valid=95, duplicates=14(+0), invalid=7,403(+26), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.900/0.400
+Skipping missing sequence 656; nearest received=657
+Skipping missing sequence 658; nearest received=669
+Skipping missing sequence 659; nearest received=669
+Skipping missing sequence 660; nearest received=669
+Skipping missing sequence 661; nearest received=669
+RX HEARTBEAT state=CONNECTED, elapsed=271.5s, buffers=7,538, buffer_rate=25.4/s, valid=95, duplicates=14(+0), invalid=7,429(+26), rms=5.1 ADC (-52.0 dBFS), peak=-37.3 dBFS, best_sync=0.887/0.400
+RX seq=682, valid=96, duplicates=14, pending=6, metric=0.929, avg_metric=0.930, CFO=+3601 Hz, avg_CFO=+3597 Hz, rate=1,060 bit/s
+Skipping missing sequence 662; nearest received=669
+RX HEARTBEAT state=CONNECTED, elapsed=272.5s, buffers=7,565, buffer_rate=26.3/s, valid=96, duplicates=14(+0), invalid=7,455(+26), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.929/0.400
+RX seq=687, valid=97, duplicates=14, pending=7, metric=0.933, avg_metric=0.930, CFO=+3589 Hz, avg_CFO=+3597 Hz, rate=1,053 bit/s
+Skipping missing sequence 663; nearest received=669
+RX HEARTBEAT state=CONNECTED, elapsed=273.6s, buffers=7,594, buffer_rate=28.3/s, valid=97, duplicates=14(+0), invalid=7,483(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 664; nearest received=669
+RX HEARTBEAT state=CONNECTED, elapsed=274.6s, buffers=7,622, buffer_rate=27.4/s, valid=97, duplicates=14(+0), invalid=7,511(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 665; nearest received=669
+Skipping missing sequence 666; nearest received=669
+Skipping missing sequence 667; nearest received=669
+Skipping missing sequence 668; nearest received=669
+RX seq=692, valid=98, duplicates=14, pending=5, metric=0.932, avg_metric=0.930, CFO=+3613 Hz, avg_CFO=+3597 Hz, rate=1,081 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=275.6s, buffers=7,650, buffer_rate=27.7/s, valid=98, duplicates=14(+0), invalid=7,538(+27), rms=8.4 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 672; nearest received=673
+Skipping missing sequence 674; nearest received=682
+RX HEARTBEAT state=CONNECTED, elapsed=276.6s, buffers=7,678, buffer_rate=27.8/s, valid=98, duplicates=14(+0), invalid=7,566(+28), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.880/0.400
+RX seq=697, valid=99, duplicates=14, pending=5, metric=0.928, avg_metric=0.930, CFO=+3593 Hz, avg_CFO=+3597 Hz, rate=1,086 bit/s
+Skipping missing sequence 675; nearest received=682
+RX HEARTBEAT state=CONNECTED, elapsed=277.6s, buffers=7,707, buffer_rate=28.1/s, valid=99, duplicates=14(+0), invalid=7,594(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.928/0.400
+Skipping missing sequence 676; nearest received=682
+RX HEARTBEAT state=CONNECTED, elapsed=278.6s, buffers=7,735, buffer_rate=27.3/s, valid=99, duplicates=14(+0), invalid=7,622(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.884/0.400
+RX seq=702, valid=100, duplicates=14, pending=6, metric=0.930, avg_metric=0.930, CFO=+3609 Hz, avg_CFO=+3597 Hz, rate=1,078 bit/s
+Skipping missing sequence 677; nearest received=682
+RX HEARTBEAT state=CONNECTED, elapsed=279.7s, buffers=7,764, buffer_rate=28.1/s, valid=100, duplicates=14(+0), invalid=7,650(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.930/0.400
+RX seq=704, valid=101, duplicates=14, pending=7, metric=0.931, avg_metric=0.930, CFO=+3599 Hz, avg_CFO=+3597 Hz, rate=1,075 bit/s
+Skipping missing sequence 678; nearest received=682
+Skipping missing sequence 679; nearest received=682
+Skipping missing sequence 680; nearest received=682
+Skipping missing sequence 681; nearest received=682
+RX seq=705, valid=102, duplicates=14, pending=7, metric=0.924, avg_metric=0.930, CFO=+3603 Hz, avg_CFO=+3597 Hz, rate=1,085 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=280.7s, buffers=7,792, buffer_rate=27.9/s, valid=102, duplicates=14(+0), invalid=7,676(+26), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 683; nearest received=687
+RX HEARTBEAT state=CONNECTED, elapsed=281.7s, buffers=7,818, buffer_rate=25.8/s, valid=102, duplicates=14(+0), invalid=7,702(+26), rms=8.5 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 684; nearest received=687
+RX HEARTBEAT state=CONNECTED, elapsed=282.7s, buffers=7,846, buffer_rate=27.8/s, valid=102, duplicates=14(+0), invalid=7,730(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.882/0.400
+Skipping missing sequence 685; nearest received=687
+Skipping missing sequence 686; nearest received=687
+RX seq=712, valid=103, duplicates=14, pending=7, metric=0.938, avg_metric=0.930, CFO=+3610 Hz, avg_CFO=+3598 Hz, rate=1,086 bit/s
+Skipping missing sequence 688; nearest received=692
+Skipping missing sequence 689; nearest received=692
+Skipping missing sequence 690; nearest received=692
+Skipping missing sequence 691; nearest received=692
+RX seq=713, valid=104, duplicates=14, pending=7, metric=0.927, avg_metric=0.930, CFO=+3593 Hz, avg_CFO=+3598 Hz, rate=1,097 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=283.7s, buffers=7,875, buffer_rate=28.0/s, valid=104, duplicates=14(+0), invalid=7,757(+27), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.938/0.400
+Skipping missing sequence 693; nearest received=697
+Skipping missing sequence 694; nearest received=697
+Skipping missing sequence 695; nearest received=697
+Skipping missing sequence 696; nearest received=697
+RX seq=717, valid=105, duplicates=14, pending=7, metric=0.931, avg_metric=0.930, CFO=+3602 Hz, avg_CFO=+3598 Hz, rate=1,103 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=284.8s, buffers=7,904, buffer_rate=28.0/s, valid=105, duplicates=14(+0), invalid=7,785(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 698; nearest received=702
+Skipping missing sequence 699; nearest received=702
+Skipping missing sequence 700; nearest received=702
+Skipping missing sequence 701; nearest received=702
+RX seq=720, valid=106, duplicates=14, pending=7, metric=0.922, avg_metric=0.930, CFO=+3600 Hz, avg_CFO=+3598 Hz, rate=1,110 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=285.8s, buffers=7,932, buffer_rate=27.5/s, valid=106, duplicates=14(+0), invalid=7,812(+27), rms=8.5 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.922/0.400
+Skipping missing sequence 703; nearest received=704
+RX HEARTBEAT state=CONNECTED, elapsed=286.8s, buffers=7,960, buffer_rate=27.3/s, valid=106, duplicates=14(+0), invalid=7,840(+28), rms=6.1 ADC (-50.5 dBFS), peak=-37.0 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 706; nearest received=712
+RX HEARTBEAT state=CONNECTED, elapsed=287.8s, buffers=7,990, buffer_rate=29.8/s, valid=106, duplicates=14(+0), invalid=7,870(+30), rms=8.4 ADC (-47.7 dBFS), peak=-35.3 dBFS, best_sync=0.878/0.400
+RX seq=726, valid=107, duplicates=14, pending=6, metric=0.930, avg_metric=0.930, CFO=+3590 Hz, avg_CFO=+3598 Hz, rate=1,122 bit/s
+Skipping missing sequence 707; nearest received=712
+RX HEARTBEAT state=CONNECTED, elapsed=288.8s, buffers=8,018, buffer_rate=27.8/s, valid=107, duplicates=14(+0), invalid=7,897(+27), rms=8.5 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.930/0.400
+Skipping missing sequence 708; nearest received=712
+RX HEARTBEAT state=CONNECTED, elapsed=289.8s, buffers=8,046, buffer_rate=27.9/s, valid=107, duplicates=14(+0), invalid=7,925(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.1 dBFS, best_sync=0.886/0.400
+RX seq=731, valid=108, duplicates=14, pending=7, metric=0.926, avg_metric=0.930, CFO=+3591 Hz, avg_CFO=+3598 Hz, rate=1,115 bit/s
+Skipping missing sequence 709; nearest received=712
+RX HEARTBEAT state=CONNECTED, elapsed=290.9s, buffers=8,075, buffer_rate=28.3/s, valid=108, duplicates=15(+1), invalid=7,952(+27), rms=6.5 ADC (-50.0 dBFS), peak=-36.4 dBFS, best_sync=0.928/0.400
+Skipping missing sequence 710; nearest received=712
+RX HEARTBEAT state=CONNECTED, elapsed=291.9s, buffers=8,103, buffer_rate=27.3/s, valid=108, duplicates=15(+0), invalid=7,980(+28), rms=8.4 ADC (-47.7 dBFS), peak=-37.0 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 711; nearest received=712
+RX seq=739, valid=109, duplicates=15, pending=6, metric=0.938, avg_metric=0.930, CFO=+3600 Hz, avg_CFO=+3598 Hz, rate=1,125 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=292.9s, buffers=8,131, buffer_rate=27.7/s, valid=109, duplicates=15(+0), invalid=8,007(+27), rms=8.9 ADC (-47.3 dBFS), peak=-36.1 dBFS, best_sync=0.938/0.400
+RX seq=740, valid=110, duplicates=15, pending=7, metric=0.940, avg_metric=0.930, CFO=+3584 Hz, avg_CFO=+3598 Hz, rate=1,124 bit/s
+Skipping missing sequence 714; nearest received=717
+RX HEARTBEAT state=CONNECTED, elapsed=293.9s, buffers=8,159, buffer_rate=27.5/s, valid=110, duplicates=15(+0), invalid=8,034(+27), rms=8.8 ADC (-47.3 dBFS), peak=-36.1 dBFS, best_sync=0.940/0.400
+Skipping missing sequence 715; nearest received=717
+Skipping missing sequence 716; nearest received=717
+RX seq=743, valid=111, duplicates=15, pending=7, metric=0.930, avg_metric=0.930, CFO=+3612 Hz, avg_CFO=+3598 Hz, rate=1,131 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=294.9s, buffers=8,187, buffer_rate=27.8/s, valid=111, duplicates=15(+0), invalid=8,061(+27), rms=8.5 ADC (-47.6 dBFS), peak=-36.4 dBFS, best_sync=0.930/0.400
+Skipping missing sequence 718; nearest received=720
+Skipping missing sequence 719; nearest received=720
+RX seq=746, valid=112, duplicates=15, pending=7, metric=0.931, avg_metric=0.931, CFO=+3603 Hz, avg_CFO=+3598 Hz, rate=1,137 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=295.9s, buffers=8,213, buffer_rate=25.9/s, valid=112, duplicates=15(+0), invalid=8,086(+25), rms=6.5 ADC (-49.9 dBFS), peak=-36.7 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 721; nearest received=726
+RX HEARTBEAT state=CONNECTED, elapsed=297.0s, buffers=8,237, buffer_rate=23.4/s, valid=112, duplicates=15(+0), invalid=8,110(+24), rms=8.5 ADC (-47.6 dBFS), peak=-35.3 dBFS, best_sync=0.884/0.400
+Skipping missing sequence 722; nearest received=726
+Skipping missing sequence 723; nearest received=726
+Skipping missing sequence 724; nearest received=726
+Skipping missing sequence 725; nearest received=726
+RX seq=760, valid=113, duplicates=15, pending=7, metric=0.947, avg_metric=0.931, CFO=+3610 Hz, avg_CFO=+3599 Hz, rate=1,139 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=298.0s, buffers=8,266, buffer_rate=28.3/s, valid=113, duplicates=15(+0), invalid=8,138(+28), rms=8.7 ADC (-47.4 dBFS), peak=-36.7 dBFS, best_sync=0.947/0.400
+Skipping missing sequence 727; nearest received=731
+Skipping missing sequence 728; nearest received=731
+Skipping missing sequence 729; nearest received=731
+Skipping missing sequence 730; nearest received=731
+RX seq=753, valid=114, duplicates=15, pending=7, metric=0.932, avg_metric=0.931, CFO=+3608 Hz, avg_CFO=+3599 Hz, rate=1,149 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=299.0s, buffers=8,294, buffer_rate=27.2/s, valid=114, duplicates=16(+1), invalid=8,164(+26), rms=8.9 ADC (-47.2 dBFS), peak=-35.6 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 732; nearest received=739
+Skipping missing sequence 733; nearest received=739
+Skipping missing sequence 734; nearest received=739
+Skipping missing sequence 735; nearest received=739
+Skipping missing sequence 736; nearest received=739
+Skipping missing sequence 737; nearest received=739
+Skipping missing sequence 738; nearest received=739
+RX seq=756, valid=115, duplicates=16, pending=6, metric=0.928, avg_metric=0.931, CFO=+3597 Hz, avg_CFO=+3599 Hz, rate=1,166 bit/s
+RX seq=757, valid=116, duplicates=16, pending=7, metric=0.941, avg_metric=0.931, CFO=+3604 Hz, avg_CFO=+3599 Hz, rate=1,164 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=300.0s, buffers=8,323, buffer_rate=28.2/s, valid=116, duplicates=16(+0), invalid=8,191(+27), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.941/0.400
+Skipping missing sequence 741; nearest received=743
+RX HEARTBEAT state=CONNECTED, elapsed=301.0s, buffers=8,350, buffer_rate=26.6/s, valid=116, duplicates=16(+0), invalid=8,218(+27), rms=9.0 ADC (-47.2 dBFS), peak=-35.9 dBFS, best_sync=0.912/0.400
+Skipping missing sequence 742; nearest received=743
+RX HEARTBEAT state=CONNECTED, elapsed=302.1s, buffers=8,378, buffer_rate=27.2/s, valid=116, duplicates=16(+0), invalid=8,246(+28), rms=8.5 ADC (-47.6 dBFS), peak=-35.9 dBFS, best_sync=0.898/0.400
+Skipping missing sequence 744; nearest received=746
+RX HEARTBEAT state=CONNECTED, elapsed=303.1s, buffers=8,405, buffer_rate=26.1/s, valid=116, duplicates=16(+0), invalid=8,273(+27), rms=6.8 ADC (-49.6 dBFS), peak=-36.1 dBFS, best_sync=0.888/0.400
+Skipping missing sequence 745; nearest received=746
+RX seq=768, valid=117, duplicates=16, pending=6, metric=0.918, avg_metric=0.931, CFO=+3607 Hz, avg_CFO=+3599 Hz, rate=1,170 bit/s
+RX seq=769, valid=118, duplicates=16, pending=7, metric=0.928, avg_metric=0.931, CFO=+3600 Hz, avg_CFO=+3599 Hz, rate=1,168 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=304.1s, buffers=8,432, buffer_rate=26.5/s, valid=118, duplicates=16(+0), invalid=8,298(+25), rms=8.5 ADC (-47.6 dBFS), peak=-36.7 dBFS, best_sync=0.928/0.400
+Skipping missing sequence 747; nearest received=753
+RX HEARTBEAT state=CONNECTED, elapsed=305.2s, buffers=8,460, buffer_rate=27.5/s, valid=118, duplicates=16(+0), invalid=8,326(+28), rms=8.5 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.879/0.400
+Skipping missing sequence 748; nearest received=753
+Skipping missing sequence 749; nearest received=753
+Skipping missing sequence 750; nearest received=753
+Skipping missing sequence 751; nearest received=753
+Skipping missing sequence 752; nearest received=753
+RX seq=773, valid=119, duplicates=16, pending=7, metric=0.934, avg_metric=0.931, CFO=+3603 Hz, avg_CFO=+3599 Hz, rate=1,174 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=306.2s, buffers=8,489, buffer_rate=28.5/s, valid=119, duplicates=17(+1), invalid=8,353(+27), rms=8.5 ADC (-47.6 dBFS), peak=-37.0 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 754; nearest received=756
+RX HEARTBEAT state=CONNECTED, elapsed=307.2s, buffers=8,517, buffer_rate=27.6/s, valid=119, duplicates=17(+0), invalid=8,381(+28), rms=8.4 ADC (-47.7 dBFS), peak=-36.7 dBFS, best_sync=0.885/0.400
+Skipping missing sequence 755; nearest received=756
+RX seq=780, valid=120, duplicates=17, pending=6, metric=0.933, avg_metric=0.931, CFO=+3612 Hz, avg_CFO=+3599 Hz, rate=1,184 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=308.2s, buffers=8,546, buffer_rate=28.5/s, valid=120, duplicates=17(+0), invalid=8,409(+28), rms=8.5 ADC (-47.7 dBFS), peak=-37.0 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 758; nearest received=760
+RX HEARTBEAT state=CONNECTED, elapsed=309.2s, buffers=8,574, buffer_rate=27.3/s, valid=120, duplicates=17(+0), invalid=8,437(+28), rms=8.3 ADC (-47.9 dBFS), peak=-35.9 dBFS, best_sync=0.881/0.400
+Skipping missing sequence 759; nearest received=760
+RX seq=784, valid=121, duplicates=17, pending=6, metric=0.926, avg_metric=0.931, CFO=+3607 Hz, avg_CFO=+3600 Hz, rate=1,188 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=310.2s, buffers=8,602, buffer_rate=27.8/s, valid=121, duplicates=17(+0), invalid=8,464(+27), rms=8.7 ADC (-47.4 dBFS), peak=-36.4 dBFS, best_sync=0.926/0.400
+Skipping missing sequence 761; nearest received=768
+RX seq=788, valid=122, duplicates=17, pending=7, metric=0.934, avg_metric=0.931, CFO=+3584 Hz, avg_CFO=+3599 Hz, rate=1,183 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=311.2s, buffers=8,630, buffer_rate=27.9/s, valid=122, duplicates=18(+1), invalid=8,490(+26), rms=8.1 ADC (-48.0 dBFS), peak=-35.6 dBFS, best_sync=0.938/0.400
+Skipping missing sequence 762; nearest received=768
+Skipping missing sequence 763; nearest received=768
+Skipping missing sequence 764; nearest received=768
+Skipping missing sequence 765; nearest received=768
+Skipping missing sequence 766; nearest received=768
+Skipping missing sequence 767; nearest received=768
+RX seq=790, valid=123, duplicates=18, pending=6, metric=0.937, avg_metric=0.931, CFO=+3610 Hz, avg_CFO=+3600 Hz, rate=1,201 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=312.3s, buffers=8,655, buffer_rate=24.3/s, valid=123, duplicates=18(+0), invalid=8,514(+24), rms=8.7 ADC (-47.4 dBFS), peak=-36.4 dBFS, best_sync=0.937/0.400
+Skipping missing sequence 770; nearest received=773
+RX HEARTBEAT state=CONNECTED, elapsed=313.3s, buffers=8,683, buffer_rate=27.5/s, valid=123, duplicates=18(+0), invalid=8,542(+28), rms=8.6 ADC (-47.5 dBFS), peak=-35.9 dBFS, best_sync=0.889/0.400
+Skipping missing sequence 771; nearest received=773
+RX seq=795, valid=124, duplicates=18, pending=7, metric=0.934, avg_metric=0.931, CFO=+3605 Hz, avg_CFO=+3600 Hz, rate=1,193 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=314.3s, buffers=8,711, buffer_rate=27.8/s, valid=124, duplicates=18(+0), invalid=8,569(+27), rms=5.0 ADC (-52.2 dBFS), peak=-39.0 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 772; nearest received=773
+RX seq=797, valid=125, duplicates=18, pending=7, metric=0.938, avg_metric=0.931, CFO=+3607 Hz, avg_CFO=+3600 Hz, rate=1,200 bit/s
+Skipping missing sequence 774; nearest received=780
+Skipping missing sequence 775; nearest received=780
+Skipping missing sequence 776; nearest received=780
+Skipping missing sequence 777; nearest received=780
+Skipping missing sequence 778; nearest received=780
+Skipping missing sequence 779; nearest received=780
+RX seq=798, valid=126, duplicates=18, pending=7, metric=0.935, avg_metric=0.931, CFO=+3591 Hz, avg_CFO=+3600 Hz, rate=1,209 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=315.3s, buffers=8,741, buffer_rate=29.6/s, valid=126, duplicates=18(+0), invalid=8,597(+28), rms=7.8 ADC (-48.4 dBFS), peak=-36.1 dBFS, best_sync=0.938/0.400
+Skipping missing sequence 781; nearest received=784
+Skipping missing sequence 782; nearest received=784
+Skipping missing sequence 783; nearest received=784
+RX seq=799, valid=127, duplicates=18, pending=7, metric=0.923, avg_metric=0.931, CFO=+3611 Hz, avg_CFO=+3600 Hz, rate=1,217 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=316.3s, buffers=8,770, buffer_rate=28.0/s, valid=127, duplicates=18(+0), invalid=8,625(+28), rms=8.6 ADC (-47.6 dBFS), peak=-36.1 dBFS, best_sync=0.923/0.400
+Skipping missing sequence 785; nearest received=788
+RX HEARTBEAT state=CONNECTED, elapsed=317.4s, buffers=8,798, buffer_rate=27.5/s, valid=127, duplicates=18(+0), invalid=8,653(+28), rms=8.6 ADC (-47.6 dBFS), peak=-35.6 dBFS, best_sync=0.890/0.400
+Skipping missing sequence 786; nearest received=788
+Skipping missing sequence 787; nearest received=788
+RX seq=805, valid=128, duplicates=18, pending=7, metric=0.931, avg_metric=0.931, CFO=+3586 Hz, avg_CFO=+3600 Hz, rate=1,219 bit/s
+Skipping missing sequence 789; nearest received=790
+RX seq=806, valid=129, duplicates=19, pending=7, metric=0.935, avg_metric=0.931, CFO=+3599 Hz, avg_CFO=+3600 Hz, rate=1,227 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=318.4s, buffers=8,827, buffer_rate=28.2/s, valid=129, duplicates=19(+1), invalid=8,679(+26), rms=5.0 ADC (-52.2 dBFS), peak=-39.4 dBFS, best_sync=0.940/0.400
+Skipping missing sequence 791; nearest received=795
+Skipping missing sequence 792; nearest received=795
+Skipping missing sequence 793; nearest received=795
+Skipping missing sequence 794; nearest received=795
+RX seq=808, valid=130, duplicates=19, pending=7, metric=0.935, avg_metric=0.931, CFO=+3590 Hz, avg_CFO=+3600 Hz, rate=1,232 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=319.4s, buffers=8,859, buffer_rate=30.6/s, valid=130, duplicates=19(+0), invalid=8,710(+31), rms=8.6 ADC (-47.6 dBFS), peak=-36.1 dBFS, best_sync=0.935/0.400
+Skipping missing sequence 796; nearest received=797
+RX HEARTBEAT state=CONNECTED, elapsed=320.5s, buffers=8,888, buffer_rate=28.4/s, valid=130, duplicates=19(+0), invalid=8,739(+29), rms=8.5 ADC (-47.6 dBFS), peak=-35.6 dBFS, best_sync=0.885/0.400
+RX seq=811, valid=131, duplicates=19, pending=5, metric=0.933, avg_metric=0.931, CFO=+3607 Hz, avg_CFO=+3600 Hz, rate=1,257 bit/s
+RX seq=812, valid=132, duplicates=19, pending=6, metric=0.933, avg_metric=0.931, CFO=+3594 Hz, avg_CFO=+3600 Hz, rate=1,256 bit/s
+Skipping missing sequence 800; nearest received=805
+RX HEARTBEAT state=CONNECTED, elapsed=321.5s, buffers=8,916, buffer_rate=27.9/s, valid=132, duplicates=19(+0), invalid=8,765(+26), rms=8.5 ADC (-47.6 dBFS), peak=-35.9 dBFS, best_sync=0.933/0.400
+Skipping missing sequence 801; nearest received=805
+RX HEARTBEAT state=CONNECTED, elapsed=322.5s, buffers=8,944, buffer_rate=27.6/s, valid=132, duplicates=19(+0), invalid=8,793(+28), rms=8.5 ADC (-47.6 dBFS), peak=-36.1 dBFS, best_sync=0.883/0.400
+RX seq=816, valid=133, duplicates=19, pending=7, metric=0.930, avg_metric=0.931, CFO=+3599 Hz, avg_CFO=+3600 Hz, rate=1,250 bit/s
+Skipping missing sequence 802; nearest received=805
+RX HEARTBEAT state=CONNECTED, elapsed=323.5s, buffers=8,972, buffer_rate=27.7/s, valid=133, duplicates=19(+0), invalid=8,820(+27), rms=5.0 ADC (-52.2 dBFS), peak=-38.3 dBFS, best_sync=0.930/0.400
+Skipping missing sequence 803; nearest received=805
+Skipping missing sequence 804; nearest received=805
+RX seq=819, valid=134, duplicates=19, pending=6, metric=0.926, avg_metric=0.931, CFO=+3607 Hz, avg_CFO=+3600 Hz, rate=1,266 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=324.5s, buffers=9,000, buffer_rate=27.8/s, valid=134, duplicates=20(+1), invalid=8,846(+26), rms=8.5 ADC (-47.6 dBFS), peak=-36.4 dBFS, best_sync=0.935/0.400
+Skipping missing sequence 807; nearest received=808
+RX seq=822, valid=135, duplicates=20, pending=6, metric=0.932, avg_metric=0.931, CFO=+3602 Hz, avg_CFO=+3600 Hz, rate=1,271 bit/s
+RX seq=823, valid=136, duplicates=20, pending=7, metric=0.929, avg_metric=0.931, CFO=+3609 Hz, avg_CFO=+3600 Hz, rate=1,269 bit/s
+Skipping missing sequence 809; nearest received=811
+Skipping missing sequence 810; nearest received=811
+RX seq=824, valid=137, duplicates=20, pending=6, metric=0.939, avg_metric=0.931, CFO=+3605 Hz, avg_CFO=+3600 Hz, rate=1,288 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=325.5s, buffers=9,029, buffer_rate=28.6/s, valid=137, duplicates=21(+1), invalid=8,871(+25), rms=8.5 ADC (-47.6 dBFS), peak=-37.0 dBFS, best_sync=0.939/0.400
+RX seq=826, valid=138, duplicates=21, pending=7, metric=0.931, avg_metric=0.931, CFO=+3610 Hz, avg_CFO=+3601 Hz, rate=1,285 bit/s
+Skipping missing sequence 813; nearest received=816
+RX HEARTBEAT state=CONNECTED, elapsed=326.5s, buffers=9,057, buffer_rate=27.7/s, valid=138, duplicates=21(+0), invalid=8,898(+27), rms=8.5 ADC (-47.7 dBFS), peak=-35.9 dBFS, best_sync=0.931/0.400
+Skipping missing sequence 814; nearest received=816
+RX HEARTBEAT state=CONNECTED, elapsed=327.6s, buffers=9,086, buffer_rate=28.1/s, valid=138, duplicates=21(+0), invalid=8,927(+29), rms=8.5 ADC (-47.6 dBFS), peak=-36.4 dBFS, best_sync=0.888/0.400
+Skipping missing sequence 815; nearest received=816
+RX seq=831, valid=139, duplicates=21, pending=7, metric=0.932, avg_metric=0.931, CFO=+3599 Hz, avg_CFO=+3601 Hz, rate=1,288 bit/s
+New TX session: 0xAD7F1818; starting at sequence 831
+RX seq=831, valid=140, duplicates=21, pending=0, metric=0.925, avg_metric=0.931, CFO=+3603 Hz, avg_CFO=+3601 Hz, rate=1,297 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=328.6s, buffers=9,114, buffer_rate=27.7/s, valid=140, duplicates=21(+0), invalid=8,953(+26), rms=8.5 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.932/0.400
+New TX session: 0xAD7F181A; starting at sequence 832
+RX seq=832, valid=141, duplicates=21, pending=0, metric=0.931, avg_metric=0.931, CFO=+3612 Hz, avg_CFO=+3601 Hz, rate=1,304 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=329.6s, buffers=9,142, buffer_rate=27.7/s, valid=141, duplicates=21(+0), invalid=8,980(+27), rms=8.6 ADC (-47.5 dBFS), peak=-36.4 dBFS, best_sync=0.931/0.400
+RX seq=836, valid=142, duplicates=21, pending=1, metric=0.928, avg_metric=0.931, CFO=+3599 Hz, avg_CFO=+3601 Hz, rate=1,299 bit/s
+RX seq=837, valid=143, duplicates=21, pending=2, metric=0.934, avg_metric=0.931, CFO=+3616 Hz, avg_CFO=+3602 Hz, rate=1,298 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=330.6s, buffers=9,170, buffer_rate=27.9/s, valid=143, duplicates=21(+0), invalid=9,006(+26), rms=7.8 ADC (-48.4 dBFS), peak=-35.1 dBFS, best_sync=0.934/0.400
+Skipping missing sequence 833; nearest received=836
+RX seq=840, valid=144, duplicates=21, pending=3, metric=0.936, avg_metric=0.932, CFO=+3605 Hz, avg_CFO=+3602 Hz, rate=1,294 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=331.6s, buffers=9,198, buffer_rate=27.3/s, valid=144, duplicates=21(+0), invalid=9,033(+27), rms=7.0 ADC (-49.3 dBFS), peak=-36.4 dBFS, best_sync=0.936/0.400
+RX seq=841, valid=145, duplicates=21, pending=4, metric=0.940, avg_metric=0.932, CFO=+3606 Hz, avg_CFO=+3602 Hz, rate=1,293 bit/s
+Skipping missing sequence 834; nearest received=836
+RX seq=843, valid=146, duplicates=21, pending=5, metric=0.927, avg_metric=0.932, CFO=+3607 Hz, avg_CFO=+3602 Hz, rate=1,290 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=332.6s, buffers=9,226, buffer_rate=27.8/s, valid=146, duplicates=22(+1), invalid=9,058(+25), rms=8.7 ADC (-47.4 dBFS), peak=-36.4 dBFS, best_sync=0.944/0.400
+Skipping missing sequence 835; nearest received=836
+RX seq=846, valid=147, duplicates=22, pending=4, metric=0.934, avg_metric=0.932, CFO=+3607 Hz, avg_CFO=+3602 Hz, rate=1,305 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=333.7s, buffers=9,255, buffer_rate=28.0/s, valid=147, duplicates=23(+1), invalid=9,085(+27), rms=8.7 ADC (-47.4 dBFS), peak=-36.4 dBFS, best_sync=0.935/0.400
+RX seq=847, valid=148, duplicates=23, pending=5, metric=0.938, avg_metric=0.932, CFO=+3614 Hz, avg_CFO=+3602 Hz, rate=1,303 bit/s
+Skipping missing sequence 838; nearest received=840
+RX seq=848, valid=149, duplicates=24, pending=6, metric=0.940, avg_metric=0.932, CFO=+3599 Hz, avg_CFO=+3602 Hz, rate=1,301 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=334.7s, buffers=9,284, buffer_rate=28.6/s, valid=149, duplicates=24(+1), invalid=9,111(+26), rms=8.0 ADC (-48.2 dBFS), peak=-35.9 dBFS, best_sync=0.941/0.400
+Skipping missing sequence 839; nearest received=840
+RX HEARTBEAT state=CONNECTED, elapsed=335.7s, buffers=9,312, buffer_rate=27.7/s, valid=149, duplicates=24(+0), invalid=9,139(+28), rms=8.2 ADC (-48.0 dBFS), peak=-36.4 dBFS, best_sync=0.875/0.400
+Skipping missing sequence 842; nearest received=843
+RX HEARTBEAT state=CONNECTED, elapsed=336.7s, buffers=9,340, buffer_rate=27.7/s, valid=149, duplicates=24(+0), invalid=9,167(+28), rms=8.2 ADC (-48.0 dBFS), peak=-35.6 dBFS, best_sync=0.873/0.400
+Skipping missing sequence 844; nearest received=846
+RX seq=857, valid=150, duplicates=24, pending=4, metric=0.921, avg_metric=0.932, CFO=+3601 Hz, avg_CFO=+3602 Hz, rate=1,317 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=337.7s, buffers=9,368, buffer_rate=27.9/s, valid=150, duplicates=24(+0), invalid=9,194(+27), rms=8.2 ADC (-48.0 dBFS), peak=-36.4 dBFS, best_sync=0.921/0.400
+Skipping missing sequence 845; nearest received=846
+Skipping missing sequence 849; nearest received=857
+RX HEARTBEAT state=CONNECTED, elapsed=338.7s, buffers=9,396, buffer_rate=27.8/s, valid=150, duplicates=24(+0), invalid=9,222(+28), rms=8.5 ADC (-47.6 dBFS), peak=-36.7 dBFS, best_sync=0.880/0.400
+Skipping missing sequence 850; nearest received=857
+RX seq=862, valid=151, duplicates=24, pending=2, metric=0.936, avg_metric=0.932, CFO=+3594 Hz, avg_CFO=+3602 Hz, rate=1,338 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=339.7s, buffers=9,426, buffer_rate=29.1/s, valid=151, duplicates=24(+0), invalid=9,251(+29), rms=8.7 ADC (-47.5 dBFS), peak=-36.4 dBFS, best_sync=0.936/0.400
+RX seq=863, valid=152, duplicates=24, pending=3, metric=0.929, avg_metric=0.932, CFO=+3610 Hz, avg_CFO=+3602 Hz, rate=1,336 bit/s
+Skipping missing sequence 851; nearest received=857
+RX HEARTBEAT state=CONNECTED, elapsed=340.7s, buffers=9,454, buffer_rate=27.8/s, valid=152, duplicates=24(+0), invalid=9,278(+27), rms=8.7 ADC (-47.4 dBFS), peak=-36.7 dBFS, best_sync=0.929/0.400
+Skipping missing sequence 852; nearest received=857
+RX seq=866, valid=153, duplicates=24, pending=4, metric=0.937, avg_metric=0.932, CFO=+3606 Hz, avg_CFO=+3602 Hz, rate=1,332 bit/s
+RX seq=867, valid=154, duplicates=26, pending=5, metric=0.935, avg_metric=0.932, CFO=+3590 Hz, avg_CFO=+3602 Hz, rate=1,330 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=341.7s, buffers=9,482, buffer_rate=27.9/s, valid=154, duplicates=26(+2), invalid=9,302(+24), rms=8.3 ADC (-47.8 dBFS), peak=-36.4 dBFS, best_sync=0.944/0.400
+RX seq=868, valid=155, duplicates=26, pending=6, metric=0.944, avg_metric=0.933, CFO=+3596 Hz, avg_CFO=+3602 Hz, rate=1,328 bit/s
+Skipping missing sequence 853; nearest received=857
+RX HEARTBEAT state=CONNECTED, elapsed=342.8s, buffers=9,510, buffer_rate=27.6/s, valid=155, duplicates=26(+0), invalid=9,329(+27), rms=8.7 ADC (-47.4 dBFS), peak=-36.1 dBFS, best_sync=0.944/0.400
+RX seq=871, valid=156, duplicates=26, pending=7, metric=0.938, avg_metric=0.933, CFO=+3615 Hz, avg_CFO=+3602 Hz, rate=1,325 bit/s
+Skipping missing sequence 854; nearest received=857
+Skipping missing sequence 855; nearest received=857
+Skipping missing sequence 856; nearest received=857
+RX seq=872, valid=157, duplicates=26, pending=7, metric=0.930, avg_metric=0.933, CFO=+3608 Hz, avg_CFO=+3603 Hz, rate=1,332 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=343.8s, buffers=9,538, buffer_rate=27.9/s, valid=157, duplicates=27(+1), invalid=9,354(+25), rms=8.7 ADC (-47.4 dBFS), peak=-36.4 dBFS, best_sync=0.941/0.400
+Skipping missing sequence 858; nearest received=862
+RX HEARTBEAT state=CONNECTED, elapsed=344.8s, buffers=9,566, buffer_rate=27.8/s, valid=157, duplicates=27(+0), invalid=9,382(+28), rms=8.7 ADC (-47.4 dBFS), peak=-36.1 dBFS, best_sync=0.898/0.400
+Skipping missing sequence 859; nearest received=862
+Skipping missing sequence 860; nearest received=862
+Skipping missing sequence 861; nearest received=862
+RX seq=877, valid=158, duplicates=27, pending=6, metric=0.931, avg_metric=0.933, CFO=+3598 Hz, avg_CFO=+3603 Hz, rate=1,344 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=345.8s, buffers=9,594, buffer_rate=28.0/s, valid=158, duplicates=27(+0), invalid=9,409(+27), rms=8.8 ADC (-47.4 dBFS), peak=-35.3 dBFS, best_sync=0.931/0.400
+RX seq=880, valid=159, duplicates=27, pending=7, metric=0.938, avg_metric=0.933, CFO=+3596 Hz, avg_CFO=+3603 Hz, rate=1,341 bit/s
+Skipping missing sequence 864; nearest received=866
+Skipping missing sequence 865; nearest received=866
+RX seq=881, valid=160, duplicates=27, pending=5, metric=0.930, avg_metric=0.933, CFO=+3604 Hz, avg_CFO=+3603 Hz, rate=1,367 bit/s
+RX HEARTBEAT state=CONNECTED, elapsed=346.8s, buffers=9,622, buffer_rate=27.7/s, valid=160, duplicates=27(+0), invalid=9,435(+26), rms=5.4 ADC (-51.5 dBFS), peak=-37.0 dBFS, best_sync=0.938/0.400
+RX seq=882, valid=161, duplicates=27, pending=6, metric=0.932, avg_metric=0.933, CFO=+3596 Hz, avg_CFO=+3603 Hz, rate=1,365 bit/s
+Skipping missing sequence 869; nearest received=871
+RX HEARTBEAT state=CONNECTED, elapsed=347.8s, buffers=9,650, buffer_rate=27.2/s, valid=161, duplicates=27(+0), invalid=9,462(+27), rms=8.4 ADC (-47.7 dBFS), peak=-36.4 dBFS, best_sync=0.932/0.400
+Skipping missing sequence 870; nearest received=871
+RX HEARTBEAT state=CONNECTED, elapsed=348.8s, buffers=9,679, buffer_rate=28.1/s, valid=161, duplicates=27(+0), invalid=9,491(+29), rms=8.2 ADC (-48.0 dBFS), peak=-35.3 dBFS, best_sync=0.889/0.400
+Skipping missing sequence 873; nearest received=877
+RX HEARTBEAT state=CONNECTED, elapsed=349.8s, buffers=9,707, buffer_rate=27.6/s, valid=161, duplicates=27(+0), invalid=9,519(+28), rms=7.8 ADC (-48.4 dBFS), peak=-37.0 dBFS, best_sync=0.868/0.400
+Skipping missing sequence 874; nearest received=877
+RX HEARTBEAT state=CONNECTED, elapsed=350.9s, buffers=9,733, buffer_rate=25.1/s, valid=161, duplicates=27(+0), invalid=9,545(+26), rms=7.8 ADC (-48.3 dBFS), peak=-36.1 dBFS, best_sync=0.851/0.400
+Skipping missing sequence 875; nearest received=877
+RX HEARTBEAT state=CONNECTED, elapsed=351.9s, buffers=9,761, buffer_rate=27.6/s, valid=161, duplicates=27(+0), invalid=9,573(+28), rms=7.8 ADC (-48.3 dBFS), peak=-37.0 dBFS, best_sync=0.860/0.400
+Skipping missing sequence 876; nearest received=877
+
+========== RF LINK LOST ==========
+No CRC-valid transmitter packet for 5.9 seconds.
+RX hardware is still capturing samples; check TX activity, gain and matching settings.
+
+RX HEARTBEAT state=LINK_LOST, elapsed=352.9s, buffers=9,791, buffer_rate=29.3/s, valid=161, duplicates=27(+0), invalid=9,603(+30), rms=7.9 ADC (-48.3 dBFS), peak=-37.0 dBFS, best_sync=0.853/0.400
+Skipping missing sequence 878; nearest received=880
+RX HEARTBEAT state=LINK_LOST, elapsed=353.9s, buffers=9,819, buffer_rate=27.9/s, valid=161, duplicates=27(+0), invalid=9,631(+28), rms=7.8 ADC (-48.3 dBFS), peak=-37.0 dBFS, best_sync=0.863/0.400
+Skipping missing sequence 879; nearest received=880
+RX HEARTBEAT state=LINK_LOST, elapsed=354.9s, buffers=9,847, buffer_rate=27.9/s, valid=161, duplicates=27(+0), invalid=9,659(+28), rms=4.8 ADC (-52.7 dBFS), peak=-39.4 dBFS, best_sync=0.869/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=355.9s, buffers=9,875, buffer_rate=27.8/s, valid=161, duplicates=27(+0), invalid=9,687(+28), rms=7.3 ADC (-49.0 dBFS), peak=-37.3 dBFS, best_sync=0.876/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=357.0s, buffers=9,904, buffer_rate=28.1/s, valid=161, duplicates=27(+0), invalid=9,716(+29), rms=7.2 ADC (-49.1 dBFS), peak=-37.0 dBFS, best_sync=0.842/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=358.0s, buffers=9,933, buffer_rate=28.2/s, valid=161, duplicates=27(+0), invalid=9,745(+29), rms=7.2 ADC (-49.1 dBFS), peak=-37.3 dBFS, best_sync=0.852/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=359.0s, buffers=9,962, buffer_rate=28.2/s, valid=161, duplicates=27(+0), invalid=9,774(+29), rms=7.1 ADC (-49.1 dBFS), peak=-37.6 dBFS, best_sync=0.848/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=360.0s, buffers=9,991, buffer_rate=28.2/s, valid=161, duplicates=27(+0), invalid=9,803(+29), rms=6.7 ADC (-49.7 dBFS), peak=-37.3 dBFS, best_sync=0.826/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=361.1s, buffers=10,019, buffer_rate=27.8/s, valid=161, duplicates=27(+0), invalid=9,831(+28), rms=7.0 ADC (-49.3 dBFS), peak=-37.3 dBFS, best_sync=0.842/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=362.1s, buffers=10,048, buffer_rate=28.5/s, valid=161, duplicates=27(+0), invalid=9,860(+29), rms=7.1 ADC (-49.2 dBFS), peak=-37.9 dBFS, best_sync=0.836/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=363.1s, buffers=10,076, buffer_rate=27.9/s, valid=161, duplicates=27(+0), invalid=9,888(+28), rms=7.1 ADC (-49.2 dBFS), peak=-37.9 dBFS, best_sync=0.832/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=364.1s, buffers=10,105, buffer_rate=28.7/s, valid=161, duplicates=27(+0), invalid=9,917(+29), rms=4.8 ADC (-52.7 dBFS), peak=-38.6 dBFS, best_sync=0.841/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=365.1s, buffers=10,136, buffer_rate=30.8/s, valid=161, duplicates=27(+0), invalid=9,948(+31), rms=7.1 ADC (-49.2 dBFS), peak=-37.6 dBFS, best_sync=0.835/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=366.1s, buffers=10,165, buffer_rate=28.4/s, valid=161, duplicates=27(+0), invalid=9,977(+29), rms=7.1 ADC (-49.2 dBFS), peak=-37.6 dBFS, best_sync=0.838/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=367.1s, buffers=10,193, buffer_rate=27.9/s, valid=161, duplicates=27(+0), invalid=10,005(+28), rms=6.9 ADC (-49.5 dBFS), peak=-37.9 dBFS, best_sync=0.836/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=368.1s, buffers=10,222, buffer_rate=28.7/s, valid=161, duplicates=27(+0), invalid=10,034(+29), rms=7.1 ADC (-49.2 dBFS), peak=-37.9 dBFS, best_sync=0.841/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=369.2s, buffers=10,251, buffer_rate=28.4/s, valid=161, duplicates=27(+0), invalid=10,063(+29), rms=5.4 ADC (-51.5 dBFS), peak=-37.6 dBFS, best_sync=0.829/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=370.2s, buffers=10,279, buffer_rate=27.9/s, valid=161, duplicates=27(+0), invalid=10,091(+28), rms=7.1 ADC (-49.3 dBFS), peak=-37.6 dBFS, best_sync=0.833/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=371.2s, buffers=10,308, buffer_rate=28.0/s, valid=161, duplicates=27(+0), invalid=10,120(+29), rms=7.1 ADC (-49.2 dBFS), peak=-37.3 dBFS, best_sync=0.836/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=372.2s, buffers=10,337, buffer_rate=28.4/s, valid=161, duplicates=27(+0), invalid=10,149(+29), rms=7.1 ADC (-49.3 dBFS), peak=-37.3 dBFS, best_sync=0.831/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=373.2s, buffers=10,366, buffer_rate=28.4/s, valid=161, duplicates=27(+0), invalid=10,178(+29), rms=7.0 ADC (-49.3 dBFS), peak=-37.6 dBFS, best_sync=0.825/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=374.2s, buffers=10,394, buffer_rate=27.8/s, valid=161, duplicates=27(+0), invalid=10,206(+28), rms=7.1 ADC (-49.2 dBFS), peak=-37.3 dBFS, best_sync=0.826/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=375.3s, buffers=10,426, buffer_rate=31.3/s, valid=161, duplicates=27(+0), invalid=10,238(+32), rms=4.8 ADC (-52.6 dBFS), peak=-39.8 dBFS, best_sync=0.828/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=376.3s, buffers=10,458, buffer_rate=31.8/s, valid=161, duplicates=27(+0), invalid=10,270(+32), rms=4.8 ADC (-52.6 dBFS), peak=-39.4 dBFS, best_sync=0.176/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=377.3s, buffers=10,488, buffer_rate=29.9/s, valid=161, duplicates=27(+0), invalid=10,300(+30), rms=8.0 ADC (-48.2 dBFS), peak=-37.0 dBFS, best_sync=0.864/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=378.3s, buffers=10,518, buffer_rate=29.4/s, valid=161, duplicates=27(+0), invalid=10,330(+30), rms=7.9 ADC (-48.3 dBFS), peak=-36.7 dBFS, best_sync=0.861/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=379.3s, buffers=10,546, buffer_rate=27.7/s, valid=161, duplicates=27(+0), invalid=10,358(+28), rms=7.5 ADC (-48.7 dBFS), peak=-37.3 dBFS, best_sync=0.857/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=380.3s, buffers=10,574, buffer_rate=27.6/s, valid=161, duplicates=27(+0), invalid=10,386(+28), rms=6.8 ADC (-49.5 dBFS), peak=-37.9 dBFS, best_sync=0.840/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=381.3s, buffers=10,603, buffer_rate=28.4/s, valid=161, duplicates=27(+0), invalid=10,415(+29), rms=6.4 ADC (-50.1 dBFS), peak=-37.6 dBFS, best_sync=0.842/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=382.4s, buffers=10,633, buffer_rate=29.4/s, valid=161, duplicates=27(+0), invalid=10,445(+30), rms=6.6 ADC (-49.9 dBFS), peak=-38.3 dBFS, best_sync=0.786/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=383.4s, buffers=10,663, buffer_rate=29.4/s, valid=161, duplicates=27(+0), invalid=10,475(+30), rms=6.6 ADC (-49.8 dBFS), peak=-37.3 dBFS, best_sync=0.796/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=384.4s, buffers=10,692, buffer_rate=28.7/s, valid=161, duplicates=27(+0), invalid=10,504(+29), rms=5.2 ADC (-51.8 dBFS), peak=-38.6 dBFS, best_sync=0.855/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=385.4s, buffers=10,720, buffer_rate=27.8/s, valid=161, duplicates=27(+0), invalid=10,532(+28), rms=8.1 ADC (-48.0 dBFS), peak=-35.9 dBFS, best_sync=0.854/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=386.4s, buffers=10,748, buffer_rate=27.3/s, valid=161, duplicates=27(+0), invalid=10,560(+28), rms=7.9 ADC (-48.2 dBFS), peak=-35.1 dBFS, best_sync=0.843/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=387.4s, buffers=10,780, buffer_rate=31.8/s, valid=161, duplicates=27(+0), invalid=10,592(+32), rms=5.3 ADC (-51.7 dBFS), peak=-38.3 dBFS, best_sync=0.827/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=388.4s, buffers=10,811, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,623(+31), rms=5.3 ADC (-51.7 dBFS), peak=-38.6 dBFS, best_sync=0.176/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=389.5s, buffers=10,842, buffer_rate=29.8/s, valid=161, duplicates=27(+0), invalid=10,654(+31), rms=3.6 ADC (-55.2 dBFS), peak=-42.1 dBFS, best_sync=0.159/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=390.5s, buffers=10,874, buffer_rate=31.3/s, valid=161, duplicates=27(+0), invalid=10,686(+32), rms=3.5 ADC (-55.3 dBFS), peak=-42.1 dBFS, best_sync=0.171/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=391.5s, buffers=10,905, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,717(+31), rms=3.5 ADC (-55.4 dBFS), peak=-42.1 dBFS, best_sync=0.161/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=392.5s, buffers=10,936, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,748(+31), rms=3.5 ADC (-55.4 dBFS), peak=-42.1 dBFS, best_sync=0.179/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=393.6s, buffers=10,967, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,779(+31), rms=3.5 ADC (-55.4 dBFS), peak=-40.2 dBFS, best_sync=0.169/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=394.6s, buffers=10,998, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,810(+31), rms=3.5 ADC (-55.4 dBFS), peak=-41.6 dBFS, best_sync=0.156/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=395.6s, buffers=11,029, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,841(+31), rms=3.5 ADC (-55.4 dBFS), peak=-42.1 dBFS, best_sync=0.180/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=396.6s, buffers=11,060, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,872(+31), rms=3.5 ADC (-55.3 dBFS), peak=-42.1 dBFS, best_sync=0.159/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=397.6s, buffers=11,091, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=10,903(+31), rms=3.6 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.159/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=398.6s, buffers=11,122, buffer_rate=30.6/s, valid=161, duplicates=27(+0), invalid=10,934(+31), rms=3.6 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.164/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=399.7s, buffers=11,153, buffer_rate=30.1/s, valid=161, duplicates=27(+0), invalid=10,965(+31), rms=3.5 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.165/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=400.7s, buffers=11,184, buffer_rate=30.9/s, valid=161, duplicates=27(+0), invalid=10,996(+31), rms=3.5 ADC (-55.3 dBFS), peak=-41.1 dBFS, best_sync=0.175/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=401.7s, buffers=11,215, buffer_rate=30.6/s, valid=161, duplicates=27(+0), invalid=11,027(+31), rms=3.5 ADC (-55.3 dBFS), peak=-40.2 dBFS, best_sync=0.175/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=402.7s, buffers=11,246, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=11,058(+31), rms=3.6 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.168/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=403.7s, buffers=11,277, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=11,089(+31), rms=3.6 ADC (-55.2 dBFS), peak=-42.1 dBFS, best_sync=0.160/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=404.7s, buffers=11,308, buffer_rate=30.4/s, valid=161, duplicates=27(+0), invalid=11,120(+31), rms=3.6 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.157/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=405.7s, buffers=11,339, buffer_rate=30.6/s, valid=161, duplicates=27(+0), invalid=11,151(+31), rms=3.6 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.163/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=406.8s, buffers=11,365, buffer_rate=25.8/s, valid=161, duplicates=27(+0), invalid=11,177(+26), rms=3.5 ADC (-55.2 dBFS), peak=-41.1 dBFS, best_sync=0.171/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=407.8s, buffers=11,397, buffer_rate=32.0/s, valid=161, duplicates=27(+0), invalid=11,209(+32), rms=3.6 ADC (-55.2 dBFS), peak=-42.1 dBFS, best_sync=0.156/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=408.8s, buffers=11,428, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=11,240(+31), rms=3.6 ADC (-55.2 dBFS), peak=-41.6 dBFS, best_sync=0.165/0.400
+RX HEARTBEAT state=LINK_LOST, elapsed=409.8s, buffers=11,459, buffer_rate=30.5/s, valid=161, duplicates=27(+0), invalid=11,271(+31), rms=3.6 ADC (-55.2 dBFS), peak=-42.1 dBFS, best_sync=0.160/0.400
+
+Stopping receiver...
+
+========== RX RESULT ==========
+Session:             0xAD7F181A
+RX buffers:          11,469
+Valid packets:       161
+Duplicate packets:   27
+Skipped packets:     708
+Invalid buffers:     11,280
+Payload bytes:       61,600
+Useful RX rate:      1,202 bit/s
+Average recent CFO:  +3602.9 Hz
+Saved stream:        two_pluto_received.h265
+Saved file size:     61,600 bytes
+RESULT: TX/RX protocol link confirmed and validated video payload was written.
+
+Finished:            2026-08-02T17:04:00+09:30
+Exit code:           0
+Experiment log:      logs/rx_20260802_165710.log
