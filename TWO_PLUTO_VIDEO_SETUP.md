@@ -670,7 +670,7 @@ ffplay -f hevc two_pluto_received.h265
 
 ```bash
 python3 pluto_video_rx.py \
---uri "ip:pluto.local" \
+--uri "usb:" \
 --frequency 915000000 \
 --sample-rate 2000000 \
 --samples-per-bit 4 \
@@ -693,7 +693,7 @@ Use a conservative 320×180 profile:
 
 ```bash
 python3 pluto_video_tx.py \
---uri "usb:1.4.5" \
+--uri "usb:" \
 --source rtsp \
 --duration 0 \
 --video-size 320x180 \
