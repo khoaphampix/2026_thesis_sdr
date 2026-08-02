@@ -1,0 +1,15 @@
+python3 pluto_video_rx_rtsp_arq.py \
+--uri "usb:" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--samples-per-bit 4 \
+--payload-size 400 \
+--rx-gain 30 \
+--tx-gain -20 \
+--ack-airtime 0.25 \
+--final-ack-airtime 1.0 \
+--turnaround-guard 0.02 \
+--candidates-per-phase 16 \
+--metric-threshold 0.35 \
+--playback-prebuffer-bytes 4000 \
+--rx-save two_pluto_camera_received.h265
