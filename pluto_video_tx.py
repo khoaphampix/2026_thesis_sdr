@@ -50,7 +50,7 @@ except ImportError as exc:
 # ---------------------------------------------------------------------------
 # Replace PASSWORD once. The URL is not printed in normal terminal output.
 CAMERA_URL = (
-    "rtsp://admin:PASSWORD@192.168.1.2:554/Preview_01_sub"
+    "rtsp://admin:cdu_2026@192.168.1.2:554/Preview_01_sub"
 )
 
 

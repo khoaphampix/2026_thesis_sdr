@@ -87,3 +87,62 @@ create mode 100644 adi_test.py
 
 
 
+
+
+kev@DESKTOP-K2U0FPO:~/pycode/2026_thesis_sdr$ python3 adi_win.py \
+--uri "usb:" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--tone-offset 200000 \
+--tx-gain -40
+2026-08-02 16:44:25,796 | INFO | ========== SIMPLE PLUTO TX TEST ==========
+2026-08-02 16:44:25,797 | INFO | Log file: logs/simple_tx_20260802_164425.log
+2026-08-02 16:44:25,797 | INFO | Opening TX Pluto at URI usb:
+
+2026-08-02 16:44:27,399 | INFO | USB PLUTO CONNECTED
+2026-08-02 16:44:27,399 | INFO | Centre frequency: 915,000,000 Hz
+2026-08-02 16:44:27,400 | INFO | Sample rate: 2,000,000 sample/s
+2026-08-02 16:44:27,400 | INFO | Tone offset: +200000 Hz
+2026-08-02 16:44:27,400 | INFO | Expected receiver peak: +200000 Hz relative to RX centre
+2026-08-02 16:44:27,400 | INFO | TX gain: -40.0 dB
+2026-08-02 16:44:27,491 | INFO | ========== TX TONE ACTIVE ==========
+2026-08-02 16:44:27,491 | INFO | The Pluto is continuously transmitting the test tone.
+2026-08-02 16:44:27,491 | INFO | Start/observe adi_mac.py. Press Ctrl+C here to stop.
+2026-08-02 16:44:28,493 | INFO | TX HEARTBEAT active=yes elapsed=1.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:29,495 | INFO | TX HEARTBEAT active=yes elapsed=2.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:30,496 | INFO | TX HEARTBEAT active=yes elapsed=3.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:31,498 | INFO | TX HEARTBEAT active=yes elapsed=4.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:32,500 | INFO | TX HEARTBEAT active=yes elapsed=5.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:33,501 | INFO | TX HEARTBEAT active=yes elapsed=6.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:34,503 | INFO | TX HEARTBEAT active=yes elapsed=7.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:35,504 | INFO | TX HEARTBEAT active=yes elapsed=8.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:36,506 | INFO | TX HEARTBEAT active=yes elapsed=9.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:37,508 | INFO | TX HEARTBEAT active=yes elapsed=10.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:38,509 | INFO | TX HEARTBEAT active=yes elapsed=11.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:39,511 | INFO | TX HEARTBEAT active=yes elapsed=12.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:40,513 | INFO | TX HEARTBEAT active=yes elapsed=13.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:41,514 | INFO | TX HEARTBEAT active=yes elapsed=14.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:42,516 | INFO | TX HEARTBEAT active=yes elapsed=15.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:43,518 | INFO | TX HEARTBEAT active=yes elapsed=16.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:44,519 | INFO | TX HEARTBEAT active=yes elapsed=17.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:45,521 | INFO | TX HEARTBEAT active=yes elapsed=18.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:46,523 | INFO | TX HEARTBEAT active=yes elapsed=19.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:47,524 | INFO | TX HEARTBEAT active=yes elapsed=20.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:48,526 | INFO | TX HEARTBEAT active=yes elapsed=21.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:49,528 | INFO | TX HEARTBEAT active=yes elapsed=22.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:50,530 | INFO | TX HEARTBEAT active=yes elapsed=23.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:51,533 | INFO | TX HEARTBEAT active=yes elapsed=24.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:52,535 | INFO | TX HEARTBEAT active=yes elapsed=25.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:53,537 | INFO | TX HEARTBEAT active=yes elapsed=26.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:54,539 | INFO | TX HEARTBEAT active=yes elapsed=27.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:55,540 | INFO | TX HEARTBEAT active=yes elapsed=28.0s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:56,542 | INFO | TX HEARTBEAT active=yes elapsed=29.1s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:57,544 | INFO | TX HEARTBEAT active=yes elapsed=30.1s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+2026-08-02 16:44:58,546 | INFO | TX HEARTBEAT active=yes elapsed=31.1s centre=915000000Hz tone_offset=+200000Hz gain=-40.0dB
+^C2026-08-02 16:44:59,060 | INFO | Stopping transmitter after Ctrl+C.
+2026-08-02 16:44:59,237 | INFO | TX stopped.
+2026-08-02 16:44:59,238 | INFO | Experiment log: logs/simple_tx_20260802_164425.log
+^CException ignored in: <function Context.__del__ at 0x74575235c0d0>
+Traceback (most recent call last):
+  File "/home/kev/.local/lib/python3.10/site-packages/iio.py", line 1382, in __del__
+    _destroy(self._context)

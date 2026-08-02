@@ -1,0 +1,719 @@
+"""
+python3 pluto_video_rx_arq.py \
+--uri "usb:" \
+--frequency 915000000 \
+--sample-rate 2000000 \
+--samples-per-bit 4 \
+--payload-size 400 \
+--rx-gain 30 \
+--tx-gain -20 \
+--ack-airtime 0.25 \
+--final-ack-airtime 1.0 \
+--turnaround-guard 0.02 \
+--candidates-per-phase 16 \
+--metric-threshold 0.35 \
+--no-display \
+--rx-save two_pluto_received_exact.h265
+
+"""
+
+
+
+#!/usr/bin/env python3
+"""Reliable Mac H.265 receiver using stop-and-wait ARQ."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+from pathlib import Path
+import struct
+import subprocess
+import time
+
+import adi
+
+from pluto_arq_common import (
+    ACK_SIZE,
+    DATA_HEADER_SIZE,
+    DATA_MAGIC,
+    FLAG_DATA,
+    FLAG_END,
+    FLAG_MANIFEST,
+    MANIFEST_FORMAT,
+    MANIFEST_SIZE,
+    build_ack_packet,
+    configure_logger,
+    destroy_tx,
+    frame_sample_count,
+    next_power_of_two,
+    packet_to_iq,
+    parse_data_packet,
+    recover_packet,
+    refresh_rx,
+)
+
+
+class VideoOutput:
+    def __init__(
+        self,
+        path: Path,
+        display: bool,
+        prebuffer_bytes: int,
+    ):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        self.path = path
+        self.file = path.open("wb")
+        self.display = display
+        self.prebuffer_bytes = max(0, prebuffer_bytes)
+        self.pending = bytearray()
+        self.player: subprocess.Popen | None = None
+        self.total_bytes = 0
+
+    def _start_player(self) -> None:
+        if not self.display or self.player is not None:
+            return
+
+        self.player = subprocess.Popen(
+            [
+                "ffplay",
+                "-hide_banner",
+                "-loglevel",
+                "warning",
+                "-fflags",
+                "nobuffer",
+                "-flags",
+                "low_delay",
+                "-probesize",
+                "2000000",
+                "-analyzeduration",
+                "2000000",
+                "-f",
+                "hevc",
+                "-i",
+                "pipe:0",
+            ],
+            stdin=subprocess.PIPE,
+            bufsize=0,
+        )
+
+    def write(self, payload: bytes) -> None:
+        if not payload:
+            return
+
+        self.file.write(payload)
+        self.file.flush()
+        self.total_bytes += len(payload)
+
+        if not self.display:
+            return
+
+        if self.player is None:
+            self.pending.extend(payload)
+            if len(self.pending) < self.prebuffer_bytes:
+                return
+
+            self._start_player()
+
+            if (
+                self.player is not None
+                and self.player.stdin is not None
+            ):
+                self.player.stdin.write(self.pending)
+                self.player.stdin.flush()
+
+            self.pending.clear()
+            return
+
+        if self.player.stdin is not None:
+            try:
+                self.player.stdin.write(payload)
+                self.player.stdin.flush()
+            except BrokenPipeError:
+                self.player = None
+
+    def close(self) -> None:
+        self.file.close()
+
+        if self.player is not None:
+            if self.player.stdin is not None:
+                try:
+                    self.player.stdin.close()
+                except Exception:
+                    pass
+
+            try:
+                self.player.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                self.player.terminate()
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Reliably receive one raw H.265 file with two PlutoSDRs."
+        )
+    )
+    parser.add_argument("--uri", default="usb:")
+
+    parser.add_argument("--frequency", type=int, default=915_000_000)
+    parser.add_argument("--sample-rate", type=int, default=2_000_000)
+    parser.add_argument("--samples-per-bit", type=int, default=4)
+    parser.add_argument("--payload-size", type=int, default=400)
+
+    parser.add_argument(
+        "--rx-gain",
+        type=float,
+        default=30.0,
+        help="Mac gain while receiving data.",
+    )
+    parser.add_argument(
+        "--tx-gain",
+        type=float,
+        default=-20.0,
+        help="Mac gain while transmitting ACKs.",
+    )
+    parser.add_argument(
+        "--iq-scale",
+        type=float,
+        default=float(2**13),
+    )
+
+    parser.add_argument(
+        "--ack-airtime",
+        type=float,
+        default=0.25,
+    )
+    parser.add_argument(
+        "--final-ack-airtime",
+        type=float,
+        default=1.00,
+    )
+    parser.add_argument(
+        "--turnaround-guard",
+        type=float,
+        default=0.02,
+    )
+    parser.add_argument(
+        "--candidates-per-phase",
+        type=int,
+        default=16,
+    )
+    parser.add_argument(
+        "--metric-threshold",
+        type=float,
+        default=0.35,
+    )
+
+    parser.add_argument(
+        "--rx-save",
+        type=Path,
+        default=Path("two_pluto_received_exact.h265"),
+    )
+    parser.add_argument(
+        "--playback-prebuffer-bytes",
+        type=int,
+        default=8_000,
+    )
+    parser.add_argument("--no-display", action="store_true")
+    parser.add_argument(
+        "--heartbeat-seconds",
+        type=float,
+        default=1.0,
+    )
+    parser.add_argument(
+        "--log-dir",
+        type=Path,
+        default=Path("logs"),
+    )
+    return parser
+
+
+def validate_args(
+    parser: argparse.ArgumentParser,
+    args: argparse.Namespace,
+) -> None:
+    if args.payload_size < MANIFEST_SIZE:
+        parser.error(
+            f"--payload-size must be at least {MANIFEST_SIZE}"
+        )
+    if args.samples_per_bit < 2:
+        parser.error("--samples-per-bit must be at least 2")
+    if args.ack_airtime <= 0:
+        parser.error("--ack-airtime must be positive")
+    if args.final_ack_airtime < args.ack_airtime:
+        parser.error(
+            "--final-ack-airtime must be >= --ack-airtime"
+        )
+
+
+def open_pluto(
+    args: argparse.Namespace,
+    data_rx_buffer_size: int,
+):
+    device = adi.Pluto(uri=args.uri)
+    device.sample_rate = int(args.sample_rate)
+
+    device.rx_lo = int(args.frequency)
+    device.rx_rf_bandwidth = int(args.sample_rate)
+    device.gain_control_mode_chan0 = "manual"
+    device.rx_hardwaregain_chan0 = float(args.rx_gain)
+    device.rx_enabled_channels = [0]
+    device.rx_buffer_size = int(data_rx_buffer_size)
+
+    device.tx_lo = int(args.frequency)
+    device.tx_rf_bandwidth = int(args.sample_rate)
+    device.tx_hardwaregain_chan0 = float(args.tx_gain)
+    device.tx_enabled_channels = [0]
+
+    return device
+
+
+def send_ack(
+    device,
+    args: argparse.Namespace,
+    logger,
+    session: int,
+    sequence: int,
+    final_packet: bool,
+) -> None:
+    packet = build_ack_packet(session, sequence)
+    iq = packet_to_iq(
+        packet,
+        args.samples_per_bit,
+        args.iq_scale,
+    )
+
+    airtime = (
+        args.final_ack_airtime
+        if final_packet
+        else args.ack_airtime
+    )
+
+    destroy_tx(device)
+    device.tx_cyclic_buffer = True
+    device.tx(iq)
+
+    logger.info(
+        "ACK ACTIVE packet=%d airtime=%.3fs",
+        sequence,
+        airtime,
+    )
+
+    time.sleep(airtime)
+    destroy_tx(device)
+    refresh_rx(
+        device,
+        pause=args.turnaround_guard,
+    )
+
+
+def run(args: argparse.Namespace) -> int:
+    logger, log_path = configure_logger("rx_arq", args.log_dir)
+
+    data_packet_size = DATA_HEADER_SIZE + args.payload_size
+    data_frame_samples = frame_sample_count(
+        data_packet_size,
+        args.samples_per_bit,
+    )
+    data_rx_buffer_size = next_power_of_two(
+        max(data_frame_samples * 4, 65_536)
+    )
+
+    temporary_path = args.rx_save.with_suffix(
+        args.rx_save.suffix + ".part"
+    )
+    if temporary_path.exists():
+        temporary_path.unlink()
+
+    logger.info("========== RELIABLE TWO-PLUTO RX ==========")
+    logger.info("Log file: %s", log_path)
+    logger.info("RX URI: %s", args.uri)
+    logger.info("Frequency: %d Hz", args.frequency)
+    logger.info("Sample rate: %d sample/s", args.sample_rate)
+    logger.info("Samples per bit: %d", args.samples_per_bit)
+    logger.info("Payload size: %d bytes", args.payload_size)
+    logger.info("Data RX gain: %.1f dB", args.rx_gain)
+    logger.info("ACK TX gain: %.1f dB", args.tx_gain)
+    logger.info("RX buffer: %d samples", data_rx_buffer_size)
+    logger.info("Temporary file: %s", temporary_path)
+    logger.info("Final file: %s", args.rx_save)
+    logger.info("Start this receiver before the Windows transmitter.")
+
+    device = None
+    output: VideoOutput | None = None
+
+    active_session: int | None = None
+    expected_sequence = 0
+    expected_size: int | None = None
+    expected_packet_count: int | None = None
+    expected_digest: bytes | None = None
+
+    accepted_packets = 0
+    duplicate_packets = 0
+    invalid_buffers = 0
+    completed = False
+    last_heartbeat = time.monotonic()
+    last_error = "No packet decoded."
+
+    try:
+        device = open_pluto(args, data_rx_buffer_size)
+        logger.info("USB PLUTO CONNECTED")
+
+        for index in range(2):
+            samples = device.rx()
+            logger.info(
+                "Warm-up capture %d/2: %d samples",
+                index + 1,
+                len(samples),
+            )
+
+        logger.info("RX SEARCH ACTIVE")
+
+        while not completed:
+            samples = device.rx()
+            fields = None
+            metric = 0.0
+            phase = -1
+            cfo_hz = 0.0
+
+            # First search for the exact next expected packet.
+            try:
+                (
+                    fields,
+                    metric,
+                    phase,
+                    cfo_hz,
+                ) = recover_packet(
+                    rx_samples=samples,
+                    packet_size=data_packet_size,
+                    samples_per_bit=args.samples_per_bit,
+                    sample_rate=args.sample_rate,
+                    magic=DATA_MAGIC,
+                    parser=lambda packet: parse_data_packet(
+                        packet,
+                        args.payload_size,
+                    ),
+                    expected_session=active_session,
+                    expected_sequence=(
+                        expected_sequence
+                        if active_session is not None
+                        else None
+                    ),
+                    candidates_per_phase=(
+                        args.candidates_per_phase
+                    ),
+                    metric_threshold=args.metric_threshold,
+                )
+
+            except Exception as expected_error:
+                last_error = str(expected_error)
+
+                # If the ACK was lost, the sender repeats the previous packet.
+                if (
+                    active_session is not None
+                    and expected_sequence > 0
+                ):
+                    try:
+                        (
+                            fields,
+                            metric,
+                            phase,
+                            cfo_hz,
+                        ) = recover_packet(
+                            rx_samples=samples,
+                            packet_size=data_packet_size,
+                            samples_per_bit=args.samples_per_bit,
+                            sample_rate=args.sample_rate,
+                            magic=DATA_MAGIC,
+                            parser=lambda packet: parse_data_packet(
+                                packet,
+                                args.payload_size,
+                            ),
+                            expected_session=active_session,
+                            expected_sequence=(
+                                expected_sequence - 1
+                            ),
+                            candidates_per_phase=(
+                                args.candidates_per_phase
+                            ),
+                            metric_threshold=(
+                                args.metric_threshold
+                            ),
+                        )
+                    except Exception:
+                        invalid_buffers += 1
+
+                else:
+                    invalid_buffers += 1
+
+            if fields is None:
+                now = time.monotonic()
+
+                if (
+                    now - last_heartbeat
+                    >= args.heartbeat_seconds
+                ):
+                    logger.info(
+                        "RX HEARTBEAT state=SEARCHING "
+                        "expected=%d accepted=%d duplicates=%d "
+                        "invalid=%d last=%s",
+                        expected_sequence,
+                        accepted_packets,
+                        duplicate_packets,
+                        invalid_buffers,
+                        last_error,
+                    )
+                    last_heartbeat = now
+
+                continue
+
+            session = fields["session"]
+            sequence = fields["sequence"]
+            flags = fields["flags"]
+            payload = fields["payload"]
+
+            # Manifest packet starts the exact file session.
+            if flags & FLAG_MANIFEST:
+                if sequence != 0 or len(payload) != MANIFEST_SIZE:
+                    logger.warning("Malformed manifest ignored.")
+                    continue
+
+                (
+                    manifest_size,
+                    manifest_packet_count,
+                    manifest_digest,
+                ) = struct.unpack(MANIFEST_FORMAT, payload)
+
+                if (
+                    active_session == session
+                    and expected_sequence > 0
+                ):
+                    duplicate_packets += 1
+                    logger.info(
+                        "DUPLICATE MANIFEST session=0x%08X; "
+                        "ACK 0 repeated",
+                        session,
+                    )
+                    send_ack(
+                        device,
+                        args,
+                        logger,
+                        session,
+                        0,
+                        final_packet=False,
+                    )
+                    continue
+
+                if output is not None:
+                    output.close()
+
+                if temporary_path.exists():
+                    temporary_path.unlink()
+
+                output = VideoOutput(
+                    path=temporary_path,
+                    display=not args.no_display,
+                    prebuffer_bytes=(
+                        args.playback_prebuffer_bytes
+                    ),
+                )
+
+                active_session = session
+                expected_sequence = 1
+                expected_size = manifest_size
+                expected_packet_count = manifest_packet_count
+                expected_digest = manifest_digest
+                accepted_packets = 0
+
+                logger.info(
+                    "========== FILE SESSION STARTED =========="
+                )
+                logger.info("Session: 0x%08X", session)
+                logger.info(
+                    "Expected size: %d bytes",
+                    expected_size,
+                )
+                logger.info(
+                    "Expected packets: %d",
+                    expected_packet_count,
+                )
+                logger.info(
+                    "Expected SHA-256: %s",
+                    expected_digest.hex(),
+                )
+                logger.info(
+                    "Manifest sync=%.3f phase=%d CFO=%+.1fHz",
+                    metric,
+                    phase,
+                    cfo_hz,
+                )
+
+                send_ack(
+                    device,
+                    args,
+                    logger,
+                    session,
+                    0,
+                    final_packet=False,
+                )
+                continue
+
+            if active_session is None or output is None:
+                logger.warning(
+                    "Data packet %d ignored before manifest.",
+                    sequence,
+                )
+                continue
+
+            if session != active_session:
+                logger.warning(
+                    "Foreign session 0x%08X ignored.",
+                    session,
+                )
+                continue
+
+            # Previous packet means Windows missed the earlier ACK.
+            if sequence == expected_sequence - 1:
+                duplicate_packets += 1
+                logger.info(
+                    "DUPLICATE packet=%d; ACK repeated",
+                    sequence,
+                )
+                send_ack(
+                    device,
+                    args,
+                    logger,
+                    session,
+                    sequence,
+                    final_packet=bool(flags & FLAG_END),
+                )
+                continue
+
+            # Stop-and-wait should never jump ahead.
+            if sequence != expected_sequence:
+                logger.warning(
+                    "OUT OF ORDER packet=%d expected=%d; no ACK",
+                    sequence,
+                    expected_sequence,
+                )
+                continue
+
+            if not flags & FLAG_DATA:
+                logger.warning(
+                    "Packet %d has no DATA flag.",
+                    sequence,
+                )
+                continue
+
+            output.write(payload)
+            accepted_packets += 1
+            expected_sequence += 1
+            final_packet = bool(flags & FLAG_END)
+
+            logger.info(
+                "RX ACCEPTED packet=%d bytes=%d total=%d "
+                "sync=%.3f phase=%d CFO=%+.1fHz",
+                sequence,
+                len(payload),
+                output.total_bytes,
+                metric,
+                phase,
+                cfo_hz,
+            )
+
+            send_ack(
+                device,
+                args,
+                logger,
+                session,
+                sequence,
+                final_packet=final_packet,
+            )
+
+            if final_packet:
+                completed = True
+
+    except KeyboardInterrupt:
+        logger.info("Stopping receiver after Ctrl+C.")
+        return 130
+
+    finally:
+        if output is not None:
+            output.close()
+
+        if device is not None:
+            destroy_tx(device)
+
+            if hasattr(device, "rx_destroy_buffer"):
+                try:
+                    device.rx_destroy_buffer()
+                except Exception:
+                    pass
+
+    if not completed:
+        raise RuntimeError("Transfer did not complete.")
+    if (
+        expected_size is None
+        or expected_digest is None
+        or expected_packet_count is None
+    ):
+        raise RuntimeError("Manifest information is missing.")
+    if not temporary_path.exists():
+        raise RuntimeError("Temporary output is missing.")
+
+    actual_size = temporary_path.stat().st_size
+    actual_digest = hashlib.sha256(
+        temporary_path.read_bytes()
+    ).hexdigest()
+    expected_digest_hex = expected_digest.hex()
+
+    size_match = actual_size == expected_size
+    hash_match = actual_digest == expected_digest_hex
+    packet_match = accepted_packets == expected_packet_count
+
+    logger.info("========== RX VERIFICATION ==========")
+    logger.info(
+        "Accepted packets: %d / %d",
+        accepted_packets,
+        expected_packet_count,
+    )
+    logger.info("Duplicate packets: %d", duplicate_packets)
+    logger.info("Invalid buffers: %d", invalid_buffers)
+    logger.info(
+        "Received bytes: %d / %d",
+        actual_size,
+        expected_size,
+    )
+    logger.info("Expected SHA-256: %s", expected_digest_hex)
+    logger.info("Received SHA-256: %s", actual_digest)
+    logger.info("Packet count match: %s", packet_match)
+    logger.info("Size match: %s", size_match)
+    logger.info("Hash match: %s", hash_match)
+
+    if not packet_match or not size_match or not hash_match:
+        raise RuntimeError(
+            "Verification failed. The .part file was kept."
+        )
+
+    if args.rx_save.exists():
+        args.rx_save.unlink()
+
+    temporary_path.replace(args.rx_save)
+
+    logger.info("Final file: %s", args.rx_save)
+    logger.info(
+        "RESULT: TX and RX H.265 files are identical."
+    )
+    return 0
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+    validate_args(parser, args)
+    return run(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
