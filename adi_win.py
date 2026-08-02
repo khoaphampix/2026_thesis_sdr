@@ -1,7 +1,7 @@
 import adi
 
 # Use the exact USB context string found by iio_info
-uri = "usb:20.7.5"
+uri = "usb:"
 
 sdr = adi.Pluto(uri=uri)
 print("RX Pluto connected successfully!")
