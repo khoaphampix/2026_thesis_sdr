@@ -16,10 +16,13 @@ The transmitter is pluto_video_tx.py.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 from collections import deque
 from pathlib import Path
 import struct
 import subprocess
+import threading
+import sys
 import time
 import zlib
 
@@ -32,6 +35,111 @@ except ImportError as exc:
         "pyadi-iio is required. Install it with: pip install pyadi-iio"
     ) from exc
 
+
+
+# ---------------------------------------------------------------------------
+# Persistent experiment logging
+# ---------------------------------------------------------------------------
+
+class _TeeStream:
+    """Write the same text to the terminal and the experiment log."""
+
+    def __init__(self, console, log_file, lock: threading.Lock):
+        self.console = console
+        self.log_file = log_file
+        self.lock = lock
+        self.encoding = getattr(console, "encoding", "utf-8")
+
+    def write(self, text: str) -> int:
+        if not text:
+            return 0
+
+        with self.lock:
+            self.console.write(text)
+            self.log_file.write(text)
+            self.console.flush()
+            self.log_file.flush()
+
+        return len(text)
+
+    def flush(self) -> None:
+        with self.lock:
+            self.console.flush()
+            self.log_file.flush()
+
+    def isatty(self) -> bool:
+        return bool(getattr(self.console, "isatty", lambda: False)())
+
+    def fileno(self) -> int:
+        return self.console.fileno()
+
+
+class RunLog:
+    """
+    Mirror stdout and stderr into a timestamped UTF-8 text log.
+
+    The log contains the command line, settings, FFmpeg messages, packet
+    status, errors and final statistics while preserving terminal output.
+    """
+
+    def __init__(
+        self,
+        role: str,
+        log_dir: Path,
+        explicit_path: Path | None,
+    ):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.path = (
+            explicit_path
+            if explicit_path is not None
+            else log_dir / f"{role}_{timestamp}.log"
+        )
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+
+        self._file = self.path.open(
+            "w",
+            encoding="utf-8",
+            buffering=1,
+        )
+        self._original_stdout = sys.stdout
+        self._original_stderr = sys.stderr
+        self._lock = threading.Lock()
+
+        sys.stdout = _TeeStream(
+            self._original_stdout,
+            self._file,
+            self._lock,
+        )
+        sys.stderr = _TeeStream(
+            self._original_stderr,
+            self._file,
+            self._lock,
+        )
+
+    def close(self) -> None:
+        try:
+            sys.stdout.flush()
+            sys.stderr.flush()
+        finally:
+            sys.stdout = self._original_stdout
+            sys.stderr = self._original_stderr
+            self._file.close()
+
+
+def print_log_header(run_log: RunLog, role: str) -> None:
+    print("========== EXPERIMENT LOG ==========")
+    print(f"Role:                {role}")
+    print(
+        "Started:             "
+        f"{datetime.now().astimezone().isoformat(timespec='seconds')}"
+    )
+    print(
+        "Command:             "
+        + " ".join(shlex.quote(argument) for argument in sys.argv)
+    )
+    print(f"Log file:            {run_log.path}")
+    print("Pluto connection:    direct USB context usb:")
+    print()
 
 # ---------------------------------------------------------------------------
 # Shared over-the-air protocol
@@ -436,7 +544,7 @@ def open_rx_pluto(
     args: argparse.Namespace,
     rx_buffer_size: int,
 ):
-    device = adi.Pluto(uri=args.uri) if args.uri else adi.Pluto()
+    device = adi.Pluto(uri=args.uri)
 
     device.sample_rate = int(args.sample_rate)
     device.rx_lo = int(args.frequency)
@@ -456,9 +564,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument(
         "--uri",
+        default="usb:",
         help=(
-            "RX Pluto URI, for example usb:1.6.5 or ip:192.168.2.1. "
-            "Omit only when this computer has one visible Pluto."
+            "RX Pluto libiio context. Default: usb:. "
+            "Use one directly connected Pluto on this computer."
         ),
     )
     parser.add_argument(
@@ -530,7 +639,29 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--status-every",
         type=int,
-        default=10,
+        default=1,
+        help=(
+            "Write a status line every N new packets. Default 1 gives a "
+            "detailed experiment log."
+        ),
+    )
+
+    parser.add_argument(
+        "--log-dir",
+        type=Path,
+        default=Path("logs"),
+        help=(
+            "Directory for automatic timestamped experiment logs. "
+            "Default: logs."
+        ),
+    )
+    parser.add_argument(
+        "--log-file",
+        type=Path,
+        help=(
+            "Optional exact log path. Overrides --log-dir and automatic "
+            "timestamp naming."
+        ),
     )
 
     return parser
@@ -556,11 +687,7 @@ def validate_args(
         parser.error("--gap-timeout must be greater than zero")
 
 
-def main() -> int:
-    parser = build_parser()
-    args = parser.parse_args()
-    validate_args(parser, args)
-
+def run(args: argparse.Namespace) -> int:
     frame_symbols = frame_symbol_count(args.payload_size)
     frame_samples = (
         frame_symbols * args.samples_per_bit
@@ -571,7 +698,7 @@ def main() -> int:
     )
 
     print("========== TWO-PLUTO VIDEO RECEIVER ==========")
-    print(f"RX URI:              {args.uri or 'automatic/default'}")
+    print(f"RX URI:              {args.uri}")
     print(f"Frequency:           {args.frequency:,} Hz")
     print(f"Sample rate:         {args.sample_rate:,} sample/s")
     print(f"Samples per bit:     {args.samples_per_bit}")
@@ -828,6 +955,35 @@ def main() -> int:
     print(f"Saved stream:        {args.rx_save}")
 
     return 0
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+    validate_args(parser, args)
+
+    run_log = RunLog(
+        role="rx",
+        log_dir=args.log_dir,
+        explicit_path=args.log_file,
+    )
+
+    try:
+        print_log_header(run_log, "RECEIVER")
+        return run(args)
+    except Exception as error:
+        print()
+        print("========== FATAL ERROR ==========")
+        print(f"{type(error).__name__}: {error}")
+        raise
+    finally:
+        print()
+        print(
+            "Finished:            "
+            f"{datetime.now().astimezone().isoformat(timespec='seconds')}"
+        )
+        print(f"Experiment log:      {run_log.path}")
+        run_log.close()
 
 
 if __name__ == "__main__":
