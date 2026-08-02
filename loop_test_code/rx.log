@@ -1,559 +1,89 @@
-========== EXPERIMENT LOG ==========
-Role:                RECEIVER
-Started:             2026-08-02T16:31:47+09:30
-Command:             pluto_video_rx.py --uri usb: --frequency 915000000 --sample-rate 2000000 --samples-per-bit 4 --payload-size 400 --rx-gain 20 --rx-buffer-frames 4 --candidates-per-phase 8 --metric-threshold 0.55 --reorder-window 8 --gap-timeout 1.0 --playback-prebuffer-bytes 8000 --status-every 1 --log-dir logs --rx-save two_pluto_received.h265
-Log file:            logs/rx_20260802_163147.log
-Pluto connection:    direct USB context usb:
+create mode 100644 adi_test.py
+(pysdr_3_11_9) N2T2ks-MacBook-Pro:2026_thesis_sdr n2t2k$ python3 adi_mac.py \
+> --uri "usb:" \
+> --frequency 915000000 \
+> --sample-rate 2000000 \
+> --tone-offset 200000 \
+> --rx-gain 20 \
+> --snr-threshold 18
+2026-08-02 16:44:13,793 | INFO | ========== SIMPLE PLUTO RX TEST ==========
+2026-08-02 16:44:13,794 | INFO | Log file: logs/simple_rx_20260802_164413.log
+2026-08-02 16:44:13,794 | INFO | Opening RX Pluto at URI usb:
+2026-08-02 16:44:14,914 | INFO | USB PLUTO CONNECTED
+2026-08-02 16:44:14,914 | INFO | Centre frequency: 915,000,000 Hz
+2026-08-02 16:44:14,915 | INFO | Sample rate: 2,000,000 sample/s
+2026-08-02 16:44:14,915 | INFO | Expected tone offset: +200000 Hz
+2026-08-02 16:44:14,915 | INFO | Search window: +80000 Hz around the expected tone
+2026-08-02 16:44:14,915 | INFO | Required SNR: 18.0 dB
+2026-08-02 16:44:14,916 | INFO | RX gain: 20.0 dB
+2026-08-02 16:44:14,916 | INFO | Taking two warm-up RX buffers...
+2026-08-02 16:44:14,975 | INFO | Warm-up captured 65536 complex samples
+2026-08-02 16:44:15,001 | INFO | Warm-up captured 65536 complex samples
+2026-08-02 16:44:15,001 | INFO | ========== RX SEARCH ACTIVE ==========
+2026-08-02 16:44:15,001 | INFO | Now start adi_win.py on the Windows/WSL transmitter.
+2026-08-02 16:44:15,836 | INFO | RX HEARTBEAT state=SEARCHING elapsed=0.8s buffers=1 peak_offset=+258972.2Hz frequency_error=+58972.2Hz snr=12.7dB best_snr=12.7dB rms=1.9ADC(-60.9dBFS) consecutive_hits=0/3
+2026-08-02 16:44:16,839 | INFO | RX HEARTBEAT state=SEARCHING elapsed=1.8s buffers=34 peak_offset=+160491.9Hz frequency_error=-39508.1Hz snr=12.8dB best_snr=14.5dB rms=1.8ADC(-60.9dBFS) consecutive_hits=0/3
+2026-08-02 16:44:17,856 | INFO | RX HEARTBEAT state=SEARCHING elapsed=2.9s buffers=65 peak_offset=+121551.5Hz frequency_error=-78448.5Hz snr=13.0dB best_snr=14.5dB rms=1.8ADC(-60.9dBFS) consecutive_hits=0/3
+2026-08-02 16:44:18,873 | INFO | RX HEARTBEAT state=SEARCHING elapsed=3.9s buffers=96 peak_offset=+177124.0Hz frequency_error=-22876.0Hz snr=14.1dB best_snr=14.5dB rms=1.8ADC(-61.0dBFS) consecutive_hits=0/3
+2026-08-02 16:44:19,890 | INFO | RX HEARTBEAT state=SEARCHING elapsed=4.9s buffers=127 peak_offset=+165679.9Hz frequency_error=-34320.1Hz snr=12.3dB best_snr=14.8dB rms=1.8ADC(-61.0dBFS) consecutive_hits=0/3
+2026-08-02 16:44:20,908 | INFO | RX HEARTBEAT state=SEARCHING elapsed=5.9s buffers=158 peak_offset=+136291.5Hz frequency_error=-63708.5Hz snr=11.7dB best_snr=15.6dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:44:21,924 | INFO | RX HEARTBEAT state=SEARCHING elapsed=6.9s buffers=189 peak_offset=+180419.9Hz frequency_error=-19580.1Hz snr=13.4dB best_snr=15.6dB rms=1.8ADC(-61.0dBFS) consecutive_hits=0/3
+2026-08-02 16:44:22,942 | INFO | RX HEARTBEAT state=SEARCHING elapsed=7.9s buffers=220 peak_offset=+250824.0Hz frequency_error=+50824.0Hz snr=13.3dB best_snr=15.6dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:44:23,959 | INFO | RX HEARTBEAT state=SEARCHING elapsed=8.9s buffers=251 peak_offset=+157531.7Hz frequency_error=-42468.3Hz snr=12.8dB best_snr=15.6dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:44:24,975 | INFO | RX HEARTBEAT state=SEARCHING elapsed=10.0s buffers=282 peak_offset=+177154.5Hz frequency_error=-22845.5Hz snr=12.4dB best_snr=15.6dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:44:25,993 | INFO | RX HEARTBEAT state=SEARCHING elapsed=11.0s buffers=313 peak_offset=+180419.9Hz frequency_error=-19580.1Hz snr=13.4dB best_snr=15.6dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:44:26,358 | INFO | ========== RF LINK CONNECTED ==========
+2026-08-02 16:44:26,358 | INFO | Known TX tone detected for 3 consecutive buffers.
+2026-08-02 16:44:26,358 | INFO | Peak offset: +269775.4 Hz
+2026-08-02 16:44:26,358 | INFO | Frequency error/CFO contribution: +69775.4 Hz
+2026-08-02 16:44:26,358 | INFO | Peak SNR: 47.4 dB
+2026-08-02 16:44:26,358 | INFO | This confirms RF energy from adi_win.py reached adi_mac.py.
+2026-08-02 16:44:27,014 | INFO | RX HEARTBEAT state=CONNECTED elapsed=12.0s buffers=343 peak_offset=+227874.8Hz frequency_error=+27874.8Hz snr=11.1dB best_snr=47.4dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:44:28,030 | INFO | RX HEARTBEAT state=CONNECTED elapsed=13.0s buffers=374 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.2dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=25/3
+2026-08-02 16:44:29,047 | INFO | RX HEARTBEAT state=CONNECTED elapsed=14.0s buffers=405 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.4dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=56/3
+2026-08-02 16:44:30,063 | INFO | RX HEARTBEAT state=CONNECTED elapsed=15.0s buffers=436 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=87/3
+2026-08-02 16:44:31,080 | INFO | RX HEARTBEAT state=CONNECTED elapsed=16.1s buffers=467 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.4dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=118/3
+2026-08-02 16:44:32,096 | INFO | RX HEARTBEAT state=CONNECTED elapsed=17.1s buffers=498 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=149/3
+2026-08-02 16:44:33,113 | INFO | RX HEARTBEAT state=CONNECTED elapsed=18.1s buffers=529 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=180/3
+2026-08-02 16:44:34,129 | INFO | RX HEARTBEAT state=CONNECTED elapsed=19.1s buffers=560 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=211/3
+2026-08-02 16:44:35,146 | INFO | RX HEARTBEAT state=CONNECTED elapsed=20.1s buffers=591 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=242/3
+2026-08-02 16:44:36,162 | INFO | RX HEARTBEAT state=CONNECTED elapsed=21.1s buffers=622 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.6dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=273/3
+2026-08-02 16:44:37,178 | INFO | RX HEARTBEAT state=CONNECTED elapsed=22.2s buffers=653 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=304/3
+2026-08-02 16:44:38,195 | INFO | RX HEARTBEAT state=CONNECTED elapsed=23.2s buffers=684 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=335/3
+2026-08-02 16:44:39,211 | INFO | RX HEARTBEAT state=CONNECTED elapsed=24.2s buffers=715 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=366/3
+2026-08-02 16:44:40,227 | INFO | RX HEARTBEAT state=CONNECTED elapsed=25.2s buffers=746 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=397/3
+2026-08-02 16:44:41,243 | INFO | RX HEARTBEAT state=CONNECTED elapsed=26.2s buffers=777 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.4dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=428/3
+2026-08-02 16:44:42,259 | INFO | RX HEARTBEAT state=CONNECTED elapsed=27.2s buffers=808 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=459/3
+2026-08-02 16:44:43,275 | INFO | RX HEARTBEAT state=CONNECTED elapsed=28.3s buffers=839 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=490/3
+2026-08-02 16:44:44,292 | INFO | RX HEARTBEAT state=CONNECTED elapsed=29.3s buffers=870 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=521/3
+2026-08-02 16:44:45,308 | INFO | RX HEARTBEAT state=CONNECTED elapsed=30.3s buffers=901 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.4dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=552/3
+2026-08-02 16:44:46,324 | INFO | RX HEARTBEAT state=CONNECTED elapsed=31.3s buffers=932 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=583/3
+2026-08-02 16:44:47,340 | INFO | RX HEARTBEAT state=CONNECTED elapsed=32.3s buffers=963 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.2dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=614/3
+2026-08-02 16:44:48,352 | INFO | RX HEARTBEAT state=CONNECTED elapsed=33.3s buffers=994 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=43.0dB best_snr=77.9dB rms=2.2ADC(-59.6dBFS) consecutive_hits=645/3
+2026-08-02 16:44:49,355 | INFO | RX HEARTBEAT state=CONNECTED elapsed=34.3s buffers=1022 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.8dB best_snr=77.9dB rms=2.1ADC(-59.6dBFS) consecutive_hits=673/3
+2026-08-02 16:44:50,373 | INFO | RX HEARTBEAT state=CONNECTED elapsed=35.3s buffers=1055 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=43.1dB best_snr=77.9dB rms=2.2ADC(-59.5dBFS) consecutive_hits=706/3
+2026-08-02 16:44:51,387 | INFO | RX HEARTBEAT state=CONNECTED elapsed=36.4s buffers=1086 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=43.0dB best_snr=77.9dB rms=2.2ADC(-59.6dBFS) consecutive_hits=737/3
+2026-08-02 16:44:52,403 | INFO | RX HEARTBEAT state=CONNECTED elapsed=37.4s buffers=1117 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=43.1dB best_snr=77.9dB rms=2.2ADC(-59.5dBFS) consecutive_hits=768/3
+2026-08-02 16:44:53,420 | INFO | RX HEARTBEAT state=CONNECTED elapsed=38.4s buffers=1148 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.9dB best_snr=77.9dB rms=2.2ADC(-59.5dBFS) consecutive_hits=799/3
+2026-08-02 16:44:54,436 | INFO | RX HEARTBEAT state=CONNECTED elapsed=39.4s buffers=1179 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.7dBFS) consecutive_hits=830/3
+2026-08-02 16:44:55,452 | INFO | RX HEARTBEAT state=CONNECTED elapsed=40.4s buffers=1210 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.5dB best_snr=77.9dB rms=2.1ADC(-59.7dBFS) consecutive_hits=861/3
+2026-08-02 16:44:56,468 | INFO | RX HEARTBEAT state=CONNECTED elapsed=41.4s buffers=1241 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=42.3dB best_snr=77.9dB rms=2.1ADC(-59.7dBFS) consecutive_hits=892/3
+2026-08-02 16:44:57,484 | INFO | RX HEARTBEAT state=CONNECTED elapsed=42.5s buffers=1272 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=41.6dB best_snr=77.9dB rms=2.1ADC(-59.8dBFS) consecutive_hits=923/3
+2026-08-02 16:44:58,500 | INFO | RX HEARTBEAT state=CONNECTED elapsed=43.5s buffers=1303 peak_offset=+203826.9Hz frequency_error=+3826.9Hz snr=41.6dB best_snr=77.9dB rms=2.1ADC(-59.9dBFS) consecutive_hits=954/3
+2026-08-02 16:44:59,516 | INFO | RX HEARTBEAT state=CONNECTED elapsed=44.5s buffers=1334 peak_offset=+129699.7Hz frequency_error=-70300.3Hz snr=13.6dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:45:00,532 | INFO | RX HEARTBEAT state=CONNECTED elapsed=45.5s buffers=1365 peak_offset=+231231.7Hz frequency_error=+31231.7Hz snr=13.5dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:45:00,859 | WARNING | ========== RF LINK LOST ==========
+2026-08-02 16:45:00,859 | WARNING | The known tone has not met the threshold for 2.0s.
+2026-08-02 16:45:01,549 | INFO | RX HEARTBEAT state=SEARCHING elapsed=46.5s buffers=1396 peak_offset=+250793.5Hz frequency_error=+50793.5Hz snr=15.1dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:45:02,564 | INFO | RX HEARTBEAT state=SEARCHING elapsed=47.5s buffers=1427 peak_offset=+150573.7Hz frequency_error=-49426.3Hz snr=12.5dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:45:03,579 | INFO | RX HEARTBEAT state=SEARCHING elapsed=48.6s buffers=1458 peak_offset=+176391.6Hz frequency_error=-23608.4Hz snr=11.8dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:45:04,594 | INFO | RX HEARTBEAT state=SEARCHING elapsed=49.6s buffers=1489 peak_offset=+278595.0Hz frequency_error=+78595.0Hz snr=11.9dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+2026-08-02 16:45:05,612 | INFO | RX HEARTBEAT state=SEARCHING elapsed=50.6s buffers=1520 peak_offset=+222991.9Hz frequency_error=+22991.9Hz snr=12.2dB best_snr=77.9dB rms=1.8ADC(-61.1dBFS) consecutive_hits=0/3
+^C2026-08-02 16:45:06,191 | INFO | Stopping receiver after Ctrl+C.
+2026-08-02 16:45:06,192 | INFO | RX stopped.
+2026-08-02 16:45:06,192 | INFO | Experiment log: logs/simple_rx_20260802_164413.log
 
-========== TWO-PLUTO VIDEO RECEIVER ==========
-RX URI:              usb:
-Frequency:           915,000,000 Hz
-Sample rate:         2,000,000 sample/s
-Samples per bit:     4
-Payload size:        400 bytes
-Frame samples:       15,712
-RX buffer:           65,536 samples
-RX gain:             20.0 dB
-Heartbeat interval:  1.0 s
-Link timeout:        5.0 s
-Playback prebuffer:  8,000 bytes
-RX file:             two_pluto_received.h265
-Start this receiver before pluto_video_tx.py.
-Press Ctrl+C to stop.
 
-Opening RX Pluto through direct USB context...
 
-========== USB PLUTO CONNECTED ==========
-Context:             usb:
-Configured RX LO:    914,999,998 Hz
-Configured rate:     1,999,999 sample/s
-Configured bandwidth:2,000,000 Hz
-Gain mode:           manual
-Hardware gain:       20.0 dB
-Buffer size:         65,536 samples
-USB connection and RX configuration succeeded.
 
-RX warm-up capture 1/2: 65,536 complex samples
-RX warm-up capture 2/2: 65,536 complex samples
 
-========== RX SAMPLE FLOW ACTIVE ==========
-Captured:            65,536 complex samples
-Initial RMS:         1.4 ADC (-63.0 dBFS approximate)
-Initial peak:        -50.7 dBFS approximate
-The receiver is searching for a CRC-valid P2V1 transmitter packet.
-Only 'RF LINK CONNECTED' proves successful TX/RX communication.
-
-RX HEARTBEAT state=SEARCHING, elapsed=1.3s, buffers=1, buffer_rate=0.8/s, valid=0, duplicates=0(+0), invalid=1(+1), rms=1.4 ADC (-63.0 dBFS), peak=-50.7 dBFS, best_sync=0.124/0.550
-RX DETAIL: Preamble below threshold: best=0.124, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=2.3s, buffers=32, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=32(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.246/0.550
-RX DETAIL: Preamble below threshold: best=0.137, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=3.3s, buffers=63, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=63(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.241/0.550
-RX DETAIL: Preamble below threshold: best=0.150, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=4.3s, buffers=94, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=94(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.199/0.550
-RX DETAIL: Preamble below threshold: best=0.163, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=5.3s, buffers=125, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=125(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.243/0.550
-RX DETAIL: Preamble below threshold: best=0.148, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=6.4s, buffers=156, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=156(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.291/0.550
-RX DETAIL: Preamble below threshold: best=0.178, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=7.4s, buffers=187, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=187(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.263/0.550
-RX DETAIL: Preamble below threshold: best=0.152, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=8.4s, buffers=218, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=218(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.254/0.550
-RX DETAIL: Preamble below threshold: best=0.209, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=9.4s, buffers=249, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=249(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.205/0.550
-RX DETAIL: Preamble below threshold: best=0.154, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=10.4s, buffers=280, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=280(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.276/0.550
-RX DETAIL: Preamble below threshold: best=0.221, required=0.550.
-
-========== NO TX PROTOCOL DETECTED ==========
-No CRC-valid P2V1 packet was received in 10.4 seconds.
-The RX Pluto and sample capture are running, but an RF protocol connection has not been proved.
-Check both TX and RX use exactly:
-  frequency       915000000
-  sample rate     2000000
-  samples/bit     4
-  payload size    400
-Confirm TX prints increasing 'TX packet=' lines. For a short antenna test, try TX gain -40 dB and RX gain 30 dB.
-
-RX HEARTBEAT state=SEARCHING, elapsed=11.4s, buffers=311, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=311(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.262/0.550
-RX DETAIL: Preamble below threshold: best=0.184, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=12.4s, buffers=342, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=342(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.229/0.550
-RX DETAIL: Preamble below threshold: best=0.205, required=0.550.
-RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=13.5s, buffers=373, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=373(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=1.000/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=14.5s, buffers=404, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=404(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.255/0.550
-RX DETAIL: Preamble below threshold: best=0.195, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=15.5s, buffers=435, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=435(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.243/0.550
-RX DETAIL: Preamble below threshold: best=0.147, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=16.5s, buffers=466, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=466(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.290/0.550
-RX DETAIL: Preamble below threshold: best=0.173, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=17.5s, buffers=497, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=497(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.230/0.550
-RX DETAIL: Preamble below threshold: best=0.157, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=18.5s, buffers=528, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=528(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.221/0.550
-RX DETAIL: Preamble below threshold: best=0.196, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=19.6s, buffers=559, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=559(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.319/0.550
-RX DETAIL: Preamble below threshold: best=0.162, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=20.6s, buffers=590, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=590(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.235/0.550
-RX DETAIL: Preamble below threshold: best=0.171, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=21.6s, buffers=621, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=621(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.247/0.550
-RX DETAIL: Preamble below threshold: best=0.188, required=0.550.
-RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=22.6s, buffers=652, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=652(+31), rms=56.6 ADC (-31.2 dBFS), peak=-15.5 dBFS, best_sync=0.999/0.550
-RX DETAIL: Preamble found but packet failed: best=0.999, last error=Wrong magic..
-RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=23.6s, buffers=683, buffer_rate=30.7/s, valid=0, duplicates=0(+0), invalid=683(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=1.000/0.550
-RX DETAIL: Preamble below threshold: best=0.172, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=24.6s, buffers=714, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=714(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.219/0.550
-RX DETAIL: Preamble below threshold: best=0.128, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=25.7s, buffers=745, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=745(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.262/0.550
-RX DETAIL: Preamble below threshold: best=0.177, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=26.7s, buffers=776, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=776(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.269/0.550
-RX DETAIL: Preamble below threshold: best=0.181, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=27.7s, buffers=807, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=807(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.214/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=28.7s, buffers=838, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=838(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.245/0.550
-RX DETAIL: Preamble below threshold: best=0.166, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=29.7s, buffers=869, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=869(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.247/0.550
-RX DETAIL: Preamble below threshold: best=0.189, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=30.7s, buffers=900, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=900(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.314/0.550
-RX DETAIL: Preamble below threshold: best=0.148, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=31.7s, buffers=931, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=931(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.268/0.550
-RX DETAIL: Preamble below threshold: best=0.229, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=32.8s, buffers=962, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=962(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.321/0.550
-RX DETAIL: Preamble below threshold: best=0.185, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=33.8s, buffers=993, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=993(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.248/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=34.8s, buffers=1,024, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,024(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.257/0.550
-RX DETAIL: Preamble below threshold: best=0.193, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=35.8s, buffers=1,055, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,055(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.253/0.550
-RX DETAIL: Preamble below threshold: best=0.176, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=36.8s, buffers=1,086, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,086(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.283/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=37.8s, buffers=1,117, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,117(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.288/0.550
-RX DETAIL: Preamble below threshold: best=0.174, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=38.9s, buffers=1,148, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,148(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.278/0.550
-RX DETAIL: Preamble below threshold: best=0.156, required=0.550.
-RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=39.9s, buffers=1,179, buffer_rate=30.0/s, valid=0, duplicates=0(+0), invalid=1,179(+31), rms=230.6 ADC (-19.0 dBFS), peak=-14.1 dBFS, best_sync=1.000/0.550
-RX DETAIL: Preamble found but packet failed: best=1.000, last error=Wrong magic..
-RX HEARTBEAT state=TX_WAVEFORM_CANDIDATE, elapsed=40.9s, buffers=1,211, buffer_rate=31.0/s, valid=0, duplicates=0(+0), invalid=1,211(+32), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=1.000/0.550
-RX DETAIL: Preamble below threshold: best=0.144, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=41.9s, buffers=1,242, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=1,242(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.226/0.550
-RX DETAIL: Preamble below threshold: best=0.212, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=43.0s, buffers=1,273, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,273(+31), rms=1.4 ADC (-63.3 dBFS), peak=-50.7 dBFS, best_sync=0.218/0.550
-RX DETAIL: Preamble below threshold: best=0.170, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=44.0s, buffers=1,304, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,304(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.259/0.550
-RX DETAIL: Preamble below threshold: best=0.149, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=45.0s, buffers=1,335, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,335(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.230/0.550
-RX DETAIL: Preamble below threshold: best=0.211, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=46.0s, buffers=1,366, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,366(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.241/0.550
-RX DETAIL: Preamble below threshold: best=0.168, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=47.0s, buffers=1,397, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,397(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.245/0.550
-RX DETAIL: Preamble below threshold: best=0.153, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=48.0s, buffers=1,428, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,428(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.226/0.550
-RX DETAIL: Preamble below threshold: best=0.191, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=49.0s, buffers=1,459, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,459(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.275/0.550
-RX DETAIL: Preamble below threshold: best=0.150, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=50.1s, buffers=1,490, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,490(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.291/0.550
-RX DETAIL: Preamble below threshold: best=0.291, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=51.1s, buffers=1,521, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,521(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.235/0.550
-RX DETAIL: Preamble below threshold: best=0.157, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=52.1s, buffers=1,552, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,552(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.255/0.550
-RX DETAIL: Preamble below threshold: best=0.177, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=53.1s, buffers=1,583, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,583(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.251/0.550
-RX DETAIL: Preamble below threshold: best=0.177, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=54.1s, buffers=1,614, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=1,614(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.234/0.550
-RX DETAIL: Preamble below threshold: best=0.162, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=55.1s, buffers=1,645, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=1,645(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.228/0.550
-RX DETAIL: Preamble below threshold: best=0.161, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=56.2s, buffers=1,676, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,676(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.237/0.550
-RX DETAIL: Preamble below threshold: best=0.206, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=57.2s, buffers=1,707, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,707(+31), rms=1.4 ADC (-63.1 dBFS), peak=-48.2 dBFS, best_sync=0.265/0.550
-RX DETAIL: Preamble below threshold: best=0.197, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=58.2s, buffers=1,738, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,738(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.250/0.550
-RX DETAIL: Preamble below threshold: best=0.156, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=59.2s, buffers=1,769, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=1,769(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.331/0.550
-RX DETAIL: Preamble below threshold: best=0.149, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=60.2s, buffers=1,800, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=1,800(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.233/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=61.2s, buffers=1,831, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=1,831(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.260/0.550
-RX DETAIL: Preamble below threshold: best=0.163, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=62.3s, buffers=1,862, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,862(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.237/0.550
-RX DETAIL: Preamble below threshold: best=0.180, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=63.3s, buffers=1,893, buffer_rate=30.7/s, valid=0, duplicates=0(+0), invalid=1,893(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.231/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=64.3s, buffers=1,923, buffer_rate=29.7/s, valid=0, duplicates=0(+0), invalid=1,923(+30), rms=1.4 ADC (-63.0 dBFS), peak=-50.7 dBFS, best_sync=0.277/0.550
-RX DETAIL: Preamble below threshold: best=0.195, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=65.3s, buffers=1,955, buffer_rate=31.2/s, valid=0, duplicates=0(+0), invalid=1,955(+32), rms=1.4 ADC (-63.3 dBFS), peak=-50.7 dBFS, best_sync=0.291/0.550
-RX DETAIL: Preamble below threshold: best=0.221, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=66.3s, buffers=1,986, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=1,986(+31), rms=1.4 ADC (-63.3 dBFS), peak=-50.7 dBFS, best_sync=0.226/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=67.3s, buffers=2,017, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,017(+31), rms=1.4 ADC (-63.3 dBFS), peak=-50.7 dBFS, best_sync=0.219/0.550
-RX DETAIL: Preamble below threshold: best=0.176, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=68.4s, buffers=2,048, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,048(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.227/0.550
-RX DETAIL: Preamble below threshold: best=0.154, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=69.4s, buffers=2,078, buffer_rate=29.9/s, valid=0, duplicates=0(+0), invalid=2,078(+30), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.223/0.550
-RX DETAIL: Preamble below threshold: best=0.204, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=70.4s, buffers=2,110, buffer_rate=31.1/s, valid=0, duplicates=0(+0), invalid=2,110(+32), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.262/0.550
-RX DETAIL: Preamble below threshold: best=0.180, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=71.4s, buffers=2,141, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,141(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.330/0.550
-RX DETAIL: Preamble below threshold: best=0.183, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=72.4s, buffers=2,172, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,172(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.285/0.550
-RX DETAIL: Preamble below threshold: best=0.168, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=73.4s, buffers=2,202, buffer_rate=29.5/s, valid=0, duplicates=0(+0), invalid=2,202(+30), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.265/0.550
-RX DETAIL: Preamble below threshold: best=0.160, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=74.4s, buffers=2,233, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,233(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.273/0.550
-RX DETAIL: Preamble below threshold: best=0.189, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=75.5s, buffers=2,264, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,264(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.276/0.550
-RX DETAIL: Preamble below threshold: best=0.146, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=76.5s, buffers=2,295, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=2,295(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.248/0.550
-RX DETAIL: Preamble below threshold: best=0.187, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=77.5s, buffers=2,326, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=2,326(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.336/0.550
-RX DETAIL: Preamble below threshold: best=0.176, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=78.5s, buffers=2,357, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,357(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.258/0.550
-RX DETAIL: Preamble below threshold: best=0.152, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=79.5s, buffers=2,388, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,388(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.285/0.550
-RX DETAIL: Preamble below threshold: best=0.133, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=80.5s, buffers=2,419, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,419(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.368/0.550
-RX DETAIL: Preamble below threshold: best=0.170, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=81.6s, buffers=2,450, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,450(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.343/0.550
-RX DETAIL: Preamble below threshold: best=0.145, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=82.6s, buffers=2,481, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,481(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.273/0.550
-RX DETAIL: Preamble below threshold: best=0.191, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=83.6s, buffers=2,512, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,512(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.237/0.550
-RX DETAIL: Preamble below threshold: best=0.163, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=84.6s, buffers=2,543, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,543(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.246/0.550
-RX DETAIL: Preamble below threshold: best=0.158, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=85.6s, buffers=2,574, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,574(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.264/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=86.6s, buffers=2,605, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=2,605(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.251/0.550
-RX DETAIL: Preamble below threshold: best=0.194, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=87.7s, buffers=2,636, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,636(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.248/0.550
-RX DETAIL: Preamble below threshold: best=0.141, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=88.7s, buffers=2,667, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,667(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.296/0.550
-RX DETAIL: Preamble below threshold: best=0.132, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=89.7s, buffers=2,698, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,698(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.306/0.550
-RX DETAIL: Preamble below threshold: best=0.171, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=90.7s, buffers=2,729, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=2,729(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.256/0.550
-RX DETAIL: Preamble below threshold: best=0.172, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=91.7s, buffers=2,760, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=2,760(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.244/0.550
-RX DETAIL: Preamble below threshold: best=0.161, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=92.7s, buffers=2,791, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=2,791(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.310/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=93.7s, buffers=2,821, buffer_rate=30.0/s, valid=0, duplicates=0(+0), invalid=2,821(+30), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.251/0.550
-RX DETAIL: Preamble below threshold: best=0.246, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=94.8s, buffers=2,850, buffer_rate=28.5/s, valid=0, duplicates=0(+0), invalid=2,850(+29), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.258/0.550
-RX DETAIL: Preamble below threshold: best=0.154, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=95.8s, buffers=2,881, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=2,881(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.238/0.550
-RX DETAIL: Preamble below threshold: best=0.166, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=96.8s, buffers=2,912, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=2,912(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.218/0.550
-RX DETAIL: Preamble below threshold: best=0.157, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=97.8s, buffers=2,943, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=2,943(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.218/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=98.8s, buffers=2,974, buffer_rate=29.5/s, valid=0, duplicates=0(+0), invalid=2,974(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.233/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=99.9s, buffers=3,006, buffer_rate=31.6/s, valid=0, duplicates=0(+0), invalid=3,006(+32), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.238/0.550
-RX DETAIL: Preamble below threshold: best=0.218, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=100.9s, buffers=3,037, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=3,037(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.248/0.550
-RX DETAIL: Preamble below threshold: best=0.163, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=101.9s, buffers=3,067, buffer_rate=29.8/s, valid=0, duplicates=0(+0), invalid=3,067(+30), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.215/0.550
-RX DETAIL: Preamble below threshold: best=0.174, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=102.9s, buffers=3,091, buffer_rate=24.0/s, valid=0, duplicates=0(+0), invalid=3,091(+24), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.211/0.550
-RX DETAIL: Preamble below threshold: best=0.170, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=103.9s, buffers=3,122, buffer_rate=30.9/s, valid=0, duplicates=0(+0), invalid=3,122(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.251/0.550
-RX DETAIL: Preamble below threshold: best=0.165, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=104.9s, buffers=3,150, buffer_rate=27.3/s, valid=0, duplicates=0(+0), invalid=3,150(+28), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.272/0.550
-RX DETAIL: Preamble below threshold: best=0.187, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=105.9s, buffers=3,183, buffer_rate=32.2/s, valid=0, duplicates=0(+0), invalid=3,183(+33), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.304/0.550
-RX DETAIL: Preamble below threshold: best=0.180, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=107.0s, buffers=3,214, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,214(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.295/0.550
-RX DETAIL: Preamble below threshold: best=0.192, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=108.0s, buffers=3,245, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,245(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.246/0.550
-RX DETAIL: Preamble below threshold: best=0.153, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=109.0s, buffers=3,276, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,276(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.234/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=110.0s, buffers=3,307, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,307(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.278/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=111.0s, buffers=3,338, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,338(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.274/0.550
-RX DETAIL: Preamble below threshold: best=0.146, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=112.0s, buffers=3,369, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,369(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.252/0.550
-RX DETAIL: Preamble below threshold: best=0.186, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=113.1s, buffers=3,400, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,400(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.291/0.550
-RX DETAIL: Preamble below threshold: best=0.154, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=114.1s, buffers=3,431, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,431(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.277/0.550
-RX DETAIL: Preamble below threshold: best=0.224, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=115.1s, buffers=3,462, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,462(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.233/0.550
-RX DETAIL: Preamble below threshold: best=0.169, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=116.1s, buffers=3,493, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,493(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.237/0.550
-RX DETAIL: Preamble below threshold: best=0.154, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=117.1s, buffers=3,522, buffer_rate=28.8/s, valid=0, duplicates=0(+0), invalid=3,522(+29), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.372/0.550
-RX DETAIL: Preamble below threshold: best=0.289, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=118.1s, buffers=3,553, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,553(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.217/0.550
-RX DETAIL: Preamble below threshold: best=0.140, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=119.1s, buffers=3,584, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,584(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.264/0.550
-RX DETAIL: Preamble below threshold: best=0.189, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=120.2s, buffers=3,615, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,615(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.265/0.550
-RX DETAIL: Preamble below threshold: best=0.171, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=121.2s, buffers=3,646, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,646(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.241/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=122.2s, buffers=3,677, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,677(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.254/0.550
-RX DETAIL: Preamble below threshold: best=0.210, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=123.2s, buffers=3,708, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,708(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.287/0.550
-RX DETAIL: Preamble below threshold: best=0.149, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=124.2s, buffers=3,739, buffer_rate=30.7/s, valid=0, duplicates=0(+0), invalid=3,739(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.221/0.550
-RX DETAIL: Preamble below threshold: best=0.190, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=125.2s, buffers=3,770, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=3,770(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.255/0.550
-RX DETAIL: Preamble below threshold: best=0.186, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=126.2s, buffers=3,801, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,801(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.282/0.550
-RX DETAIL: Preamble below threshold: best=0.174, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=127.3s, buffers=3,832, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=3,832(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.243/0.550
-RX DETAIL: Preamble below threshold: best=0.180, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=128.3s, buffers=3,863, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,863(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.243/0.550
-RX DETAIL: Preamble below threshold: best=0.171, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=129.3s, buffers=3,894, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,894(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.262/0.550
-RX DETAIL: Preamble below threshold: best=0.175, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=130.3s, buffers=3,925, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,925(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.226/0.550
-RX DETAIL: Preamble below threshold: best=0.158, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=131.3s, buffers=3,956, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,956(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.307/0.550
-RX DETAIL: Preamble below threshold: best=0.231, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=132.3s, buffers=3,987, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=3,987(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.250/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=133.4s, buffers=4,018, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,018(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.259/0.550
-RX DETAIL: Preamble below threshold: best=0.174, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=134.4s, buffers=4,049, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,049(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.238/0.550
-RX DETAIL: Preamble below threshold: best=0.181, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=135.4s, buffers=4,080, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,080(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.240/0.550
-RX DETAIL: Preamble below threshold: best=0.138, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=136.4s, buffers=4,111, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,111(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.232/0.550
-RX DETAIL: Preamble below threshold: best=0.183, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=137.4s, buffers=4,142, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,142(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.247/0.550
-RX DETAIL: Preamble below threshold: best=0.169, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=138.4s, buffers=4,173, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,173(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.230/0.550
-RX DETAIL: Preamble below threshold: best=0.193, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=139.5s, buffers=4,204, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,204(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.280/0.550
-RX DETAIL: Preamble below threshold: best=0.134, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=140.5s, buffers=4,235, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,235(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.298/0.550
-RX DETAIL: Preamble below threshold: best=0.140, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=141.5s, buffers=4,266, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,266(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.234/0.550
-RX DETAIL: Preamble below threshold: best=0.150, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=142.5s, buffers=4,297, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,297(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.227/0.550
-RX DETAIL: Preamble below threshold: best=0.143, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=143.5s, buffers=4,328, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,328(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.269/0.550
-RX DETAIL: Preamble below threshold: best=0.137, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=144.5s, buffers=4,359, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,359(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.265/0.550
-RX DETAIL: Preamble below threshold: best=0.160, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=145.5s, buffers=4,390, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,390(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.294/0.550
-RX DETAIL: Preamble below threshold: best=0.147, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=146.6s, buffers=4,421, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,421(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.244/0.550
-RX DETAIL: Preamble below threshold: best=0.182, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=147.6s, buffers=4,452, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,452(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.304/0.550
-RX DETAIL: Preamble below threshold: best=0.187, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=148.6s, buffers=4,483, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,483(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.258/0.550
-RX DETAIL: Preamble below threshold: best=0.189, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=149.6s, buffers=4,514, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,514(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.279/0.550
-RX DETAIL: Preamble below threshold: best=0.177, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=150.6s, buffers=4,545, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,545(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.211/0.550
-RX DETAIL: Preamble below threshold: best=0.180, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=151.6s, buffers=4,576, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,576(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.265/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=152.7s, buffers=4,607, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,607(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.275/0.550
-RX DETAIL: Preamble below threshold: best=0.153, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=153.7s, buffers=4,638, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,638(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.277/0.550
-RX DETAIL: Preamble below threshold: best=0.157, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=154.7s, buffers=4,669, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,669(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.255/0.550
-RX DETAIL: Preamble below threshold: best=0.159, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=155.7s, buffers=4,700, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,700(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.234/0.550
-RX DETAIL: Preamble below threshold: best=0.190, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=156.7s, buffers=4,731, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,731(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.278/0.550
-RX DETAIL: Preamble below threshold: best=0.186, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=157.7s, buffers=4,762, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,762(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.239/0.550
-RX DETAIL: Preamble below threshold: best=0.239, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=158.8s, buffers=4,793, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,793(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.307/0.550
-RX DETAIL: Preamble below threshold: best=0.170, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=159.8s, buffers=4,824, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,824(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.254/0.550
-RX DETAIL: Preamble below threshold: best=0.133, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=160.8s, buffers=4,855, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,855(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.253/0.550
-RX DETAIL: Preamble below threshold: best=0.167, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=161.8s, buffers=4,886, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,886(+31), rms=1.4 ADC (-63.1 dBFS), peak=-48.2 dBFS, best_sync=0.246/0.550
-RX DETAIL: Preamble below threshold: best=0.138, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=162.8s, buffers=4,917, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,917(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.231/0.550
-RX DETAIL: Preamble below threshold: best=0.177, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=163.8s, buffers=4,948, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,948(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.255/0.550
-RX DETAIL: Preamble below threshold: best=0.170, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=164.9s, buffers=4,979, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=4,979(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.217/0.550
-RX DETAIL: Preamble below threshold: best=0.200, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=165.9s, buffers=5,010, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,010(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.239/0.550
-RX DETAIL: Preamble below threshold: best=0.176, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=166.9s, buffers=5,041, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,041(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.254/0.550
-RX DETAIL: Preamble below threshold: best=0.195, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=167.9s, buffers=5,072, buffer_rate=30.3/s, valid=0, duplicates=0(+0), invalid=5,072(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.241/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=168.9s, buffers=5,103, buffer_rate=30.8/s, valid=0, duplicates=0(+0), invalid=5,103(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.324/0.550
-RX DETAIL: Preamble below threshold: best=0.170, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=169.9s, buffers=5,134, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=5,134(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.232/0.550
-RX DETAIL: Preamble below threshold: best=0.132, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=170.9s, buffers=5,165, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,165(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.308/0.550
-RX DETAIL: Preamble below threshold: best=0.135, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=172.0s, buffers=5,196, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=5,196(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.297/0.550
-RX DETAIL: Preamble below threshold: best=0.153, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=173.0s, buffers=5,227, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=5,227(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.262/0.550
-RX DETAIL: Preamble below threshold: best=0.262, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=174.0s, buffers=5,258, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,258(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.303/0.550
-RX DETAIL: Preamble below threshold: best=0.161, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=175.0s, buffers=5,289, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,289(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.244/0.550
-RX DETAIL: Preamble below threshold: best=0.147, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=176.0s, buffers=5,320, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,320(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.281/0.550
-RX DETAIL: Preamble below threshold: best=0.134, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=177.0s, buffers=5,351, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,351(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.309/0.550
-RX DETAIL: Preamble below threshold: best=0.162, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=178.1s, buffers=5,382, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,382(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.280/0.550
-RX DETAIL: Preamble below threshold: best=0.165, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=179.1s, buffers=5,413, buffer_rate=30.7/s, valid=0, duplicates=0(+0), invalid=5,413(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.236/0.550
-RX DETAIL: Preamble below threshold: best=0.218, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=180.1s, buffers=5,444, buffer_rate=30.3/s, valid=0, duplicates=0(+0), invalid=5,444(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.276/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=181.1s, buffers=5,475, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,475(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.229/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=182.1s, buffers=5,506, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,506(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.253/0.550
-RX DETAIL: Preamble below threshold: best=0.137, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=183.1s, buffers=5,537, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,537(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.278/0.550
-RX DETAIL: Preamble below threshold: best=0.153, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=184.2s, buffers=5,568, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,568(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.263/0.550
-RX DETAIL: Preamble below threshold: best=0.206, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=185.2s, buffers=5,599, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,599(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.264/0.550
-RX DETAIL: Preamble below threshold: best=0.216, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=186.2s, buffers=5,630, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=5,630(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.274/0.550
-RX DETAIL: Preamble below threshold: best=0.261, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=187.2s, buffers=5,661, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=5,661(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.263/0.550
-RX DETAIL: Preamble below threshold: best=0.187, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=188.2s, buffers=5,692, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,692(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.310/0.550
-RX DETAIL: Preamble below threshold: best=0.179, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=189.2s, buffers=5,723, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,723(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.235/0.550
-RX DETAIL: Preamble below threshold: best=0.131, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=190.2s, buffers=5,754, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,754(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.241/0.550
-RX DETAIL: Preamble below threshold: best=0.184, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=191.3s, buffers=5,785, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=5,785(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.300/0.550
-RX DETAIL: Preamble below threshold: best=0.176, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=192.3s, buffers=5,816, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=5,816(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.232/0.550
-RX DETAIL: Preamble below threshold: best=0.169, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=193.3s, buffers=5,847, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,847(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.225/0.550
-RX DETAIL: Preamble below threshold: best=0.203, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=194.3s, buffers=5,878, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,878(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.281/0.550
-RX DETAIL: Preamble below threshold: best=0.189, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=195.3s, buffers=5,909, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,909(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.330/0.550
-RX DETAIL: Preamble below threshold: best=0.150, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=196.3s, buffers=5,940, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,940(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.222/0.550
-RX DETAIL: Preamble below threshold: best=0.185, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=197.4s, buffers=5,971, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=5,971(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.278/0.550
-RX DETAIL: Preamble below threshold: best=0.158, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=198.4s, buffers=6,002, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=6,002(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.274/0.550
-RX DETAIL: Preamble below threshold: best=0.181, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=199.4s, buffers=6,033, buffer_rate=30.4/s, valid=0, duplicates=0(+0), invalid=6,033(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.263/0.550
-RX DETAIL: Preamble below threshold: best=0.191, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=200.4s, buffers=6,064, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,064(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.216/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=201.4s, buffers=6,095, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,095(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.327/0.550
-RX DETAIL: Preamble below threshold: best=0.183, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=202.4s, buffers=6,126, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,126(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.235/0.550
-RX DETAIL: Preamble below threshold: best=0.155, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=203.5s, buffers=6,157, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,157(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.261/0.550
-RX DETAIL: Preamble below threshold: best=0.176, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=204.5s, buffers=6,188, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,188(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.234/0.550
-RX DETAIL: Preamble below threshold: best=0.169, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=205.5s, buffers=6,219, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,219(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.236/0.550
-RX DETAIL: Preamble below threshold: best=0.138, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=206.5s, buffers=6,250, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,250(+31), rms=1.4 ADC (-63.1 dBFS), peak=-50.7 dBFS, best_sync=0.278/0.550
-RX DETAIL: Preamble below threshold: best=0.167, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=207.5s, buffers=6,281, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,281(+31), rms=1.4 ADC (-63.1 dBFS), peak=-49.3 dBFS, best_sync=0.247/0.550
-RX DETAIL: Preamble below threshold: best=0.195, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=208.5s, buffers=6,312, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,312(+31), rms=1.4 ADC (-63.0 dBFS), peak=-49.3 dBFS, best_sync=0.226/0.550
-RX DETAIL: Preamble below threshold: best=0.175, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=209.5s, buffers=6,343, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,343(+31), rms=1.4 ADC (-63.2 dBFS), peak=-50.7 dBFS, best_sync=0.292/0.550
-RX DETAIL: Preamble below threshold: best=0.180, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=210.6s, buffers=6,374, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,374(+31), rms=1.4 ADC (-63.2 dBFS), peak=-49.3 dBFS, best_sync=0.217/0.550
-RX DETAIL: Preamble below threshold: best=0.130, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=211.6s, buffers=6,405, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,405(+31), rms=1.4 ADC (-63.4 dBFS), peak=-49.3 dBFS, best_sync=0.300/0.550
-RX DETAIL: Preamble below threshold: best=0.135, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=212.6s, buffers=6,436, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,436(+31), rms=1.2 ADC (-64.7 dBFS), peak=-52.2 dBFS, best_sync=0.292/0.550
-RX DETAIL: Preamble below threshold: best=0.173, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=213.6s, buffers=6,467, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,467(+31), rms=1.4 ADC (-63.3 dBFS), peak=-50.7 dBFS, best_sync=0.265/0.550
-RX DETAIL: Preamble below threshold: best=0.174, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=214.6s, buffers=6,498, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,498(+31), rms=1.4 ADC (-63.6 dBFS), peak=-50.7 dBFS, best_sync=0.323/0.550
-RX DETAIL: Preamble below threshold: best=0.182, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=215.6s, buffers=6,529, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,529(+31), rms=1.2 ADC (-64.4 dBFS), peak=-50.7 dBFS, best_sync=0.348/0.550
-RX DETAIL: Preamble below threshold: best=0.175, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=216.7s, buffers=6,560, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,560(+31), rms=1.6 ADC (-62.3 dBFS), peak=-48.2 dBFS, best_sync=0.269/0.550
-RX DETAIL: Preamble below threshold: best=0.147, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=217.7s, buffers=6,591, buffer_rate=30.3/s, valid=0, duplicates=0(+0), invalid=6,591(+31), rms=1.7 ADC (-61.6 dBFS), peak=-49.3 dBFS, best_sync=0.227/0.550
-RX DETAIL: Preamble below threshold: best=0.148, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=218.7s, buffers=6,622, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,622(+31), rms=1.7 ADC (-61.4 dBFS), peak=-48.2 dBFS, best_sync=0.211/0.550
-RX DETAIL: Preamble below threshold: best=0.192, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=219.7s, buffers=6,653, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,653(+31), rms=1.6 ADC (-61.9 dBFS), peak=-49.3 dBFS, best_sync=0.241/0.550
-RX DETAIL: Preamble below threshold: best=0.142, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=220.7s, buffers=6,684, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,684(+31), rms=1.7 ADC (-61.4 dBFS), peak=-48.2 dBFS, best_sync=0.285/0.550
-RX DETAIL: Preamble below threshold: best=0.156, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=221.7s, buffers=6,715, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,715(+31), rms=1.8 ADC (-61.2 dBFS), peak=-49.3 dBFS, best_sync=0.239/0.550
-RX DETAIL: Preamble below threshold: best=0.156, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=222.8s, buffers=6,746, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,746(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.204/0.550
-RX DETAIL: Preamble below threshold: best=0.181, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=223.8s, buffers=6,777, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,777(+31), rms=1.8 ADC (-61.1 dBFS), peak=-48.2 dBFS, best_sync=0.218/0.550
-RX DETAIL: Preamble below threshold: best=0.196, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=224.8s, buffers=6,808, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,808(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.176/0.550
-RX DETAIL: Preamble below threshold: best=0.163, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=225.8s, buffers=6,839, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,839(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.207/0.550
-RX DETAIL: Preamble below threshold: best=0.156, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=226.8s, buffers=6,870, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,870(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.185/0.550
-RX DETAIL: Preamble below threshold: best=0.157, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=227.8s, buffers=6,901, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,901(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.214/0.550
-RX DETAIL: Preamble below threshold: best=0.144, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=228.9s, buffers=6,932, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,932(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.180/0.550
-RX DETAIL: Preamble below threshold: best=0.158, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=229.9s, buffers=6,963, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,963(+31), rms=1.8 ADC (-61.2 dBFS), peak=-49.3 dBFS, best_sync=0.262/0.550
-RX DETAIL: Preamble below threshold: best=0.137, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=230.9s, buffers=6,994, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=6,994(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.202/0.550
-RX DETAIL: Preamble below threshold: best=0.173, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=231.9s, buffers=7,025, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,025(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.190/0.550
-RX DETAIL: Preamble below threshold: best=0.124, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=232.9s, buffers=7,056, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,056(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.181/0.550
-RX DETAIL: Preamble below threshold: best=0.136, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=233.9s, buffers=7,087, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,087(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.212/0.550
-RX DETAIL: Preamble below threshold: best=0.124, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=234.9s, buffers=7,118, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,118(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.282/0.550
-RX DETAIL: Preamble below threshold: best=0.129, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=236.0s, buffers=7,149, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,149(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.211/0.550
-RX DETAIL: Preamble below threshold: best=0.157, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=237.0s, buffers=7,180, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,180(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.195/0.550
-RX DETAIL: Preamble below threshold: best=0.128, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=238.0s, buffers=7,211, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,211(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.227/0.550
-RX DETAIL: Preamble below threshold: best=0.166, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=239.0s, buffers=7,242, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,242(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.214/0.550
-RX DETAIL: Preamble below threshold: best=0.127, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=240.0s, buffers=7,273, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,273(+31), rms=1.8 ADC (-61.2 dBFS), peak=-47.1 dBFS, best_sync=0.201/0.550
-RX DETAIL: Preamble below threshold: best=0.171, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=241.0s, buffers=7,304, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,304(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.198/0.550
-RX DETAIL: Preamble below threshold: best=0.151, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=242.1s, buffers=7,335, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,335(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.205/0.550
-RX DETAIL: Preamble below threshold: best=0.138, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=243.1s, buffers=7,366, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,366(+31), rms=1.8 ADC (-61.1 dBFS), peak=-48.2 dBFS, best_sync=0.190/0.550
-RX DETAIL: Preamble below threshold: best=0.166, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=244.1s, buffers=7,397, buffer_rate=30.6/s, valid=0, duplicates=0(+0), invalid=7,397(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.196/0.550
-RX DETAIL: Preamble below threshold: best=0.189, required=0.550.
-RX HEARTBEAT state=SEARCHING, elapsed=245.1s, buffers=7,428, buffer_rate=30.5/s, valid=0, duplicates=0(+0), invalid=7,428(+31), rms=1.8 ADC (-61.2 dBFS), peak=-48.2 dBFS, best_sync=0.195/0.550
-RX DETAIL: Preamble below threshold: best=0.133, required=0.550.
-
-Stopping receiver...
-
-========== RX RESULT ==========
-Session:             none
-RX buffers:          7,430
-Valid packets:       0
-Duplicate packets:   0
-Skipped packets:     0
-Invalid buffers:     7,430
-Payload bytes:       0
-Useful RX rate:      0 bit/s
-Average recent CFO:  +0.0 Hz
-Saved stream:        two_pluto_received.h265
-Saved file size:     0 bytes
-RESULT: RX Pluto was opened and sampled, but no CRC-valid TX protocol packet was decoded.
-A zero-byte H.265 file is expected because only validated payload bytes are written.
-
-Finished:            2026-08-02T16:35:53+09:30
-Exit code:           0
-Experiment log:      logs/rx_20260802_163147.log
