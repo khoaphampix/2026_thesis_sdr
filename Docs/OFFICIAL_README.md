@@ -7,7 +7,8 @@ usbipd detach --hardware-id 0456:b673
 
 usbipd bind --hardware-id 0456:b673
 usbipd attach --wsl --hardware-id 0456:b673
-usbipd bind --hardware-id 0456:b673 && usbipd attach --wsl --hardware-id 0456:b673
+usbipd bind --hardware-id 0456:b673 & usbipd attach --wsl --hardware-id 0456:b673
+usbipd deattach --wsl --hardware-id 0456:b673 & usbipd unbind --hardware-id 0456:b673
 
 
 --------------- device 1 ---------------
