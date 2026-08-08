@@ -188,24 +188,28 @@ cp  "/home/kev/camera_test/camera_stream.h265" "/home/kev/pycode/one_pluto_live_
 CAMERA_URL='rtsp://admin:cdu_2026@192.168.1.2:554/Preview_01_sub'
 ffmpeg -rtsp_transport tcp \
 -i "$CAMERA_URL" \
--t 3 \
+-t 30 \
 -map 0:v:0 \
 -c:v copy \
 -f hevc \
 -y ~/camera_test/camera_stream.h265
 
 
+ffplay -f hevc "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/received_real_v8_6.h265"
+
 
 ffplay -f hevc "/home/kev/camera_test/camera_stream.h265"
-ffplay -f hevc "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265
+
+ffplay -f hevc "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265"
 
 
+ffplay -f hevc -framerate 60  "two_pluto_received_exact.h265"
 
 CAMERA_URL='rtsp://admin:cdu_2026@192.168.1.2:554/Preview_01_sub'
 
 ffmpeg -rtsp_transport tcp \
 -i "$CAMERA_URL" \
--t 4 \
+-t 30 \
 -map 0:v:0 \
 -c:v libx265 \
 -f hevc \

@@ -43,8 +43,7 @@ Write-Host ""
 Write-Host "PlutoSDR reset and attachment completed."
 
 
-# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 
-# Set-Location "\\wsl.localhost\Ubuntu-22.04\home\kev\pycode\2026_thesis_sdr\sh"
-
-# .\reset_attach_usb.ps1
+Set-Location "\\wsl.localhost\Ubuntu-22.04\home\kev\pycode\2026_thesis_sdr\sh"
+ .\reset_attach_usb.ps1
