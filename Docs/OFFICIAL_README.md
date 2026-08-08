@@ -195,7 +195,14 @@ ffmpeg -rtsp_transport tcp \
 -y ~/camera_test/camera_stream.h265
 
 
-ffplay -f hevc "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/received_real_v8_6.h265"
+cp  "/home/kev/camera_test/camera_stream.h265" "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/camera_stream_transmitted_camera.h265"
+
+cp  "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/received_real_v8_6.h265"  "/home/kev/camera_test/camera_stream.h265"
+
+
+
+received_real_v8_6.h265
+ffplay -f hevc "/home/kev/pycode/one_pluto_live_camera_v3_file_fix/transmitted_rtsp_320x180.h265"
 
 
 ffplay -f hevc "/home/kev/camera_test/camera_stream.h265"
