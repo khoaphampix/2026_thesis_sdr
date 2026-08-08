@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Turbo exact H.265 file TX using windowed selective-repeat ARQ."""
+"""High-speed exact H.265 file TX using windowed selective-repeat ARQ."""
 
 from __future__ import annotations
 
@@ -10,9 +10,10 @@ import secrets
 import struct
 import time
 
+import numpy as np
 import adi
 
-from pluto_fast_arq_common_v2 import (
+from pluto_fast_arq_common_v21 import (
     ACK_MAGIC,
     ACK_SIZE,
     DATA_HEADER_SIZE,
@@ -27,6 +28,7 @@ from pluto_fast_arq_common_v2 import (
     destroy_tx,
     frame_sample_count,
     packets_to_superframe_iq,
+    packet_to_iq,
     parse_ack_packet,
     recover_packets,
 )
@@ -35,17 +37,17 @@ from pluto_fast_arq_common_v2 import (
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Turbo exact file transfer with windowed selective-repeat ARQ."
+            "Fast exact file transfer with windowed selective-repeat ARQ."
         )
     )
     parser.add_argument("--uri", default="usb:")
     parser.add_argument("--input", type=Path, required=True)
 
     parser.add_argument("--frequency", type=int, default=915_000_000)
-    parser.add_argument("--sample-rate", type=int, default=8_000_000)
+    parser.add_argument("--sample-rate", type=int, default=4_000_000)
     parser.add_argument("--samples-per-bit", type=int, default=4)
-    parser.add_argument("--payload-size", type=int, default=1200)
-    parser.add_argument("--window-size", type=int, default=12)
+    parser.add_argument("--payload-size", type=int, default=1000)
+    parser.add_argument("--window-size", type=int, default=8)
 
     parser.add_argument("--tx-gain", type=float, default=-20.0)
     parser.add_argument("--rx-gain", type=float, default=30.0)
@@ -56,24 +58,22 @@ def build_parser() -> argparse.ArgumentParser:
         type=float,
         default=0.0,
         help=(
-            "Optional minimum data burst time in seconds. Zero lets the "
-            "program derive airtime from the actual IQ superframe."
+            "Minimum seconds each window burst is held cyclically. "
+            "The program automatically increases it if one full window "
+            "does not fit."
         ),
     )
     parser.add_argument(
         "--burst-repeat-factor",
         type=float,
-        default=1.10,
-        help=(
-            "How long to hold a cyclic data superframe relative to one "
-            "complete RF pass. 1.10 means about one full pass plus 10%."
-        ),
+        default=1.20,
+        help="Hold each cyclic burst this multiple of one RF pass.",
     )
-    parser.add_argument("--control-slot", type=float, default=0.030)
+    parser.add_argument("--control-slot", type=float, default=0.050)
     parser.add_argument("--turnaround-guard", type=float, default=0.002)
     parser.add_argument("--ack-captures", type=int, default=24)
     parser.add_argument("--ack-rx-buffer", type=int, default=8_192)
-    parser.add_argument("--retries", type=int, default=15)
+    parser.add_argument("--retries", type=int, default=20)
     parser.add_argument("--metric-threshold", type=float, default=0.35)
     parser.add_argument("--candidates-per-phase", type=int, default=8)
     parser.add_argument("--log-dir", type=Path, default=Path("logs"))
@@ -93,10 +93,12 @@ def validate_args(parser: argparse.ArgumentParser, args: argparse.Namespace) -> 
         parser.error("--samples-per-bit must be at least 2")
     if args.sample_rate < 1_000_000:
         parser.error("--sample-rate is unexpectedly low")
-    if args.data_slot < 0 or args.control_slot <= 0:
-        parser.error("--data-slot must be >= 0 and --control-slot positive")
+    if args.data_slot < 0:
+        parser.error("--data-slot must be >= 0")
     if args.burst_repeat_factor < 1.0:
         parser.error("--burst-repeat-factor must be >= 1.0")
+    if args.data_slot <= 0 or args.control_slot <= 0:
+        parser.error("slot durations must be positive")
     if args.ack_captures < 1:
         parser.error("--ack-captures must be at least 1")
     if args.ack_rx_buffer < 4096:
@@ -230,7 +232,7 @@ def run(args: argparse.Namespace) -> int:
     one_frame_samples = frame_sample_count(data_packet_size, args.samples_per_bit)
     one_frame_seconds = one_frame_samples / args.sample_rate
     full_window_airtime = one_frame_seconds * args.window_size
-    effective_data_slot = max(args.data_slot, full_window_airtime * args.burst_repeat_factor)
+    effective_data_slot = max(args.data_slot, full_window_airtime * 1.25)
 
     manifest_payload = struct.pack(
         MANIFEST_FORMAT,
@@ -242,7 +244,31 @@ def run(args: argparse.Namespace) -> int:
         int(round(effective_data_slot * 1_000_000)),
     )
 
-    logger.info("========== TURBO WINDOWED FILE TX V2 ==========")
+    # Precompute every data packet and its IQ waveform once.
+    # Retransmissions only concatenate cached IQ arrays; they do not rerun
+    # struct packing, CRC, bit unpacking, or BPSK modulation.
+    cached_packets: dict[int, bytes] = {}
+    cached_iq: dict[int, np.ndarray] = {}
+    for sequence, payload in enumerate(chunks, start=1):
+        flags = FLAG_DATA
+        if sequence == total_packets:
+            flags |= FLAG_END
+        packet = build_data_packet(
+            session=session,
+            sequence=sequence,
+            timestamp_ms=0,
+            flags=flags,
+            payload=payload,
+            payload_size=args.payload_size,
+        )
+        cached_packets[sequence] = packet
+        cached_iq[sequence] = packet_to_iq(
+            packet,
+            args.samples_per_bit,
+            args.iq_scale,
+        )
+
+    logger.info("========== STABLE-FAST WINDOWED FILE TX V2.1 ==========")
     logger.info("Log file: %s", log_path)
     logger.info("URI: %s", args.uri)
     logger.info("Frequency: %d Hz", args.frequency)
@@ -254,7 +280,7 @@ def run(args: argparse.Namespace) -> int:
     logger.info("One packet RF time: %.3f ms", one_frame_seconds * 1000)
     logger.info("Full-window RF time: %.3f ms", full_window_airtime * 1000)
     logger.info("Burst repeat factor: %.2f", args.burst_repeat_factor)
-    logger.info("Effective full-window slot: %.3f ms", effective_data_slot * 1000)
+    logger.info("Effective data slot: %.3f ms", effective_data_slot * 1000)
     logger.info("Input: %s", args.input)
     logger.info("Input size: %d bytes", file_size)
     logger.info("Data packets: %d", total_packets)
@@ -297,27 +323,10 @@ def run(args: argparse.Namespace) -> int:
                 if attempt > 1:
                     retransmitted_packets += len(missing_sequences)
 
-                packets = []
-                for sequence in missing_sequences:
-                    payload = chunks[sequence - 1]
-                    flags = FLAG_DATA
-                    if sequence == total_packets:
-                        flags |= FLAG_END
-                    packet = build_data_packet(
-                        session=session,
-                        sequence=sequence,
-                        timestamp_ms=int((time.monotonic() - started) * 1000),
-                        flags=flags,
-                        payload=payload,
-                        payload_size=args.payload_size,
-                    )
-                    packets.append(packet)
-
-                iq = packets_to_superframe_iq(
-                    packets,
-                    args.samples_per_bit,
-                    args.iq_scale,
-                )
+                # Fast path: concatenate precomputed IQ only for missing packets.
+                iq = np.concatenate(
+                    [cached_iq[sequence] for sequence in missing_sequences]
+                ).astype(np.complex64, copy=False)
 
                 logger.info(
                     "WINDOW TX base=%d count=%d attempt=%d/%d missing=%s burst_samples=%d",
@@ -421,7 +430,7 @@ def run(args: argparse.Namespace) -> int:
 
     elapsed = time.monotonic() - started
     useful_rate = file_size * 8 / max(elapsed, 1e-9)
-    logger.info("========== TURBO TX COMPLETE V2 ==========")
+    logger.info("========== STABLE-FAST TX COMPLETE V2.1 ==========")
     logger.info("File bytes: %d", file_size)
     logger.info("Data packets: %d", total_packets)
     logger.info("Window size: %d", args.window_size)

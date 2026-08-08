@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Turbo exact H.265 file RX using windowed selective-repeat ARQ."""
+"""High-speed exact H.265 file RX using windowed selective-repeat ARQ."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import time
 
 import adi
 
-from pluto_fast_arq_common_v2 import (
+from pluto_fast_arq_common_v21 import (
     DATA_HEADER_SIZE,
     DATA_MAGIC,
     FLAG_DATA,
@@ -31,29 +31,29 @@ from pluto_fast_arq_common_v2 import (
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Turbo exact file receiver with windowed selective-repeat ARQ."
+            "Fast exact file receiver with windowed selective-repeat ARQ."
         )
     )
     parser.add_argument("--uri", default="usb:")
 
     parser.add_argument("--frequency", type=int, default=915_000_000)
-    parser.add_argument("--sample-rate", type=int, default=8_000_000)
+    parser.add_argument("--sample-rate", type=int, default=4_000_000)
     parser.add_argument("--samples-per-bit", type=int, default=4)
-    parser.add_argument("--payload-size", type=int, default=1200)
-    parser.add_argument("--window-size", type=int, default=12)
+    parser.add_argument("--payload-size", type=int, default=1000)
+    parser.add_argument("--window-size", type=int, default=8)
 
     parser.add_argument("--rx-gain", type=float, default=30.0)
     parser.add_argument("--tx-gain", type=float, default=-20.0)
     parser.add_argument("--iq-scale", type=float, default=float(2**13))
 
-    parser.add_argument("--rx-buffer-size", type=int, default=131_072)
-    parser.add_argument("--ack-airtime", type=float, default=0.008)
-    parser.add_argument("--final-ack-airtime", type=float, default=0.030)
+    parser.add_argument("--rx-buffer-size", type=int, default=65_536)
+    parser.add_argument("--ack-airtime", type=float, default=0.030)
+    parser.add_argument("--final-ack-airtime", type=float, default=0.060)
     parser.add_argument("--turnaround-guard", type=float, default=0.002)
     parser.add_argument(
         "--ack-delay-factor",
         type=float,
-        default=0.90,
+        default=0.65,
         help=(
             "After the first packet from a window is seen, wait this "
             "fraction of the TX data slot before transmitting the bitmap ACK."
@@ -62,18 +62,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--control-ack-delay",
         type=float,
-        default=0.035,
+        default=0.070,
         help="Delay before ACKing the repeated manifest control packet.",
-    )
-    parser.add_argument(
-        "--ack-idle-seconds",
-        type=float,
-        default=0.030,
-        help=(
-            "Send the bitmap early when no new packet from the current "
-            "window has been decoded for this long. This accelerates "
-            "small selective retransmission bursts."
-        ),
     )
     parser.add_argument("--metric-threshold", type=float, default=0.35)
     parser.add_argument("--candidates-per-phase", type=int, default=8)
@@ -101,8 +91,6 @@ def validate_args(parser: argparse.ArgumentParser, args: argparse.Namespace) -> 
         parser.error("ACK airtime must be positive")
     if not 0.1 <= args.ack_delay_factor <= 2.0:
         parser.error("--ack-delay-factor should be between 0.1 and 2.0")
-    if args.ack_idle_seconds <= 0:
-        parser.error("--ack-idle-seconds must be positive")
 
 
 def open_pluto(args: argparse.Namespace):
@@ -169,7 +157,7 @@ def run(args: argparse.Namespace) -> int:
     if temporary_path.exists():
         temporary_path.unlink()
 
-    logger.info("========== TURBO WINDOWED FILE RX V2 ==========")
+    logger.info("========== STABLE-FAST WINDOWED FILE RX V2.1 ==========")
     logger.info("Log file: %s", log_path)
     logger.info("URI: %s", args.uri)
     logger.info("Frequency: %d Hz", args.frequency)
@@ -200,7 +188,6 @@ def run(args: argparse.Namespace) -> int:
 
     pending_ack_base: int | None = None
     pending_ack_first_seen: float | None = None
-    pending_ack_last_seen: float | None = None
     pending_ack_count = 0
 
     last_heartbeat = time.monotonic()
@@ -291,7 +278,6 @@ def run(args: argparse.Namespace) -> int:
                     duplicate_packets = 0
                     pending_ack_base = None
                     pending_ack_first_seen = None
-                    pending_ack_last_seen = None
 
                     if output is not None:
                         output.close()
@@ -344,7 +330,6 @@ def run(args: argparse.Namespace) -> int:
                     offset = (sequence - 1) * args.payload_size
                     output.seek(offset)
                     output.write(payload)
-                    output.flush()
                     received_sequences.add(sequence)
                     received_bytes += len(payload)
                     logger.info(
@@ -364,11 +349,8 @@ def run(args: argparse.Namespace) -> int:
                     pending_ack_base = base
                     pending_ack_count = count
                     pending_ack_first_seen = now
-                    pending_ack_last_seen = now
-                else:
-                    if pending_ack_first_seen is None:
-                        pending_ack_first_seen = now
-                    pending_ack_last_seen = now
+                elif pending_ack_first_seen is None:
+                    pending_ack_first_seen = now
 
             # ACK one bitmap after the known TX data slot has almost completed.
             if (
@@ -378,15 +360,7 @@ def run(args: argparse.Namespace) -> int:
                 and pending_ack_first_seen is not None
             ):
                 ack_delay = effective_data_slot * args.ack_delay_factor
-                scheduled_ready = (
-                    now - pending_ack_first_seen >= ack_delay
-                )
-                idle_ready = (
-                    pending_ack_last_seen is not None
-                    and now - pending_ack_last_seen >= args.ack_idle_seconds
-                    and now - pending_ack_first_seen >= 0.010
-                )
-                if scheduled_ready or idle_ready:
+                if now - pending_ack_first_seen >= ack_delay:
                     bitmap = window_bitmap(
                         received_sequences,
                         pending_ack_base,
@@ -422,7 +396,6 @@ def run(args: argparse.Namespace) -> int:
 
                     pending_ack_base = None
                     pending_ack_first_seen = None
-                    pending_ack_last_seen = None
                     pending_ack_count = 0
 
                     if final_window:
@@ -472,7 +445,7 @@ def run(args: argparse.Namespace) -> int:
     size_match = actual_size == expected_size
     hash_match = actual_digest == expected_digest_hex
 
-    logger.info("========== TURBO RX VERIFICATION V2 ==========")
+    logger.info("========== STABLE-FAST RX VERIFICATION V2.1 ==========")
     logger.info("Packets: %d / %d", len(received_sequences), total_packets)
     logger.info("Received payload bytes: %d", received_bytes)
     logger.info("File bytes: %d / %d", actual_size, expected_size)

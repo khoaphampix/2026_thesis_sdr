@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared protocol for turbo two-Pluto windowed selective-repeat ARQ."""
+"""Shared protocol for stable-fast two-Pluto windowed selective-repeat ARQ."""
 
 from __future__ import annotations
 
@@ -12,8 +12,8 @@ import zlib
 
 import numpy as np
 
-DATA_MAGIC = b"P2F4"
-ACK_MAGIC = b"P2A4"
+DATA_MAGIC = b"P2F3"
+ACK_MAGIC = b"P2A3"
 
 DATA_NO_CRC_FORMAT = "!4sIIIHB"
 DATA_FORMAT = "!4sIIIHBI"
@@ -32,7 +32,7 @@ FLAG_END = 0x04
 MANIFEST_FORMAT = "!QI32sHHI"
 MANIFEST_SIZE = struct.calcsize(MANIFEST_FORMAT)
 
-PREAMBLE_BITS_COUNT = 256
+PREAMBLE_BITS_COUNT = 512
 _rng = np.random.default_rng(20260802)
 PREAMBLE_BITS = _rng.integers(0, 2, PREAMBLE_BITS_COUNT, dtype=np.uint8)
 
